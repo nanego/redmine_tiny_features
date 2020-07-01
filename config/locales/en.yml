@@ -1,0 +1,6 @@
+en:
+  open_new_issue: 'opening a new issue'
+  warning_closed_issue: "You are updating a <b>closed</b> issue. Do not forget to
+                  update the status so nobody miss your new note.<br>
+                  If you are requesting a new action, please consider %{link}."
+  i_understand: I understand

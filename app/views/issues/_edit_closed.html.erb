@@ -1,0 +1,36 @@
+<% if @issue.closed? %>
+  <div id=warning-issue-closed class=warning-issue-closed>
+    <p>
+      <%= t('warning_closed_issue', link: link_to(t('open_new_issue'), new_issue_path(:project_id => @project))).html_safe %>
+    </p>
+    <p class="buttons">
+      <button><%= t('i_understand') %></button>
+    </p>
+  </div>
+  <script>
+    function hideIfIssueClosed() {
+      $("#warning-issue-closed").parent().children(".jstElements, .jstEditor, .jstHandle, >p").hide()
+      $("#warning-issue-closed").show()
+    }
+    function showIfIssueOpen() {
+      $("#warning-issue-closed").parent().children(".jstElements, .jstEditor, .jstHandle, >p").show()
+      $("#warning-issue-closed").hide()
+    }
+    //on load!
+    $(function() {
+      hideIfIssueClosed()
+      $("#warning-issue-closed button").on("click", function(event) {
+        showIfIssueOpen()
+        event.preventDefault()
+      })
+      $("#issue-form").on("change", "#issue_status_id", function() {
+        var status_id = parseInt($(this).val())
+        console.log(status_id)
+        console.log($.inArray(status_id, <%= IssueStatus.where(:is_closed => true).pluck(:id).inspect %>))
+        if ($.inArray(status_id, <%= IssueStatus.where(:is_closed => true).pluck(:id).inspect %>) < 0) {
+          showIfIssueOpen()
+        }
+      })
+    })
+  </script>
+<% end %>

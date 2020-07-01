@@ -1,0 +1,6 @@
+fr:
+  open_new_issue: 'ouvrir une nouvelle demande'
+  warning_closed_issue: "Vous mettez à jour une demande <b>fermée</b>. Veillez à modifier le
+                  statut afin que les exploitants ne ratent pas votre commentaire.<br>
+                  S'il s'agit d'une action différente, merci de plutôt %{link}."
+  i_understand: J'ai compris

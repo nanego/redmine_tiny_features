@@ -1,0 +1,12 @@
+.warning-issue-closed {
+  margin:3px 0; padding:0; color:#fff; font-size:13px;
+  background-color: rgba(0, 0, 0, 0.15);
+  background-repeat: repeat-x;
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.15));
+  background-color: #c22;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border: 1px solid #803349;
+}
+.warning-issue-closed p { text-align:center; margin:0; padding:7px 10px; }
+.warning-issue-closed p.buttons { text-align:right; font-size:110%; }
+.warning-issue-closed p a { color:#fff; font-weight:bold; }
