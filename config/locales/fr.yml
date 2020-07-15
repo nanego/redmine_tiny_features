@@ -4,3 +4,5 @@ fr:
                   statut afin que les exploitants ne ratent pas votre commentaire.<br>
                   S'il s'agit d'une action différente, merci de plutôt %{link}."
   i_understand: J'ai compris
+  versions_form_show_advanced_fields: Afficher plus d'options
+  versions_form_hide_advanced_fields: Masquer les options
