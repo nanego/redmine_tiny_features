@@ -4,3 +4,5 @@ en:
                   update the status so nobody miss your new note.<br>
                   If you are requesting a new action, please consider %{link}."
   i_understand: I understand
+  versions_form_show_advanced_fields: Show more options
+  versions_form_hide_advanced_fields: Show less options

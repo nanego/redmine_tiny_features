@@ -1,0 +1,37 @@
+<p>
+  <a href="#" id="show-hide-advanced-fields">
+    <span class="icon icon-toggle-plus" id="show-advanced-fields" style="display: none">
+      <%= t("versions_form_show_advanced_fields") %>
+    </span>
+    <span class="icon icon-toggle-minus" id="hide-advanced-fields" style="display: none">
+      <%= t("versions_form_hide_advanced_fields") %>
+    </span>
+  </a>
+</p>
+
+<script>
+$(document).ready(function() {
+  $("#show-hide-advanced-fields").on("click", function() {
+    $("#advanced-fields").toggle();
+    if ($("#advanced-fields").is(":visible")) {
+      $("#show-advanced-fields").hide();
+      $("#hide-advanced-fields").show();
+    } else {
+      $("#show-advanced-fields").show();
+      $("#hide-advanced-fields").hide();
+    }
+  });
+
+  $("#show-advanced-fields").show();
+  $("<div/>", { id: "advanced-fields" }).hide().appendTo(".box.tabular");
+  $("form.new_version, form.edit_version").find("p").each(function() {
+    var $this = $(this);
+    if (
+      ($this.has("input").length == 1 && $this.has("input[name=\"version[name]\"]").length == 0)
+      || $this.has("select").length == 1
+    ) {
+      $this.appendTo("#advanced-fields");
+    }
+  });
+});
+</script>
