@@ -23,11 +23,15 @@ $(document).ready(function() {
   });
 
   $("#show-advanced-fields").show();
-  $("<div/>", { id: "advanced-fields" }).hide().appendTo(".box.tabular");
-  $("form.new_version, form.edit_version").find("p").each(function() {
+  $("<div/>", { id: "advanced-fields" }).hide()
+    .appendTo("form.new_version .box.tabular, form.edit_version .box.tabular");
+  $("form.new_version, form.edit_version").find(".box.tabular").find("p").each(function() {
     var $this = $(this);
     if (
-      ($this.has("input").length == 1 && $this.has("input[name=\"version[name]\"]").length == 0)
+      (
+        $this.has("input").length == 1
+        && $this.has("input[name=\"version[name]\"]").length == 0
+      )
       || $this.has("select").length == 1
     ) {
       $this.appendTo("#advanced-fields");
