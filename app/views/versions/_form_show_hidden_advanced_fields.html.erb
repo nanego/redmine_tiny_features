@@ -11,7 +11,8 @@
 
 <script>
 $(document).ready(function() {
-  $("#show-hide-advanced-fields").on("click", function() {
+  $("#show-hide-advanced-fields").on("click", function(e) {
+    e.preventDefault();
     $("#advanced-fields").toggle();
     if ($("#advanced-fields").is(":visible")) {
       $("#show-advanced-fields").hide();
