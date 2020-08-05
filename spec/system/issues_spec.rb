@@ -79,7 +79,7 @@ RSpec.describe "creating an issue", type: :system do
   end
 
   it "does not hide any field if the feature is disabled in plugin settings" do
-    with_settings :plugin_redmine_tiny_features => {'simplified_version_form' => false} do
+    with_settings :plugin_redmine_tiny_features => {'simplified_version_form' => '0'} do
       visit '/projects/ecookbook/issues/new'
       fill_in 'Subject', :with => 'With a new version'
       click_on 'New version'
