@@ -1,6 +1,13 @@
-<div style="display: inline-flex;padding-left: 300px;">
+<p>
   <%= label_tag '', {style: 'width: auto;'} do %>
     <%= check_box_tag "settings[warning_message_on_closed_issues]", '1', Setting["plugin_redmine_tiny_features"]["warning_message_on_closed_issues"] %>
     <%= l("setting_warning_message_on_closed_issues") %>
   <% end %>
-</div>
+</p>
+
+<p>
+  <%= label_tag '', {style: 'width: auto;'} do %>
+    <%= check_box_tag "settings[simplified_version_form]", '1', Setting["plugin_redmine_tiny_features"]["simplified_version_form"] %>
+    <%= l("setting_simplified_version_form") %>
+  <% end %>
+</p>

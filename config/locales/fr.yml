@@ -7,3 +7,4 @@ fr:
   versions_form_show_advanced_fields: Afficher plus d'options
   versions_form_hide_advanced_fields: Masquer les options
   setting_warning_message_on_closed_issues: Afficher un message d'avertissement lors de l'édition d'une demande FERMÉE
+  setting_simplified_version_form: Masquer les paramètres avancés sur le formulaire de création des versions

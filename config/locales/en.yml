@@ -7,3 +7,4 @@ en:
   versions_form_show_advanced_fields: Show more options
   versions_form_hide_advanced_fields: Show less options
   setting_warning_message_on_closed_issues: Display warning message when editing a CLOSED issue
+  setting_simplified_version_form: Hide advanced settings in version form

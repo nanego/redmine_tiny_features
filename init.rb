@@ -12,6 +12,7 @@ Redmine::Plugin.register :redmine_tiny_features do
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
   settings partial: 'settings/redmine_plugin_tiny_features_settings',
            default: {
-               setting_warning_message_on_closed_issues: '1'
+               'warning_message_on_closed_issues': '1',
+               'simplified_version_form': '1'
            }
 end
