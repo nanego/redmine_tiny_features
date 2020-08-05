@@ -1,3 +1,6 @@
+<% puts Setting["plugin_redmine_tiny_features"]["warning_message_on_closed_issues"].inspect %>
+
+
 <% if Setting["plugin_redmine_tiny_features"]["warning_message_on_closed_issues"] == '1' %>
 
   <% if @issue.closed? %>
