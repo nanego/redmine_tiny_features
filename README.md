@@ -14,10 +14,8 @@ Here is a complete list of the features:
 |Plugin branch| Redmine Version   | Test Status       |
 |-------------|-------------------|-------------------|
 |master       | 4.1.1             | [![Build1][1]][5] |  
-|master       | 4.0.7             | [![Build2][2]][5] |
-|master       | master            | [![Build3][3]][5] |  
+|master       | master            | [![Build3][2]][5] |  
 
 [1]: https://travis-matrix-badges.herokuapp.com/repos/nanego/redmine_tiny_features/branches/master/1?use_travis_com=true
 [2]: https://travis-matrix-badges.herokuapp.com/repos/nanego/redmine_tiny_features/branches/master/2?use_travis_com=true
-[3]: https://travis-matrix-badges.herokuapp.com/repos/nanego/redmine_tiny_features/branches/master/3?use_travis_com=true
 [5]: https://travis-ci.com/nanego/redmine_tiny_features
