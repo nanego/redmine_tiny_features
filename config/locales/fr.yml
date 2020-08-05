@@ -6,3 +6,4 @@ fr:
   i_understand: J'ai compris
   versions_form_show_advanced_fields: Afficher plus d'options
   versions_form_hide_advanced_fields: Masquer les options
+  setting_warning_message_on_closed_issues: Afficher un message d'avertissement lors de l'édition d'une demande FERMÉE

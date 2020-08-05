@@ -35,13 +35,12 @@ describe "issues/show.html.erb", type: :view do
     assign(:relations, issue.relations.select { |r| r.other_issue(issue) && r.other_issue(issue).visible? })
 
     controller.request.path_parameters[:id] = issue.id
-
     render
 
     assert_select "div#warning-issue-closed"
   end
 
-  it "doest NOT contain a warning to prevent to re-open it" do
+  it "doest NOT contain a warning to prevent to re-open it when issue is open" do
     assign(:issue, open_issue)
     assign(:journals, open_issue.journals.includes(:user, :details).reorder("#{Journal.table_name}.id ASC").to_a)
     assign(:allowed_statuses, open_issue.new_statuses_allowed_to(User.current))
@@ -49,9 +48,24 @@ describe "issues/show.html.erb", type: :view do
     assign(:relations, open_issue.relations.select { |r| r.other_issue(issue) && r.other_issue(issue).visible? })
 
     controller.request.path_parameters[:id] = open_issue.id
-
     render
 
     assert_select "div#warning-issue-closed", false
   end
+
+  it "doest not contains a warning to prevent to re-open it if feature is disabled" do
+    with_settings :plugin_redmine_tiny_features => {'warning_message_on_closed_issues' => false} do
+      assign(:issue, issue)
+      assign(:journals, issue.journals.includes(:user, :details).reorder("#{Journal.table_name}.id ASC").to_a)
+      assign(:allowed_statuses, issue.new_statuses_allowed_to(User.current))
+      assign(:time_entry, TimeEntry.new(:issue => issue, :project => issue.project))
+      assign(:relations, issue.relations.select { |r| r.other_issue(issue) && r.other_issue(issue).visible? })
+
+      controller.request.path_parameters[:id] = issue.id
+      render
+
+      assert_select "div#warning-issue-closed", false
+    end
+  end
+
 end
