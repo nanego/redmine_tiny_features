@@ -4,7 +4,6 @@ module Redmine
   module FieldFormat
 
     class EnumerationFormat < RecordList
-
       def possible_values_records(custom_field, object = nil)
         enumerations = custom_field.enumerations.active
         if object.present? && object.try(:project).present?
@@ -16,5 +15,4 @@ module Redmine
     end
 
   end
-
 end

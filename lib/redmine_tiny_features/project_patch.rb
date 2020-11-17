@@ -1,4 +1,4 @@
-require_dependency 'issue'
+require_dependency 'project'
 
 class Project < ActiveRecord::Base
 
