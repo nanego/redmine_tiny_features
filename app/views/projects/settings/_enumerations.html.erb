@@ -1,0 +1,25 @@
+<%
+  enumerations_custom_fields = @issue_custom_fields.select { |cf| cf.field_format == 'enumeration' }
+  project_cfs = @project.all_issue_custom_fields.select { |project_custom_field| enumerations_custom_fields.include? project_custom_field }
+  disabled_enumeration_ids = DisabledCustomFieldEnumeration.disabled_ids_for(@project)
+%>
+
+<% if project_cfs.present? %>
+  <%= form_for :enumerations,
+               :method => :put,
+               :url => project_update_custom_field_enumerations_path(@project, tab: :enumerations) do |f| %>
+    <% project_cfs.each do |custom_field| %>
+      <fieldset class="box">
+        <legend><%= custom_field_name_tag(custom_field) %></legend>
+        <% custom_field.enumerations.active.each do |item| %>
+          <%= f.check_box "#{item.id}", {checked: disabled_enumeration_ids.exclude?(item.id), label: item.to_s} %>
+          <%= f.label "#{item.id}", item.to_s %>
+          <br/>
+        <% end %>
+      </fieldset>
+    <% end %>
+    <p><%= submit_tag l(:button_save) %></p>
+  <% end %>
+<% else %>
+  <p><%= l 'no_key_value_custom_field' %></p>
+<% end %>

@@ -4,6 +4,7 @@ require 'redmine_tiny_features/hooks'
 Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/field_format_patch'
   require_dependency 'redmine_tiny_features/project_patch'
+  require_dependency 'redmine_tiny_features/projects_helper_patch'
 end
 
 Redmine::Plugin.register :redmine_tiny_features do
