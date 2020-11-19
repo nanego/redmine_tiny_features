@@ -16,6 +16,7 @@ Redmine::Plugin.register :redmine_tiny_features do
   author_url 'https://github.com/nanego'
   requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.4' if Rails.env.test?
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
+  permission :manage_project_enumerations, {}
   settings partial: 'settings/redmine_plugin_tiny_features_settings',
            default: {
                'warning_message_on_closed_issues': '1',
