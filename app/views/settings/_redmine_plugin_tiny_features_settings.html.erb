@@ -11,3 +11,17 @@
     <%= l("setting_simplified_version_form") %>
   <% end %>
 </p>
+
+<p>
+  <%= label_tag l("default_project") %>
+  <%= select_tag "settings[default_project]", project_tree_options_for_select(Project.all_public.active.sorted,
+                                                                              selected: Project.where(id: Setting["plugin_redmine_tiny_features"]["default_project"]).first) %>
+</p>
+
+<%= javascript_tag do %>
+  $(function() {
+  if ((typeof $().select2) === 'function') {
+  $('#settings_default_project').select2();
+  }
+  });
+<% end %>

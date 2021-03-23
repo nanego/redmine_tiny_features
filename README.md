@@ -6,6 +6,7 @@ Here is a complete list of the features:
 * Make it possible to disable **custom field values** per project (only for key/value lists)
 * Display a warning message when a user is editing a **closed issue**
 * Hide optional advanced fields in **version** form
+* Define a **default project** selected when creating a new issue without being in a specific project
 
 
 ## Test status
