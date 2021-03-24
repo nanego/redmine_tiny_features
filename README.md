@@ -7,7 +7,7 @@ Here is a complete list of the features:
 * Display a warning message when a user is editing a **closed issue**
 * Hide optional advanced fields in **version** form
 * Define a **default project** selected when creating a new issue without being in a specific project
-
+* Add **check-all / uncheck-all shortcuts** to roles filters
 
 ## Test status
 
