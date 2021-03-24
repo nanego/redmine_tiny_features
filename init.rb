@@ -5,6 +5,7 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/field_format_patch'
   require_dependency 'redmine_tiny_features/project_patch'
   require_dependency 'redmine_tiny_features/projects_helper_patch'
+  require_dependency 'redmine_tiny_features/queries_helper_patch'
   require_dependency 'redmine_tiny_features/issues_controller_patch'
 end
 
