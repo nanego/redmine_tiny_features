@@ -5,6 +5,7 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/field_format_patch'
   require_dependency 'redmine_tiny_features/project_patch'
   require_dependency 'redmine_tiny_features/projects_helper_patch'
+  require_dependency 'redmine_tiny_features/issues_controller_patch'
 end
 
 Redmine::Plugin.register :redmine_tiny_features do
@@ -20,6 +21,7 @@ Redmine::Plugin.register :redmine_tiny_features do
   settings partial: 'settings/redmine_plugin_tiny_features_settings',
            default: {
                'warning_message_on_closed_issues': '1',
-               'simplified_version_form': '1'
+               'simplified_version_form': '1',
+               'default_project': ''
            }
 end

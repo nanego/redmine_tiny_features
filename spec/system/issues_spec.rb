@@ -30,62 +30,87 @@ RSpec.describe "creating an issue", type: :system do
     log_user('jsmith', 'jsmith')
   end
 
-  it "creates an issue and a new target version without advanced options" do
-    with_settings :plugin_redmine_tiny_features => {'simplified_version_form' => '1'} do
-      assert_difference 'Issue.count' do
-        assert_difference 'Version.count' do
-          visit '/projects/ecookbook/issues/new'
-          fill_in 'Subject', :with => 'With a new version'
-          click_on 'New version'
-          within '#ajax-modal' do
-            expect(page).to have_selector("a", text: "Show more options")
-            expect(page).to_not have_selector("label", text: "Description")
-            fill_in 'Name', :with => '4.0'
+  describe "simplified version form" do
+    it "creates an issue and a new target version without advanced options" do
+      with_settings :plugin_redmine_tiny_features => { 'simplified_version_form' => '1' } do
+        assert_difference 'Issue.count' do
+          assert_difference 'Version.count' do
+            visit '/projects/ecookbook/issues/new'
+            fill_in 'Subject', :with => 'With a new version'
+            click_on 'New version'
+            within '#ajax-modal' do
+              expect(page).to have_selector("a", text: "Show more options")
+              expect(page).to_not have_selector("label", text: "Description")
+              fill_in 'Name', :with => '4.0'
+              click_on 'Create'
+            end
             click_on 'Create'
           end
-          click_on 'Create'
+        end
+      end
+
+      issue = Issue.order('id desc').first
+      expect(issue.fixed_version).to_not be_nil
+      expect(issue.fixed_version.name).to eq '4.0'
+    end
+
+    it "creates an issue with a new target version which uses some advanced fields" do
+      with_settings :plugin_redmine_tiny_features => { 'simplified_version_form' => '1' } do
+        assert_difference 'Issue.count' do
+          assert_difference 'Version.count' do
+            visit '/projects/ecookbook/issues/new'
+            fill_in 'Subject', :with => 'With a new version'
+            click_on 'New version'
+            within '#ajax-modal' do
+              expect(page).to have_selector("a", text: "Show more options")
+              expect(page).to_not have_selector("label", text: "Description")
+              fill_in 'Name', :with => '4.1'
+              click_on 'Show more options'
+              fill_in 'Description', :with => 'This branch adds some new features'
+              click_on 'Create'
+            end
+            click_on 'Create'
+          end
+        end
+      end
+
+      issue = Issue.order('id desc').first
+      expect(issue.fixed_version).to_not be_nil
+      expect(issue.fixed_version.description).to eq 'This branch adds some new features'
+    end
+
+    it "does not hide any field if the feature is disabled in plugin settings" do
+      with_settings :plugin_redmine_tiny_features => { 'simplified_version_form' => '0' } do
+        visit '/projects/ecookbook/issues/new'
+        fill_in 'Subject', :with => 'With a new version'
+        click_on 'New version'
+        within '#ajax-modal' do
+          expect(page).to_not have_selector("a", text: "Show more options")
+          expect(page).to have_selector("label", text: "Description")
         end
       end
     end
-
-    issue = Issue.order('id desc').first
-    expect(issue.fixed_version).to_not be_nil
-    expect(issue.fixed_version.name).to eq '4.0'
   end
 
-  it "creates an issue with a new target version which uses some advanced fields" do
-    with_settings :plugin_redmine_tiny_features => {'simplified_version_form' => '1'} do
-      assert_difference 'Issue.count' do
-        assert_difference 'Version.count' do
-          visit '/projects/ecookbook/issues/new'
-          fill_in 'Subject', :with => 'With a new version'
-          click_on 'New version'
-          within '#ajax-modal' do
-            expect(page).to have_selector("a", text: "Show more options")
-            expect(page).to_not have_selector("label", text: "Description")
-            fill_in 'Name', :with => '4.1'
-            click_on 'Show more options'
-            fill_in 'Description', :with => 'This branch adds some new features'
-            click_on 'Create'
-          end
-          click_on 'Create'
-        end
+  describe "default project" do
+    it "does NOT change default project if plugin setting is not set" do
+      with_settings :plugin_redmine_tiny_features => { 'default_project' => '' } do
+        visit 'issues/new'
+        expect(page).to have_select('issue[project_id]', selected: 'eCookbook')
       end
     end
 
-    issue = Issue.order('id desc').first
-    expect(issue.fixed_version).to_not be_nil
-    expect(issue.fixed_version.description).to eq 'This branch adds some new features'
-  end
+    it "uses default project if plugin setting is set" do
+      with_settings :plugin_redmine_tiny_features => { 'default_project' => '2' } do
+        visit 'issues/new'
+        expect(page).to have_select('issue[project_id]', selected: 'OnlineStore')
+      end
+    end
 
-  it "does not hide any field if the feature is disabled in plugin settings" do
-    with_settings :plugin_redmine_tiny_features => {'simplified_version_form' => '0'} do
-      visit '/projects/ecookbook/issues/new'
-      fill_in 'Subject', :with => 'With a new version'
-      click_on 'New version'
-      within '#ajax-modal' do
-        expect(page).to_not have_selector("a", text: "Show more options")
-        expect(page).to have_selector("label", text: "Description")
+    it "does NOT change project if we are in a project" do
+      with_settings :plugin_redmine_tiny_features => { 'default_project' => '2' } do
+        visit 'projects/3/issues/new'
+        expect(page).to_not have_select('issue[project_id]')
       end
     end
   end

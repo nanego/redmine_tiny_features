@@ -10,3 +10,4 @@ fr:
   setting_simplified_version_form: Masquer les paramètres avancés sur le formulaire de création des versions
   no_key_value_custom_field: Ce projet n'utilise aucun champ personnalisé de type clé/valeur.
   permission_manage_project_enumerations: Gérer les valeurs possibles des champs personnalisés par projet
+  default_project: Projet par défaut pour les nouvelles demandes
