@@ -4,7 +4,7 @@ This plugin adds some small features we are testing and plan to commit to Redmin
 
 Here is a complete list of the features:
 * Make it possible to disable **custom field values** per project (only for key/value lists)
-* Display a warning message when a user is editing a **closed issue**
+* Display a warning message when a user is editing a **closed issue**, and automatically re-open the edited issue
 * Hide optional advanced fields in **version** form
 * Define a **default project** selected when creating a new issue without being in a specific project
 * Add **check-all / uncheck-all shortcuts** to roles filters
@@ -13,9 +13,11 @@ Here is a complete list of the features:
 
 |Plugin branch| Redmine Version   | Test Status      |
 |-------------|-------------------|------------------|
-|master       | 4.1.2             | [![4.1.2][1]][5] | 
+|master       | 4.2.0             | [![4.2.0][1]][5] | 
+|master       | 4.1.2             | [![4.1.2][2]][5] | 
 |master       | master            | [![master][3]][5]|
 
-[1]: https://github.com/nanego/redmine_tiny_features/actions/workflows/4_1_2.yml/badge.svg
+[1]: https://github.com/nanego/redmine_tiny_features/actions/workflows/4_2_0.yml/badge.svg
+[2]: https://github.com/nanego/redmine_tiny_features/actions/workflows/4_1_2.yml/badge.svg
 [3]: https://github.com/nanego/redmine_tiny_features/actions/workflows/master.yml/badge.svg
 [5]: https://github.com/nanego/redmine_tiny_features/actions
