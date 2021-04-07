@@ -4,9 +4,11 @@ fr:
                   statut afin que les exploitants ne ratent pas votre commentaire.<br>
                   S'il s'agit d'une action différente, merci de plutôt %{link}."
   i_understand: J'ai compris
+  default_open_status: Statut ouvert pré-sélectionné
   versions_form_show_advanced_fields: Afficher plus d'options
   versions_form_hide_advanced_fields: Masquer les options
   setting_warning_message_on_closed_issues: Afficher un message d'avertissement lors de l'édition d'une demande FERMÉE
+  setting_open_issue_when_editing_closed_issues: Ouvrir à nouveau la demande lors de la mise à jour
   setting_simplified_version_form: Masquer les paramètres avancés sur le formulaire de création des versions
   no_key_value_custom_field: Ce projet n'utilise aucun champ personnalisé de type clé/valeur.
   permission_manage_project_enumerations: Gérer les valeurs possibles des champs personnalisés par projet

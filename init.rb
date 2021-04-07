@@ -22,6 +22,7 @@ Redmine::Plugin.register :redmine_tiny_features do
   settings partial: 'settings/redmine_plugin_tiny_features_settings',
            default: {
                'warning_message_on_closed_issues': '1',
+               'open_issue_when_editing_closed_issues': '',
                'simplified_version_form': '1',
                'default_project': ''
            }

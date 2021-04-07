@@ -24,6 +24,11 @@
         $(function () {
             hideIfIssueClosed()
             $("#warning-issue-closed button").on("click", function (event) {
+
+                <% if Setting["plugin_redmine_tiny_features"]["open_issue_when_editing_closed_issues"] == '1' %>
+                    $('#issue_status_id').val("<%= Setting["plugin_redmine_tiny_features"]["default_open_status"] %>")
+                <% end %>
+
                 showIfIssueOpen()
                 event.preventDefault()
             })

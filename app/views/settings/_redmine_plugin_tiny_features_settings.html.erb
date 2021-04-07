@@ -1,16 +1,31 @@
 <p>
-  <%= label_tag '', {style: 'width: auto;'} do %>
+  <%= label_tag '', { style: 'width: auto;' } do %>
     <%= check_box_tag "settings[warning_message_on_closed_issues]", '1', Setting["plugin_redmine_tiny_features"]["warning_message_on_closed_issues"] %>
     <%= l("setting_warning_message_on_closed_issues") %>
   <% end %>
 </p>
+<p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[open_issue_when_editing_closed_issues]", '1', Setting["plugin_redmine_tiny_features"]["open_issue_when_editing_closed_issues"] %>
+    <%= l("setting_open_issue_when_editing_closed_issues") %>
+  <% end %>
+</p>
+<p>
+  <%= label_tag l("default_open_status") %>
+  <%= select_tag "settings[default_open_status]", options_for_select(IssueStatus.where(is_closed: false).sorted.map { |status| [status.name, status.id] },
+                                                                     selected: Setting["plugin_redmine_tiny_features"]["default_open_status"]) %>
+</p>
+
+<hr>
 
 <p>
-  <%= label_tag '', {style: 'width: auto;'} do %>
+  <%= label_tag '', { style: 'width: auto;' } do %>
     <%= check_box_tag "settings[simplified_version_form]", '1', Setting["plugin_redmine_tiny_features"]["simplified_version_form"] %>
     <%= l("setting_simplified_version_form") %>
   <% end %>
 </p>
+
+<hr>
 
 <p>
   <%= label_tag l("default_project") %>
