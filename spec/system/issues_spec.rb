@@ -110,7 +110,7 @@ RSpec.describe "creating an issue", type: :system do
     it "does NOT change project if we are in a project" do
       with_settings :plugin_redmine_tiny_features => { 'default_project' => '2' } do
         visit 'projects/3/issues/new'
-        expect(page).to_not have_select('issue[project_id]')
+        expect(page).to have_select('issue[project_id]', selected: '  » eCookbook Subproject 1')
       end
     end
   end
