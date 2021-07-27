@@ -13,3 +13,5 @@ fr:
   no_key_value_custom_field: Ce projet n'utilise aucun champ personnalisé de type clé/valeur.
   permission_manage_project_enumerations: Gérer les valeurs possibles des champs personnalisés par projet
   default_project: Projet par défaut pour les nouvelles demandes
+  label_general_data: Données générales
+  label_trakers_permissions: Permissions des trackers

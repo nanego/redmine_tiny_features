@@ -12,3 +12,12 @@ Deface::Override.new :virtual_path => 'roles/permissions',
 <%= form_tag({}, :method => :get, :id => "roles-form") do %>
 eos
 
+Deface::Override.new :virtual_path => 'roles/permissions',
+                     :name => 'add-general-data-box',
+                     :insert_top => "div.autoscroll",
+                     :partial    => "roles/general_data"
+
+Deface::Override.new :virtual_path => 'roles/permissions',
+                     :name => 'add-trackers-permissions-box',
+                     :insert_after => ".permissions",
+                     :partial    => "roles/trackers_permissions.html"

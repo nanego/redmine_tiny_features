@@ -10,3 +10,5 @@
 .warning-issue-closed p { text-align:center; margin:0; padding:7px 10px; }
 .warning-issue-closed p.buttons { text-align:right; font-size:110%; }
 .warning-issue-closed p a { color:#fff; font-weight:bold; }
+
+table.list th:first-child {min-width: 30%;}
