@@ -13,16 +13,22 @@ class RolesController
         role.assignable = false
       end
 
-      role.issues_visibility = params[:issues_visibility][role.id.to_s] if params[:issues_visibility][role.id.to_s].present?
+      if params[:issues_visibility].present? # This condition is because there are (redmine tests) that call the function without passing this parameter
+        role.issues_visibility = params[:issues_visibility][role.id.to_s] if params[:issues_visibility][role.id.to_s].present?
+      end
+
       # update permissions of trackers
-      params[:permissions_tracker_ids][role.id.to_s].each do |permission|
-        role.set_permission_trackers(permission.first, permission.second)
+      if params[:permissions_tracker_ids].present? # This condition is because there are (redmine tests) that call the function without passing this parameter
+        params[:permissions_tracker_ids][role.id.to_s].each do |permission|
+          role.set_permission_trackers(permission.first, permission.second)
+        end
       end
 
-      params[:permissions_all_trackers][role.id.to_s].each do |permission|
-        role.set_permission_trackers(permission.first, :all) if permission.second == "1"
+      if params[:permissions_all_trackers].present? # This condition is because there are (redmine tests) that call the function without passing this parameter
+        params[:permissions_all_trackers][role.id.to_s].each do |permission|
+          role.set_permission_trackers(permission.first, :all) if permission.second == "1"
+        end
       end
-
       role.save
     end
     flash[:notice] = l(:notice_successful_update)

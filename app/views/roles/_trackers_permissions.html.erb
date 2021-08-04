@@ -1,7 +1,7 @@
 <div>
   <h3><%= l(:label_trakers_permissions) %></h3>
   <div class="autoscroll">
-    <table class="list permissions">
+    <table class="list trakers_permissions">
       <thead>
         <tr>
         <th><%=l(:label_tracker_all)%></th>
@@ -57,11 +57,16 @@
               </td>
               <% @roles.each do |role| %>
                 <% if role.setable_permissions.collect(&:name).include? permission %>
-                  <td title="<%= l("permission_#{permission}") + "(#{role.name})" %>">
-                    <%= check_box_tag "permissions_tracker_ids[#{role.id}][#{permission}][]", tracker.id, (role.permissions_tracker_ids[permission].include? tracker.id.to_s), :id => "role_permissions_tracker_ids-#{role.id}_#{tracker.id}", :class => "#{permission}_tracker_role_#{role.id} view_issues-#{role.id}_shown" %>
+                 <!--   This condition is because there are (redmine tests) that call the function without passing this parameter -->
+                  <% if  role.permissions_tracker_ids.present? %>
+                    <td title="<%= l("permission_#{permission}") + "(#{role.name})" %>">
+                      <%= check_box_tag "permissions_tracker_ids[#{role.id}][#{permission}][]", tracker.id, (role.permissions_tracker_ids[permission].include? tracker.id.to_s), :id => "role_permissions_tracker_ids-#{role.id}_#{tracker.id}", :class => "#{permission}_tracker_role_#{role.id} view_issues-#{role.id}_shown" %>
 
-                  </td>
+                    </td>
                   <% else %>
+                    <td></td>
+                  <% end %>
+                <% else %>
                   <td></td>
                 <% end %>
               <% end %>
