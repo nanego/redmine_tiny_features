@@ -8,6 +8,7 @@ Here is a complete list of the features:
 * Hide optional advanced fields in **version** form
 * Define a **default project** selected when creating a new issue without being in a specific project
 * Add **check-all / uncheck-all shortcuts** to roles filters
+* Improve roles synthesis by adding missing informations about issues permissions and trackers
 
 ## Test status
 
