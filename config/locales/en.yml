@@ -13,3 +13,5 @@ en:
   no_key_value_custom_field: This project do not use any custom field with key/value format.
   permission_manage_project_enumerations: Manager custom fields possible values per project
   default_project: Default project for new issues
+  label_general_data: General data
+  label_trakers_permissions: Tracker permissions
