@@ -15,3 +15,4 @@ en:
   default_project: Default project for new issues
   label_general_data: General data
   label_trakers_permissions: Tracker permissions
+  label_general_data_permission: General data permissions
