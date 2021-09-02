@@ -1,10 +1,11 @@
-<div class="autoscroll">
+<p><h3><%=l(:label_general_data_permission)%></h3></p>
 <table class="list permmision">
   <thead>
       <tr>
       <th class="col-permmision"><%=l(:label_general_data)%></th>
       <% @roles.each do |role| %>
       <th>
+          <%= content_tag('span', '', :class => 'trakers-permissions') %>
           <%= content_tag(role.builtin? ? 'em' : 'span', role.name) %>
       </th>
       <% end %>
@@ -61,4 +62,4 @@
     <% end %>
   </tbody>
 </table>
-</div>
+<p><h3><%=l(:label_permissions)%></h3></p>

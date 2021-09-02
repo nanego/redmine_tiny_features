@@ -14,3 +14,8 @@
 table.list th:first-child {min-width: 30%;}
 table.trakers_permissions td.role {color:#999;font-size:90%;font-weight:normal !important;text-align:center;vertical-align:bottom;}
 table.trakers_permissions tr.group>td:nth-of-type(1),
+
+.trakers-permissions {
+  padding-left: 16px;
+  display: inline-block;
+}
