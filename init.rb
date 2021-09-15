@@ -8,6 +8,11 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/queries_helper_patch'
   require_dependency 'redmine_tiny_features/issues_controller_patch'
   require_dependency 'redmine_tiny_features/roles_controller_patch'
+  require_dependency 'redmine_tiny_features/principal_patch'
+  require_dependency 'redmine_tiny_features/query_patch'
+  require_dependency 'redmine_tiny_features/queries_controller_patch'
+  require_dependency 'redmine_tiny_features/issue_query_patch'
+  require_dependency 'redmine_tiny_features/time_entry_query_patch'
 end
 
 Redmine::Plugin.register :redmine_tiny_features do
