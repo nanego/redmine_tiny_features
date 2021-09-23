@@ -1,41 +1,41 @@
-<p><h3><%=l(:label_trakers_permissions)%></h3></p>
+<p><h3><%= l(:label_trakers_permissions) %></h3></p>
 </table>
 <table class="list trackers-permissions">
   <thead>
-    <tr>
-    <th><%=l(:label_tracker_all)%></th>
+  <tr>
+    <th><%= l(:label_tracker_all) %></th>
     <% @roles.each do |role| %>
-    <th>
+      <th>
         <%= content_tag(role.builtin? ? 'em' : 'span', role.name, :class => 'permissions-header') %>
-    </th>
+      </th>
     <% end %>
-    </tr>
+  </tr>
   </thead>
   <tbody>
-    <% permissions = [:view_issues, :add_issues, :edit_issues, :add_issue_notes, :delete_issues] %>
-    <% permissions.each do |permission| %>
-      <tr class="all-trackers-<%= permission%>">
-        <td class="name">
-            <%= link_to_function('',
-                                 "toggleCheckboxesBySelector('tr.all-trackers-#{permission} input[type=checkbox]')",
-                                 :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
-                                 :class => 'icon-only icon-checked') %>
-            <%= l("permission_#{permission}") %>
-        </td>
-        <% @roles.each do |role| %>
-          <% if role.setable_permissions.collect(&:name).include? permission %>
-            <td title="<%= l("permission_#{permission}") + "(#{role.name})" %>">
-              <%= hidden_field_tag "permissions_all_trackers[#{role.id}][#{permission}]", '0', :id => nil %>
-              <%= check_box_tag "permissions_all_trackers[#{role.id}][#{permission}]", '1', (role.permissions_all_trackers?(permission)), :id => nil, class:"view_issues-#{role.id}_shown", :data => {:disables => ".#{permission}_tracker_role_#{role.id}"} %>
-            </td>
-            <% else %>
-            <td></td>
-          <% end %>
-          <%= hidden_field_tag "permissions_tracker_ids[#{role.id}][#{permission}][]", '' %>
+  <% permissions = [:view_issues, :add_issues, :edit_issues, :add_issue_notes, :delete_issues] %>
+  <% permissions.each do |permission| %>
+    <tr class="all-trackers-<%= permission %>">
+      <td class="name">
+        <%= link_to_function('',
+                             "toggleCheckboxesBySelector('tr.all-trackers-#{permission} input[type=checkbox]')",
+                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
+                             :class => 'icon-only icon-checked') %>
+        <%= l("permission_#{permission}") %>
+      </td>
+      <% @roles.each do |role| %>
+        <% if role.setable_permissions.collect(&:name).include? permission %>
+          <td title="<%= l("permission_#{permission}") + "(#{role.name})" %>">
+            <%= hidden_field_tag "permissions_all_trackers[#{role.id}][#{permission}]", '0', :id => nil %>
+            <%= check_box_tag "permissions_all_trackers[#{role.id}][#{permission}]", '1', (role.permissions_all_trackers?(permission)), :id => nil, class: "view_issues-#{role.id}_shown", :data => { :disables => ".#{permission}_tracker_role_#{role.id}" } %>
+          </td>
+        <% else %>
+          <td></td>
         <% end %>
-      </tr>
-    <% end %>
-    <% Tracker.sorted.all.each do |tracker| %>
+        <%= hidden_field_tag "permissions_tracker_ids[#{role.id}][#{permission}][]", '' %>
+      <% end %>
+    </tr>
+  <% end %>
+  <% Tracker.sorted.all.each do |tracker| %>
     <tr class="group open">
       <td>
         <span class="expander icon icon-expended" onclick="toggleRowGroup(this);">&nbsp;</span>
@@ -45,32 +45,32 @@
         <td class="role"><%= role.name %></td>
       <% end %>
     </tr>
-      <% permissions.each do |permission| %>
-        <tr class="permission-<%= permission%><%= tracker.id%>">
-          <td class="name">
-              <%= link_to_function('',
-                                   "toggleCheckboxesBySelector('.permission-#{permission}#{tracker.id} input:enabled')",
-                                   :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
-                                   :class => 'icon-only icon-checked') %>
-              <%= l("permission_#{permission}") %>
-          </td>
-          <% @roles.each do |role| %>
-            <% if role.setable_permissions.collect(&:name).include? permission %>
-             <!--   This condition is because there are (redmine tests) that call the function without passing this parameter -->
-              <% if  role.permissions_tracker_ids.present? %>
-                <td title="<%= l("permission_#{permission}") + "(#{role.name})" %>">
-                  <%= check_box_tag "permissions_tracker_ids[#{role.id}][#{permission}][]", tracker.id, (role.permissions_tracker_ids[permission].include? tracker.id.to_s), :id => "role_permissions_tracker_ids-#{role.id}_#{tracker.id}", :class => "#{permission}_tracker_role_#{role.id} view_issues-#{role.id}_shown" %>
+    <% permissions.each do |permission| %>
+      <tr class="permission-<%= permission %><%= tracker.id %>">
+        <td class="name">
+          <%= link_to_function('',
+                               "toggleCheckboxesBySelector('.permission-#{permission}#{tracker.id} input:enabled')",
+                               :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
+                               :class => 'icon-only icon-checked') %>
+          <%= l("permission_#{permission}") %>
+        </td>
+        <% @roles.each do |role| %>
+          <% if role.setable_permissions.collect(&:name).include? permission %>
+            <!--   This condition is because there are (redmine tests) that call the function without passing this parameter -->
+            <% if role.permissions_tracker_ids.present? %>
+              <td title="<%= l("permission_#{permission}") + "(#{role.name})" %>">
+                <%= check_box_tag "permissions_tracker_ids[#{role.id}][#{permission}][]", tracker.id, (role.permissions_tracker_ids[permission].include? tracker.id.to_s), :id => "role_permissions_tracker_ids-#{role.id}_#{tracker.id}", :class => "#{permission}_tracker_role_#{role.id} view_issues-#{role.id}_shown" %>
 
-                </td>
-              <% else %>
-                <td></td>
-              <% end %>
+              </td>
             <% else %>
               <td></td>
             <% end %>
+          <% else %>
+            <td></td>
           <% end %>
-        </tr>
-      <% end %>
+        <% end %>
+      </tr>
     <% end %>
+  <% end %>
   </tbody>
 </table>

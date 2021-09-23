@@ -1,64 +1,64 @@
-<p><h3><%=l(:label_general_data_permission)%></h3></p>
+<p><h3><%= l(:label_general_data_permission) %></h3></p>
 <table class="list permission">
   <thead>
-      <tr>
-      <th><%=l(:label_general_data)%></th>
-      <% @roles.each do |role| %>
+  <tr>
+    <th><%= l(:label_general_data) %></th>
+    <% @roles.each do |role| %>
       <th>
-          <%= content_tag(role.builtin? ? 'em' : 'span', role.name, :class => 'permissions-header') %>
+        <%= content_tag(role.builtin? ? 'em' : 'span', role.name, :class => 'permissions-header') %>
       </th>
-      <% end %>
-      </tr>
+    <% end %>
+  </tr>
   </thead>
   <tbody>
-    <tr class="assignable">
-      <td class="name">
-          <%= link_to_function('',
-                               "toggleCheckboxesBySelector('.assignable input')",
-                               :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
-                               :class => 'icon-only icon-checked') %>
-         <%=l(:field_assignable)%>
-      </td>
-      <% @roles.each do |role| %>
-        <% if !role.builtin? %>
-          <td title="<%= l(:field_assignable) + " (#{role.name})" %>">
-            <%= check_box_tag "assignable[#{role.id}][]", 1, (role.assignable), :id => nil %>
-          </td>
-        <% else %>
-          <td></td>
-        <% end %>
-      <% end %>
-    </tr>
-    <tr class="group open" class="view_issues_shown">
-      <td>
-        <span class="expander icon icon-expended" onclick="toggleRowGroup(this);">&nbsp;</span>
-        <%=l(:field_issues_visibility)%>
-      </td>
-      <% @roles.each do |role| %>
-      <td class="role"></td>
-      <% end %>
-    </tr>
-    <% Role::ISSUES_VISIBILITY_OPTIONS.each do |option| %>
-      <tr class="visibility_<%= option.first %>">
-        <td class="name">
-          <%= link_to_function('',
-                               "toggleCheckboxesBySelector('.visibility_#{option.first} input')",
-                               :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
-                               :class => 'icon-only icon-checked') %>
-          <%=l(option.second)%>
+  <tr class="assignable">
+    <td class="name">
+      <%= link_to_function('',
+                           "toggleCheckboxesBySelector('.assignable input')",
+                           :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
+                           :class => 'icon-only icon-checked') %>
+      <%= l(:field_assignable) %>
+    </td>
+    <% @roles.each do |role| %>
+      <% if !role.builtin? %>
+        <td title="<%= l(:field_assignable) + " (#{role.name})" %>">
+          <%= check_box_tag "assignable[#{role.id}][]", 1, (role.assignable), :id => nil %>
         </td>
-        <% @roles.each do |role| %>
+      <% else %>
+        <td></td>
+      <% end %>
+    <% end %>
+  </tr>
+  <tr class="group open" class="view_issues_shown">
+    <td>
+      <span class="expander icon icon-expended" onclick="toggleRowGroup(this);">&nbsp;</span>
+      <%= l(:field_issues_visibility) %>
+    </td>
+    <% @roles.each do |role| %>
+      <td class="role"></td>
+    <% end %>
+  </tr>
+  <% Role::ISSUES_VISIBILITY_OPTIONS.each do |option| %>
+    <tr class="visibility_<%= option.first %>">
+      <td class="name">
+        <%= link_to_function('',
+                             "toggleCheckboxesBySelector('.visibility_#{option.first} input')",
+                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
+                             :class => 'icon-only icon-checked') %>
+        <%= l(option.second) %>
+      </td>
+      <% @roles.each do |role| %>
         <td>
           <% unless role.anonymous? %>
             <label class="block">
-              <%= radio_button_tag "issues_visibility[#{role.id}]", option.first, role.issues_visibility == option.first, class:"view_issues-#{role.id}_shown"
-                     %>
+              <%= radio_button_tag "issues_visibility[#{role.id}]", option.first, role.issues_visibility == option.first, class: "view_issues-#{role.id}_shown"
+              %>
             </label>
           <% end %>
         </td>
-        <% end %>
-      </tr>
-    <% end %>
+      <% end %>
+    </tr>
+  <% end %>
   </tbody>
 </table>
-<p><h3><%=l(:label_permissions)%></h3></p>
+<p><h3><%= l(:label_permissions) %></h3></p>
