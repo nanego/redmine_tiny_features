@@ -1,13 +1,12 @@
 <p><h3><%=l(:label_trakers_permissions)%></h3></p>
 </table>
-<table class="list trakers_permissions">
+<table class="list trackers-permissions">
   <thead>
     <tr>
     <th><%=l(:label_tracker_all)%></th>
     <% @roles.each do |role| %>
     <th>
-        <%= content_tag('span', '', :class => 'trakers-permissions') %>
-        <%= content_tag(role.builtin? ? 'em' : 'span', role.name) %>
+        <%= content_tag(role.builtin? ? 'em' : 'span', role.name, :class => 'permissions-header') %>
     </th>
     <% end %>
     </tr>
