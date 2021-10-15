@@ -95,13 +95,17 @@ class Query < ActiveRecord::Base
           missing = Array(values_for(field)).select(&:present?) - options[:values].map{|v| v[1]}
 
           if missing.any? && respond_to?(method = "find_#{field}_filter_values")
+            # new instructions added by this plugin to handle the case of me -------
             me_found = false
             if missing.include?("me")
               missing[missing.index("me")] = User.current.id
               me_found = true
             end
+            # -----------
             options[:values] += send(method, missing)
+            # new instruction added by this plugin to handle the case of me -----
             options[:values][options[:values].index([User.current.name, User.current.id.to_s])] = ["<< #{l(:label_me)} >>","me"] if me_found
+            # -----------
           end
         end
       end

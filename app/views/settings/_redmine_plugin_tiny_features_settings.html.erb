@@ -33,6 +33,15 @@
                                                                               selected: Project.where(id: Setting["plugin_redmine_tiny_features"]["default_project"]).first) %>
 </p>
 
+<hr>
+<!-- Add this parameter, because of there are tests for available_filters in redmine core -->
+<p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[empty_available_filters]", '1', Setting["plugin_redmine_tiny_features"]["empty_available_filters"] %>
+    <%= l("setting_empty_available_filters_by_default") %>
+  <% end %>
+</p>
+
 <%= javascript_tag do %>
   $(function() {
   if ((typeof $().select2) === 'function') {
