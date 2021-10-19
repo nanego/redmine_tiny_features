@@ -14,11 +14,11 @@ Here is a complete list of the features:
 
 |Plugin branch| Redmine Version   | Test Status      |
 |-------------|-------------------|------------------|
-|master       | 4.2.2             | [![4.2.2][1]][5] | 
-|master       | 4.1.4             | [![4.1.4][2]][5] | 
+|master       | 4.2.3             | [![4.2.3][1]][5] | 
+|master       | 4.1.5             | [![4.1.5][2]][5] | 
 |master       | master            | [![master][3]][5]|
 
-[1]: https://github.com/nanego/redmine_tiny_features/actions/workflows/4_2_2.yml/badge.svg
-[2]: https://github.com/nanego/redmine_tiny_features/actions/workflows/4_1_4.yml/badge.svg
+[1]: https://github.com/nanego/redmine_tiny_features/actions/workflows/4_2_3.yml/badge.svg
+[2]: https://github.com/nanego/redmine_tiny_features/actions/workflows/4_1_5.yml/badge.svg
 [3]: https://github.com/nanego/redmine_tiny_features/actions/workflows/master.yml/badge.svg
 [5]: https://github.com/nanego/redmine_tiny_features/actions
