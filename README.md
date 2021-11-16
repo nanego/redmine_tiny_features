@@ -9,6 +9,7 @@ Here is a complete list of the features:
 * Define a **default project** selected when creating a new issue without being in a specific project
 * Add **check-all / uncheck-all shortcuts** to roles filters
 * Improve **roles synthesis** by adding missing informations about issues permissions and trackers
+* Improve load time of **users filters** when there are thousands entries
 
 ## Test status
 
