@@ -64,6 +64,34 @@ describe QueriesController, type: :controller do
       expect(json["results"][1]["children"].count).to eq(10)
       expect(json["results"][1]["children"][0]["text"]).to eq("first1name_0 lastname0")
     end
+
+    it "should return users whose names are like the search value with both firstname and name" do
+      get :author_values_pagination, params: {:page_limit => 20, :term => 'first1name_0 last', :page => 0}
+
+      assert_response :success
+      assert_equal 'application/json', response.media_type
+
+      json = JSON.parse(response.body)
+
+      expect(json["results"].count).to eq(2)
+      expect(json["results"][0]).to eq({"id"=>1, "text"=>"active", "children"=>[]})
+      expect(json["results"][1]["children"].size).to eq 1
+      expect(json["results"][1]["children"][0]["text"]).to eq("first1name_0 lastname0")
+    end
+
+    it "should return users whose names are like the search value with both firstname and name in reverse order" do
+      get :author_values_pagination, params: {:page_limit => 20, :term => 'lastname0 first1name_0', :page => 0}
+
+      assert_response :success
+      assert_equal 'application/json', response.media_type
+
+      json = JSON.parse(response.body)
+
+      expect(json["results"].count).to eq(2)
+      expect(json["results"][0]).to eq({"id"=>1, "text"=>"active", "children"=>[]})
+      expect(json["results"][1]["children"].size).to eq 1
+      expect(json["results"][1]["children"][0]["text"]).to eq("first1name_0 lastname0")
+    end
   end
 
   describe "assigned_to_values_pagination" do
