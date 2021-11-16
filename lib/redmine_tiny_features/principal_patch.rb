@@ -26,9 +26,7 @@ class Principal < ActiveRecord::Base
       reorder(status: :asc).
         order(*Principal.fields_for_order_statement).
         where(:type => ['User']).
-        where("LOWER(#{Principal.table_name}.firstname) LIKE LOWER(:term)
-              OR LOWER(#{Principal.table_name}.lastname) LIKE LOWER(:term)
-              OR (LOWER(#{Principal.table_name}.lastname) || ' ' || LOWER(#{Principal.table_name}.firstname)) LIKE LOWER(:term)
+        where("(LOWER(#{Principal.table_name}.lastname) || ' ' || LOWER(#{Principal.table_name}.firstname)) LIKE LOWER(:term)
               OR (LOWER(#{Principal.table_name}.firstname) || ' ' || LOWER(#{Principal.table_name}.lastname)) LIKE LOWER(:term)", term: "%#{term}%").
         where(:status => status).
         where("#{Principal.table_name}.id IN (SELECT DISTINCT user_id FROM #{Member.table_name} where project_id IN (?))", ids)
