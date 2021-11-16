@@ -1,6 +1,6 @@
 class Query < ActiveRecord::Base
   def principals_with_pagination(term = '', limit = 0, page = 0)
-   begin
+    begin
       principals = []
       if project
         principals += Principal.member_of_with_pagination(project, term, limit, page).visible
@@ -10,16 +10,13 @@ class Query < ActiveRecord::Base
       else
         principals += Principal.member_of_with_pagination(all_projects, term, limit, page).visible
       end
-
-      principals.uniq!
-      principals.sort!
-      principals.reject! {|p| p.is_a?(GroupBuiltin)}
+      principals.reject! { |p| p.is_a?(GroupBuiltin) }
       principals
     end
   end
 
   def count_principals_with_search(term = '', all = true)
-   begin
+    begin
       principals = 0
       if project
         principals += Principal.count_member_of_with_search(project, term, all)
@@ -42,8 +39,8 @@ class Query < ActiveRecord::Base
   def count_author_values_with_search(term = '', all = true)
     term ||= ''
     count = count_principals_with_search(term, all)
-    count +=1 if User.current.logged? && l(:label_me).include?(term)
-    count +=1 if l(:label_user_anonymous).include?(term)
+    count += 1 if User.current.logged? && l(:label_me).include?(term)
+    count += 1 if l(:label_user_anonymous).include?(term)
     count
   end
 
@@ -54,13 +51,13 @@ class Query < ActiveRecord::Base
     author_values = []
     author_values << ["<< #{l(:label_me)} >>", my_string] if User.current.logged? && page.to_i == 0 && l(:label_me).include?(term)
     author_values +=
-      users_with_pagination(term, limit, page).sort_by(&:status).
-        collect{|s| [s.name, s.id.to_s, l("status_#{User::LABEL_BY_STATUS[s.status]}")]}
+      users_with_pagination(term, limit, page).
+        collect { |s| [s.name, s.id.to_s, l("status_#{User::LABEL_BY_STATUS[s.status]}")] }
 
     # anonymous_string.include?(term) for take into consideration the use anonymous
-    with_user_anonymous = (( maxPage.to_i == (page.to_i + 1)) && (anonymous_string.include?(term)))
+    with_user_anonymous = ((maxPage.to_i == (page.to_i + 1)) && (anonymous_string.include?(term)))
 
-    author_values << [anonymous_string, User.anonymous.id.to_s] if  with_user_anonymous
+    author_values << [anonymous_string, User.anonymous.id.to_s] if with_user_anonymous
     author_values
   end
 
@@ -70,15 +67,15 @@ class Query < ActiveRecord::Base
     assigned_to_values = []
     assigned_to_values << ["<< #{l(:label_me)} >>", my_string] if User.current.logged? && page.to_i == 0 && l(:label_me).include?(term)
     assigned_to_values +=
-      (Setting.issue_group_assignment? ? principals_with_pagination(term, limit, page) : users_with_pagination(term, limit, page)).sort_by(&:status).
-        collect{|s| [s.name, s.id.to_s, l("status_#{User::LABEL_BY_STATUS[s.status]}")]}
+      (Setting.issue_group_assignment? ? principals_with_pagination(term, limit, page) : users_with_pagination(term, limit, page)).
+        collect { |s| [s.name, s.id.to_s, l("status_#{User::LABEL_BY_STATUS[s.status]}")] }
     assigned_to_values
   end
 
   def count_assigned_to_values_with_search(term = '', all = true)
     term ||= ''
     count = count_principals_with_search(term, all)
-    count +=1 if User.current.logged? && l(:label_me).include?(term)
+    count += 1 if User.current.logged? && l(:label_me).include?(term)
     count
   end
 
@@ -86,13 +83,13 @@ class Query < ActiveRecord::Base
   def available_filters_as_json
     json = {}
     available_filters.each do |field, filter|
-      options = {:type => filter[:type], :name => filter[:name]}
+      options = { :type => filter[:type], :name => filter[:name] }
       options[:remote] = true if filter.remote
 
       if has_filter?(field) || !filter.remote
         options[:values] = filter.values
         if options[:values] && values_for(field)
-          missing = Array(values_for(field)).select(&:present?) - options[:values].map{|v| v[1]}
+          missing = Array(values_for(field)).select(&:present?) - options[:values].map { |v| v[1] }
 
           if missing.any? && respond_to?(method = "find_#{field}_filter_values")
             # new instructions added by this plugin to handle the case of me -------
@@ -104,7 +101,7 @@ class Query < ActiveRecord::Base
             # -----------
             options[:values] += send(method, missing)
             # new instruction added by this plugin to handle the case of me -----
-            options[:values][options[:values].index([User.current.name, User.current.id.to_s])] = ["<< #{l(:label_me)} >>","me"] if me_found
+            options[:values][options[:values].index([User.current.name, User.current.id.to_s])] = ["<< #{l(:label_me)} >>", "me"] if me_found
             # -----------
           end
         end
