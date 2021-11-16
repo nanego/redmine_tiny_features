@@ -31,23 +31,6 @@ module RedmineTinyFeatures
             "last_updated_by",
             :type => :list, :values => lambda { [] }
           )
-        else
-          add_available_filter(
-            "author_id",
-            :type => :list, :values => lambda { author_values }
-          )
-          add_available_filter(
-            "assigned_to_id",
-            :type => :list_optional, :values => lambda { assigned_to_values }
-          )
-          add_available_filter(
-            "updated_by",
-            :type => :list, :values => lambda { author_values }
-          )
-          add_available_filter(
-            "last_updated_by",
-            :type => :list, :values => lambda { author_values }
-          )
         end
 
     end

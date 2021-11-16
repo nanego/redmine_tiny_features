@@ -26,16 +26,6 @@ module RedmineTinyFeatures
             "author_id",
             :type => :list_optional, :values => lambda { [] }
           )
-
-        else
-          add_available_filter(
-            "user_id",
-            :type => :list_optional, :values => lambda { author_values }
-          )
-          add_available_filter(
-            "author_id",
-            :type => :list_optional, :values => lambda { author_values }
-          )
         end
       end
     end
