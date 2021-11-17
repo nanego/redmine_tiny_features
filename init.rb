@@ -31,6 +31,6 @@ Redmine::Plugin.register :redmine_tiny_features do
                'open_issue_when_editing_closed_issues': '',
                'simplified_version_form': '1',
                'default_project': '',
-               'empty_available_filters': Rails.env.test? ? '0' : '1'
+               'paginate_issue_filters_values': Rails.env.test? ? '0' : '1'
            }
 end

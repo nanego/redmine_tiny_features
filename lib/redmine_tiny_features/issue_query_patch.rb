@@ -14,7 +14,7 @@ module RedmineTinyFeatures
       def initialize_available_filters
         super
         # Add this condition,because of there are tests for available_filters in redmine core
-        if  Setting["plugin_redmine_tiny_features"]["empty_available_filters"].present?
+        if  Setting["plugin_redmine_tiny_features"]["paginate_issue_filters_values"].present?
           add_available_filter(
             "author_id",
             :type => :list, :values => lambda { [] }

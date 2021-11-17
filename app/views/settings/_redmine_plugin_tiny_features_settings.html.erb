@@ -37,8 +37,8 @@
 <!-- Add this parameter, because of there are tests for available_filters in redmine core -->
 <p>
   <%= label_tag '', { style: 'width: auto;' } do %>
-    <%= check_box_tag "settings[empty_available_filters]", '1', Setting["plugin_redmine_tiny_features"]["empty_available_filters"] %>
-    <%= l("setting_empty_available_filters_by_default") %>
+    <%= check_box_tag "settings[paginate_issue_filters_values]", '1', Setting["plugin_redmine_tiny_features"]["paginate_issue_filters_values"] %>
+    <%= l("setting_paginate_issue_filters_values") %>
   <% end %>
 </p>
 

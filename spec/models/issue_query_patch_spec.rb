@@ -17,7 +17,7 @@ describe "IssueQuery" do
       "warning_message_on_closed_issues"=>"1",
       "default_open_status"=>"2",
       "default_project"=>"1",
-      "empty_available_filters"=>"1"
+      "paginate_issue_filters_values"=>"1"
     }
 
     issue_query = IssueQuery.new

@@ -16,4 +16,4 @@ en:
   label_general_data: General data
   label_trakers_permissions: Tracker permissions
   label_general_data_permission: General data permissions
-  setting_empty_available_filters_by_default: empty available filters by default
+  setting_paginate_issue_filters_values: Paginate issue filters values to improve load time
