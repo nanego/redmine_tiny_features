@@ -6,22 +6,25 @@ Deface::Override.new :virtual_path  => "queries/_filters",
 
   // declaration this function here, in order to generate the path by rails
   function updateSelect2ForElements() {
-    // check if values_author_id_1 defined
-    if ($('#values_author_id_1').length > 0) {
-      setConfigurationForSelect2($('#values_author_id_1'), '<%= author_values_pagination_path %>');
-    }
-    if ($('#values_last_updated_by_1').length > 0) {
-      setConfigurationForSelect2($('#values_last_updated_by_1'), '<%= author_values_pagination_path %>');
-    }
-    if ($('#values_updated_by_1').length > 0) {
-      setConfigurationForSelect2($('#values_updated_by_1'), '<%= author_values_pagination_path %>');
-    }
-    if ($('#values_user_id_1').length > 0) {
-      setConfigurationForSelect2($('#values_user_id_1'), '<%= author_values_pagination_path %>');
-    }
+    var activePagination = '<%= Setting["plugin_redmine_tiny_features"]["paginate_issue_filters_values"].present?%>';
+    if (activePagination === 'true'){
+      // check if values_author_id_1 defined
+      if ($('#values_author_id_1').length > 0) {
+        setConfigurationForSelect2($('#values_author_id_1'), '<%= author_values_pagination_path %>');
+      }
+      if ($('#values_last_updated_by_1').length > 0) {
+        setConfigurationForSelect2($('#values_last_updated_by_1'), '<%= author_values_pagination_path %>');
+      }
+      if ($('#values_updated_by_1').length > 0) {
+        setConfigurationForSelect2($('#values_updated_by_1'), '<%= author_values_pagination_path %>');
+      }
+      if ($('#values_user_id_1').length > 0) {
+        setConfigurationForSelect2($('#values_user_id_1'), '<%= author_values_pagination_path %>');
+      }
 
-    if ($('#values_assigned_to_id_1').length > 0) {
-      setConfigurationForSelect2($('#values_assigned_to_id_1'), '<%= assigned_to_values_pagination_path %>');
+      if ($('#values_assigned_to_id_1').length > 0) {
+        setConfigurationForSelect2($('#values_assigned_to_id_1'), '<%= assigned_to_values_pagination_path %>');
+      }
     }
   }
 
