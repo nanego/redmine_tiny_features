@@ -1,0 +1,14 @@
+<% if @journal.frozen? %>
+  $("#change-<%= @journal.id %>").remove();
+  // add this line inorder to update history and hide the note tab when it is empty
+  window.location.reload();
+<% else %>
+  $("#change-<%= @journal.id %>").attr('class', '<%= @journal.css_classes %>');
+  $("#change-<%= @journal.id %> .journal-actions").html('<%= escape_javascript(render_journal_actions(@journal.issue, @journal, :reply_links => authorize_for('issues', 'edit'))) %>');
+  $("#journal-<%= @journal.id %>-private_notes").replaceWith('<%= escape_javascript(render_private_notes_indicator(@journal)) %>');
+  $("#journal-<%= @journal.id %>-notes").replaceWith('<%= escape_javascript(render_notes(@journal.issue, @journal, :reply_links => authorize_for('issues', 'edit'))) %>');
+  $("#journal-<%= @journal.id %>-notes").show();
+  $("#journal-<%= @journal.id %>-form").remove();
+  setupWikiTableSortableHeader();
+<% end %>
+<%= call_hook(:view_journals_update_js_bottom, { :journal => @journal }) %>
