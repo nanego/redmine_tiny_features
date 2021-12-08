@@ -21,13 +21,7 @@ class JournalsController
     call_hook(:controller_journals_edit_post, {:journal => @journal, :params => params})
     respond_to do |format|
       format.html {redirect_to issue_path(@journal.journalized)}
-      # replace this line
-      # format.js
-
-      # by
-      format.js { render inline: "location.reload();" }
-      # Inorder to update history and hide the note tab when it is empty
-
+      format.js
     end
   end
 end
