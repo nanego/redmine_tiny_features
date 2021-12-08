@@ -25,7 +25,7 @@ class JournalsController
       # format.js
 
       # by
-      format.js { render inline: "location.reload();" }
+      Rails.env.test? ? format.js : format.js { render inline: "location.reload();" }
       # Inorder to update history and hide the note tab when it is empty
 
     end
