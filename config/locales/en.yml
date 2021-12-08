@@ -17,3 +17,4 @@ en:
   label_trakers_permissions: Tracker permissions
   label_general_data_permission: General data permissions
   setting_paginate_issue_filters_values: Paginate issue filters values to improve load time
+  label_note: Note deleted

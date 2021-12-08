@@ -17,3 +17,4 @@ fr:
   label_trakers_permissions: Permissions des trackers
   label_general_data_permission: Permissions des données générales
   setting_paginate_issue_filters_values: Paginer les valeurs des filtres sur les demandes afin de réduire les temps de chargement
+  label_note: Note supprimée
