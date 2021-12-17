@@ -3,14 +3,17 @@ require 'redmine_tiny_features/journals_controller_patch'
 
 describe JournalsController, type: :controller do
 
-  fixtures :users, :issues, :journals, :journal_details, :projects, :enabled_modules
+  fixtures :projects, :users, :members, :member_roles, :roles,
+           :issues, :journals, :journal_details, :enabled_modules,
+           :trackers, :issue_statuses, :enumerations, :custom_fields,
+           :custom_values, :custom_fields_projects, :projects_trackers
 
   before do
     User.current = User.find(1)
     @request.session[:user_id] = 1 # admin
     Journal.create!(:journalized_id => Issue.find(1).id,
                     :journalized_type => 'Issue',
-                    :user_id => User.current.id,
+                    :user_id => User.find(2).id,
                     :notes => 'note_test',
                     :private_notes => 't'
     )
