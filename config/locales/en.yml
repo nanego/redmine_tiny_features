@@ -20,3 +20,4 @@ en:
   label_note: Note
   setting_journalize_note_deletion: Journalize the note deletion
   label_of: of
+  text_note_deleted: "%{label} (%{old}) deleted"

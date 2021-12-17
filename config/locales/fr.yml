@@ -20,3 +20,4 @@ fr:
   label_note: Note
   setting_journalize_note_deletion: Traçabilité des effacements de note
   label_of: de
+  text_note_deleted: "%{label} (%{old}) supprimée"
