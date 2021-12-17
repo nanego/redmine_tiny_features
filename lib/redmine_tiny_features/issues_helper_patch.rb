@@ -7,12 +7,12 @@ module RedmineTinyFeatures
       case detail.property
       when 'note'
         label ||= l(:label_note)
-        old_value ||= '#' + detail.old_value
+        old_value ||= detail.old_value
         unless no_html
           label = content_tag('strong', l(:label_note))
-          old_value = content_tag("del", '#' + detail.old_value)
+          old_value = content_tag("del", detail.old_value)
         end
-        l(:text_journal_deleted, :label => label, :old => old_value).html_safe + '  ' +  l(:label_of) + '  ' + User.find(detail.prop_key).name
+        l(:text_journal_deleted, :label => label, :old => ('#' + old_value)).html_safe + '  ' +  l(:label_of) + '  ' + User.find(detail.prop_key).name
       else
         # Process standard properties
         super
