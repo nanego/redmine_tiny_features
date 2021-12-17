@@ -14,6 +14,13 @@ describe JournalsController, type: :controller do
                     :notes => 'note_test',
                     :private_notes => 't'
     )
+    Setting.send "plugin_redmine_tiny_features=", {
+      "warning_message_on_closed_issues"=>"1",
+      "default_open_status"=>"2",
+      "default_project"=>"1",
+      "paginate_issue_filters_values"=>"1",
+      "journalize_note_deletion"=>"1"
+    }
   end
 
   describe "Delete note" do

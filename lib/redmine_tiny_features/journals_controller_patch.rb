@@ -7,17 +7,16 @@ class JournalsController
     @journal.safe_attributes = params[:journal]
     @journal.save
 
-    # replace this line
-    #@journal.destroy if @journal.details.empty? && @journal.notes.blank?
-
-    # by
-    if @journal.notes.blank?
-      @journal.issue.init_journal(User.current)
-      @journal.issue.note_removed(@journal)
-      @journal.destroy if @journal.details.empty?
+    if  !Setting["plugin_redmine_tiny_features"]["journalize_note_deletion"].present?
+      @journal.destroy if @journal.details.empty? && @journal.notes.blank?
+    else
+      # to trace deletion of note
+      if @journal.notes.blank?
+        @journal.issue.init_journal(User.current)
+        @journal.issue.note_removed(@journal)
+        @journal.destroy if @journal.details.empty?
+      end
     end
-    # to trace deletion of note
-
     call_hook(:controller_journals_edit_post, {:journal => @journal, :params => params})
     respond_to do |format|
       format.html {redirect_to issue_path(@journal.journalized)}
