@@ -13,8 +13,6 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/queries_controller_patch'
   require_dependency 'redmine_tiny_features/issue_query_patch'
   require_dependency 'redmine_tiny_features/time_entry_query_patch'
-  require_dependency 'redmine_tiny_features/journals_controller_patch'
-  require_dependency 'redmine_tiny_features/issue_patch'
   require_dependency 'redmine_tiny_features/issues_helper_patch'
   require_dependency 'redmine_tiny_features/journal_patch'
 end

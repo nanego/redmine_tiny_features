@@ -1,5 +1,4 @@
 require "spec_helper"
-require 'redmine_tiny_features/journals_controller_patch'
 
 describe JournalsController, type: :controller do
 
