@@ -17,7 +17,7 @@ en:
   label_trakers_permissions: Tracker permissions
   label_general_data_permission: General data permissions
   setting_paginate_issue_filters_values: Paginate issue filters values to improve load time
-  label_note: Note
+  label_note: 'Note  '
   setting_journalize_note_deletion: Journalize the note deletion
-  label_of: of
-  text_note_deleted: "%{label} (%{old}) deleted"
+  label_of: 'of '
+  text_note_deleted: "%{label} (#%{old}) deleted"
