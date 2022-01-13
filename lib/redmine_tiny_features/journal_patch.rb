@@ -12,4 +12,10 @@ class Journal < ActiveRecord::Base
       )
   end
 
+  def note_removed(journal)
+    if !journal.new_record?
+      journalize_note(journal)
+      save!
+    end
+  end
 end
