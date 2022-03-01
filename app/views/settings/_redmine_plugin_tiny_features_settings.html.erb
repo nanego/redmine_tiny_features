@@ -42,6 +42,14 @@
   <% end %>
 </p>
 
+<!-- Add this parameter, In order to pass the test (JournalsControllerTest#test_update_xhr_with_empty_notes_should_delete_the_journal in redmine core) -->
+<p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[journalize_note_deletion]", '1', Setting["plugin_redmine_tiny_features"]["journalize_note_deletion"] %>
+    <%= l("setting_journalize_note_deletion") %>
+  <% end %>
+</p>
+
 <%= javascript_tag do %>
   $(function() {
   if ((typeof $().select2) === 'function') {
