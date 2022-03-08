@@ -9,7 +9,7 @@ module RedmineTinyFeatures
     def controller_journals_edit_post(context={})
       if  Setting["plugin_redmine_tiny_features"]["journalize_note_deletion"].present?
         journal = context[:journal]
-        if context[:journal].notes.blank?
+        if journal.notes.blank?
           journal.issue.init_journal(User.current).note_removed(journal)
         end
       end
