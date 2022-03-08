@@ -15,6 +15,7 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/time_entry_query_patch'
   require_dependency 'redmine_tiny_features/issues_helper_patch'
   require_dependency 'redmine_tiny_features/journal_patch'
+  require_dependency 'redmine_tiny_features/journals_helper_patch'
 end
 
 Redmine::Plugin.register :redmine_tiny_features do
