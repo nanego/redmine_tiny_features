@@ -1,5 +1,5 @@
 Deface::Override.new :virtual_path  => "journals/update",
-                     :name          => "reload-the-page-after-note-delete",
+                     :name          => "insert-a-new-entry-at-the-end-of-the-journal-after-deleting-note"
                      :insert_after  => "erb[silent]:contains(\"if @journal.frozen?\")",
                      :text          => <<UPDATEHISTORY
   // remove the container div of div (journal), before this modifications the container div remains in the page
