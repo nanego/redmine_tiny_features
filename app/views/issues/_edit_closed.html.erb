@@ -34,8 +34,6 @@
             })
             $("#issue-form").on("change", "#issue_status_id", function () {
                 var status_id = parseInt($(this).val())
-                console.log(status_id)
-                console.log($.inArray(status_id, <%= IssueStatus.where(:is_closed => true).pluck(:id).inspect %>))
                 if ($.inArray(status_id, <%= IssueStatus.where(:is_closed => true).pluck(:id).inspect %>) < 0) {
                     showIfIssueOpen()
                 }
