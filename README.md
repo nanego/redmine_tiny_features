@@ -12,6 +12,7 @@ Here is a complete list of the features:
 * Improve load time of **users filters** when there are thousands entries
 * Save **note deletion** in issue journal
 * Fix **pasted images** when using Chrome (may be fixed in future Redmine versions according to this issue https://www.redmine.org/issues/36013)
+* **Reminders rake task: add max-delay option** to define the maximum number of days after which reminders stop to be sent
 
 ## Test status
 
