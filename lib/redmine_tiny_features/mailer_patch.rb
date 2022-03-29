@@ -7,7 +7,7 @@ class Mailer < ActionMailer::Base
   # * :days     => how many days in the future to remind about (defaults to 7)
   # * :tracker  => id of tracker for filtering issues (defaults to all trackers)
   # * :project  => id or identifier of project to process (defaults to all projects)
-  # * :users    => array of user/group ids who should be reminded
+  # * :users    => array of assigned user/group ids who should be reminded
   # * :version  => name of target version for filtering issues (defaults to none)
   ####### ADDED BY TINY FEATURES PLUGIN 1/3 #######
   # * :max_delay => ignore older issues: how many days after due date to stop sending reminders (defaults to none)
