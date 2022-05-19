@@ -34,6 +34,7 @@
 </p>
 
 <hr>
+<% if Redmine::Plugin.installed?(:redmine_base_select2) %>
 <!-- Add this parameter, because there are tests for available_filters in redmine core -->
 <p>
   <%= label_tag '', { style: 'width: auto;' } do %>
@@ -41,6 +42,7 @@
     <%= l("setting_paginate_issue_filters_values") %>
   <% end %>
 </p>
+<% end %>
 
 <!-- Added this parameter in order to disable note deletion journalization and do not break core test (JournalsControllerTest#test_update_xhr_with_empty_notes_should_delete_the_journal in redmine core) -->
 <p>
