@@ -36,7 +36,6 @@ function redminePluginDatetimeCustomFieldInstalled() {
 }
 
 $(function() {
-  if (!redminePluginDatetimeCustomFieldInstalled()) {
     addFilter = function (field, operator, values) {
       var fieldId = field.replace('.', '_');
       var tr = $('#tr_'+fieldId);
@@ -55,20 +54,24 @@ $(function() {
       if (tr.length > 0) {
         tr.show();
       } else {
-        buildFilterRow(field, operator, values);
+        if (redminePluginDatetimeCustomFieldInstalled() && (filterOptions['type'] == "date" || filterOptions['type'] == "date_past" )) {
+          buildDateTimeFilterRow(field, operator, values);
+        } else {
+          buildFilterRow(field, operator, values);
+        }
       }
       $('#cb_'+fieldId).prop('checked', true);
       toggleFilter(field);
-      toggleMultiSelectIconInit();
+      if(!redminePluginDatetimeCustomFieldInstalled()){
+        toggleMultiSelectIconInit();
+      }
       $('#add_filter_select').val('').find('option').each(function() {
         if ($(this).attr('value') == field) {
           $(this).attr('disabled', true);
         }
       });
-
       addSelect2ToSelectTagsForTinyFeatures();
     }
-  }
 });
 
 function toggleMultiSelect(el) {
