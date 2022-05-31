@@ -32,6 +32,15 @@ module Redmine
                                                       min: custom_value.custom_field.min_value,
                                                       max: custom_value.custom_field.max_value,
                                                       step: custom_value.custom_field.steps))
+        edit_tag << view.content_tag(:span, custom_value.value, class: "range_selected_value")
+        edit_tag << view.javascript_tag(
+          <<~JAVASCRIPT
+            $(document).on("input change", "##{tag_id}", function(e) {
+              var value = $(this).val();
+              $(this).next('.range_selected_value').html(value);
+            })
+        JAVASCRIPT
+        )
         edit_tag
       end
 
