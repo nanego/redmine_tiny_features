@@ -1,0 +1,14 @@
+<p>
+  <label for="custom_field_min_range"><%=l(:label_min_max_range)%></label>
+  <%= f.text_field :min_value, :size => 5, :no_label => true %> -
+  <%= f.text_field :max_value, :size => 5, :no_label => true %>
+</p>
+
+<p>
+  <label for="custom_field_steps"><%=l(:label_steps)%></label>
+  <%= f.text_field :steps, :size => 5, :no_label => true %>
+</p>
+<p>
+  <label><%= l(:field_default_value) %></label>
+  <%= f.text_field :default_value, :size => 5, :no_label => true %>
+</p>

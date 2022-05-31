@@ -5,7 +5,6 @@ require 'json'
 
 describe QueriesController, type: :controller do
 
-
   fixtures :users, :projects, :members, :roles
 
   before do

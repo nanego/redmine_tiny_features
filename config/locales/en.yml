@@ -21,3 +21,6 @@ en:
   setting_journalize_note_deletion: Journalize the note deletion
   label_of: 'of '
   text_note_deleted: "%{label} (#%{old}) deleted"
+  label_range: "Range"
+  label_min_max_range: "Min / Max values"
+  label_steps: "Step"
