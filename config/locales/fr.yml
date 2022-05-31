@@ -21,3 +21,6 @@ fr:
   setting_journalize_note_deletion: Traçabilité des effacements de note
   label_of: 'de '
   text_note_deleted: "%{label} (#%{old}) supprimée"
+  label_range: "Intervalle"
+  label_min_max_range: "Valeurs minimale et maximale"
+  label_steps: "Incrément"
