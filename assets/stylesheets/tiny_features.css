@@ -13,3 +13,7 @@
 
 table.trackers-permissions td.role {color:#999;font-size:90%;font-weight:normal !important;text-align:center;vertical-align:bottom;}
 .permissions-header {padding-left: 16px;display: inline-block;}
+
+.disabled {
+  color : #aaa
+}

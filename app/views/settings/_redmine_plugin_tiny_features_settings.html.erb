@@ -75,13 +75,16 @@
     if(!select2Checked){
       paginationObject.checked = false
       paginationObject.disabled = true
-      paginationLabel.style.color = '#aaa'
+      paginationLabel.classList.add("disabled")
 
     } else {
       paginationObject.disabled = false
-      paginationLabel.style.removeProperty('color')
+      paginationLabel.classList.remove("disabled")
     }
   }
+
+  // Add to disabled option pagination when select2 option is not checked when the page is launched
+  hidePagination()
 <% end %>
 
 
