@@ -16,6 +16,7 @@ describe "TimeEntryQuery" do
       "warning_message_on_closed_issues"=>"1",
       "default_open_status"=>"2",
       "default_project"=>"1",
+      "use_select2"=>"1",
       "paginate_issue_filters_values"=>"1"
     }
 

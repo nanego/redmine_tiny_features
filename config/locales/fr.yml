@@ -21,3 +21,4 @@ fr:
   setting_journalize_note_deletion: Traçabilité des effacements de note
   label_of: 'de '
   text_note_deleted: "%{label} (#%{old}) supprimée"
+  setting_use_select2: Utilisation de la fonctionnalité select2

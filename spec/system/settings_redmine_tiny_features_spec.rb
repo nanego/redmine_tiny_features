@@ -8,8 +8,10 @@ RSpec.describe "settings_redmine_tiny_features", type: :system do
       log_user('admin', 'admin')
       visit 'settings/plugin/redmine_tiny_features'
 
+      find("input[name='settings[use_select2]']").click
       find("input[name='settings[paginate_issue_filters_values]']").click
       find("input[name='commit']").click
+      expect(Setting["plugin_redmine_tiny_features"]["use_select2"]).to eq '1'
       expect(Setting["plugin_redmine_tiny_features"]["paginate_issue_filters_values"]).to eq "1"
     end
   end

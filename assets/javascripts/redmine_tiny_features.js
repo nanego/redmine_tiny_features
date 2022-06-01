@@ -54,7 +54,7 @@ $(function() {
       if (tr.length > 0) {
         tr.show();
       } else {
-        if (redminePluginDatetimeCustomFieldInstalled() && (filterOptions['type'] == "date" || filterOptions['type'] == "date_past" )) {
+        if (redminePluginDatetimeCustomFieldInstalled()  && (filterOptions['type'] == "date" || filterOptions['type'] == "date_past" )) {
           buildDateTimeFilterRow(field, operator, values);
         } else {
           buildFilterRow(field, operator, values);
@@ -97,7 +97,7 @@ function toggleMultiSelect(el) {
 
 function addSelect2ToSelectTagsForTinyFeatures() {
   $(document).ready(function(){
-    if ((typeof $().select2) === 'function') {
+    if (((typeof $().select2) === 'function') && useRedminePluginSelect2() ) {
       $('#filters select.value').select2({
         containerCss: {width: '300px', minwidth: '300px'},
         width: 'style'

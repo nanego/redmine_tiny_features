@@ -21,3 +21,4 @@ en:
   setting_journalize_note_deletion: Journalize the note deletion
   label_of: 'of '
   text_note_deleted: "%{label} (#%{old}) deleted"
+  setting_use_select2: Use of select2 plugin

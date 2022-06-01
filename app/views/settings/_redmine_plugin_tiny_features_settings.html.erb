@@ -35,8 +35,15 @@
 
 <hr>
 <% if Redmine::Plugin.installed?(:redmine_base_select2) %>
-<!-- Add this parameter, because there are tests for available_filters in redmine core -->
 <p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[use_select2]", '1', Setting["plugin_redmine_tiny_features"]["use_select2"], :onclick=>"hidePagination()" %>
+    <%= l("setting_use_select2") %>
+  <% end %>
+</p>
+
+<!-- Add this parameter, because there are tests for available_filters in redmine core -->
+<p id="paginate_issue_filters_values">
   <%= label_tag '', { style: 'width: auto;' } do %>
     <%= check_box_tag "settings[paginate_issue_filters_values]", '1', Setting["plugin_redmine_tiny_features"]["paginate_issue_filters_values"] %>
     <%= l("setting_paginate_issue_filters_values") %>
@@ -54,8 +61,28 @@
 
 <%= javascript_tag do %>
   $(function() {
-  if ((typeof $().select2) === 'function') {
-  $('#settings_default_project').select2();
-  }
+    if ((typeof $().select2) === 'function') {
+        $('#settings_default_project').select2();
+    }
   });
+
+  // Avoid to activate pagination if select2 is not active
+  function hidePagination(){
+    paginationObject = $('#paginate_issue_filters_values input')[0]
+    paginationLabel = $('#paginate_issue_filters_values label')[0]
+    select2Checked = $('#settings_use_select2')[0].checked
+
+    if(!select2Checked){
+      paginationObject.checked = false
+      paginationObject.disabled = true
+      paginationLabel.style.color = '#aaa'
+
+    } else {
+      paginationObject.disabled = false
+      paginationLabel.style.removeProperty('color')
+    }
+  }
 <% end %>
+
+
+
