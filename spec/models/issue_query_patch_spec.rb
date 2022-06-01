@@ -13,7 +13,7 @@ describe "IssueQuery" do
 
   it "should contain empty values for available_filter author_id, assigned_to_id, updated_by, last_updated_by" do
 
-    Setting.send "plugin_redmine_tiny_features=", {
+    Setting["plugin_redmine_tiny_features"] = {
       "warning_message_on_closed_issues"=>"1",
       "default_open_status"=>"2",
       "default_project"=>"1",
@@ -30,11 +30,10 @@ describe "IssueQuery" do
 
   it "should not contain empty values for available_filter author_id, assigned_to_id, updated_by, last_updated_by (use_select2 deactivated only)" do
 
-    Setting.send "plugin_redmine_tiny_features=", {
+    Setting["plugin_redmine_tiny_features"] = {
       "warning_message_on_closed_issues"=>"1",
       "default_open_status"=>"2",
       "default_project"=>"1",
-      "use_select2"=>"0",
       "paginate_issue_filters_values"=>"1"
     }
 
@@ -47,12 +46,10 @@ describe "IssueQuery" do
 
   it "should not contain empty values for available_filter author_id, assigned_to_id, updated_by, last_updated_by (use_select2 and paginate_issue_filters_values deactivated)" do
 
-    Setting.send "plugin_redmine_tiny_features=", {
+    Setting["plugin_redmine_tiny_features"] = {
       "warning_message_on_closed_issues"=>"1",
       "default_open_status"=>"2",
       "default_project"=>"1",
-      "use_select2"=>"0",
-      "paginate_issue_filters_values"=>"0"
     }
 
     issue_query = IssueQuery.new
