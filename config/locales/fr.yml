@@ -21,4 +21,7 @@ fr:
   setting_journalize_note_deletion: Traçabilité des effacements de note
   label_of: 'de '
   text_note_deleted: "%{label} (#%{old}) supprimée"
-  setting_use_select2: Utilisation de la fonctionnalité select2
+  setting_use_select2: Activer Select2 pour faciliter l'utilisation des listes déroulantes
+  label_range: "Intervalle"
+  label_min_max_range: "Valeurs minimale et maximale"
+  label_steps: "Incrément"

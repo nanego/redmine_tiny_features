@@ -17,3 +17,10 @@ table.trackers-permissions td.role {color:#999;font-size:90%;font-weight:normal 
 .disabled-settings-redmine-tiny-features {
   color : #aaa
 }
+
+.range_selected_value {
+  color: #505050;
+  line-height: 1.5em;
+  word-wrap: break-word;
+  padding-left: 8px;
+}
