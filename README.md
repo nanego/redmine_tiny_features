@@ -14,6 +14,7 @@ Here is a complete list of the features:
 * Fix **pasted images** when using Chrome (may be fixed in future Redmine versions according to this issue https://www.redmine.org/issues/36013)
 * **Reminders rake task: add max-delay option** to define the maximum number of days after which reminders stop to be sent
 * Add **range** custom-field format
+* Apply **default value** to existing-issues custom-fields if field is required and not set
 
 ## Test status
 
