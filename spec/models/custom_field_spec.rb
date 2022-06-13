@@ -40,5 +40,33 @@ describe "CustomField" do
       assert f.valid_field_value?(123)
     end
 
+    describe "Update the table disabled_custom_field_enumerations in case of cascade deleting" do
+      let(:project) { Project.find(1) }
+      let(:field) { CustomField.create(:name => 'Test', :field_format => 'enumeration') }
+      let(:c_f_e1) { CustomFieldEnumeration.create(name: 'val1', position: 1, active: true, custom_field_id: field.id) }
+      let(:c_f_e2) { CustomFieldEnumeration.create(name: 'val2', position: 2, active: true, custom_field_id: field.id) }
+
+      before do
+        CustomFieldEnumeration.create(name: 'val3', position: 3, active: true, custom_field_id: field.id)
+        DisabledCustomFieldEnumeration.create(project: project, custom_field_enumeration_id: c_f_e1.id)
+        DisabledCustomFieldEnumeration.create(project: project, custom_field_enumeration_id: c_f_e2.id)
+        expect(DisabledCustomFieldEnumeration.count).to eq(2)
+      end
+
+      it "Should update the table disabled_custom_field_enumerations when deleting a project" do
+        project.destroy
+        expect(DisabledCustomFieldEnumeration.count).to eq(0)
+      end
+
+      it "Should update the table disabled_custom_field_enumerations when deleting a customField" do
+        field.destroy
+        expect(DisabledCustomFieldEnumeration.count).to eq(0)
+      end
+
+      it "Should update the table disabled_custom_field_enumerations when deleting a CustomFieldEnumeration" do
+        c_f_e1.destroy
+        expect(DisabledCustomFieldEnumeration.count).to eq(1)
+      end
+    end
   end
 end
