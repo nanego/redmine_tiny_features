@@ -16,6 +16,8 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/issues_helper_patch'
   require_dependency 'redmine_tiny_features/journal_patch'
   require_dependency 'redmine_tiny_features/mailer_patch'
+  require_dependency 'redmine_tiny_features/custom_field_enumeration_patch'
+  require_dependency 'redmine_tiny_features/custom_field_patch'
 end
 
 Redmine::Plugin.register :redmine_tiny_features do
@@ -34,7 +36,8 @@ Redmine::Plugin.register :redmine_tiny_features do
                'open_issue_when_editing_closed_issues': '',
                'simplified_version_form': '1',
                'default_project': '',
-               'paginate_issue_filters_values': Rails.env.test? ? '0' : '1',
-               'journalize_note_deletion': Rails.env.test? ? '0' : '1'
+               'paginate_issue_filters_values': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1',
+               'journalize_note_deletion': Rails.env.test? ? '0' : '1',
+               'use_select2': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1'
            }
 end

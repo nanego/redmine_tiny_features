@@ -36,7 +36,6 @@ function redminePluginDatetimeCustomFieldInstalled() {
 }
 
 $(function() {
-  if (!redminePluginDatetimeCustomFieldInstalled()) {
     addFilter = function (field, operator, values) {
       var fieldId = field.replace('.', '_');
       var tr = $('#tr_'+fieldId);
@@ -55,21 +54,40 @@ $(function() {
       if (tr.length > 0) {
         tr.show();
       } else {
-        buildFilterRow(field, operator, values);
+        if (redminePluginDatetimeCustomFieldInstalled()  && (filterOptions['type'] == "date" || filterOptions['type'] == "date_past" )) {
+          buildDateTimeFilterRow(field, operator, values);
+        } else {
+          buildFilterRow(field, operator, values);
+        }
       }
       $('#cb_'+fieldId).prop('checked', true);
       toggleFilter(field);
-      toggleMultiSelectIconInit();
+      if(!redminePluginDatetimeCustomFieldInstalled()){
+        toggleMultiSelectIconInit();
+      }
       $('#add_filter_select').val('').find('option').each(function() {
         if ($(this).attr('value') == field) {
           $(this).attr('disabled', true);
         }
       });
-
       addSelect2ToSelectTagsForTinyFeatures();
     }
-  }
 });
+
+function toggleMultiSelect(el) {
+  if (el.attr('multiple')) {
+    el.removeAttr('multiple');
+    el.attr('size', 1);
+  } else {
+    el.attr('multiple', true);
+    if (el.children().length > 10)
+      el.attr('size', 10);
+    else
+      el.attr('size', 4);
+  }
+  // Patch
+  addSelect2ToSelectTagsForTinyFeatures()
+}
 
 /*
   Override for addSelect2ToSelectTags, because of addFilter takes time ,we should wait for it to finish.
@@ -77,20 +95,16 @@ $(function() {
   redmine_datetime_custom_field installed loaded after  addSelect2ToSelectTags of this plugin
 */
 
-addSelect2ToSelectTags = function(){
-  $(document).ready(function(){
-    addSelect2ToSelectTagsForTinyFeatures();
-  });
-}
-
 function addSelect2ToSelectTagsForTinyFeatures() {
-  if ((typeof $().select2) === 'function') {
-    $('#filters select.value').select2({
-      containerCss: {width: '300px', minwidth: '300px'},
-      width: 'style'
-    });
-    updateSelect2ForElements();
-  }
+  $(document).ready(function(){
+    if (((typeof $().select2) === 'function') && useRedminePluginSelect2() ) {
+      $('#filters select.value').select2({
+        containerCss: {width: '300px', minwidth: '300px'},
+        width: 'style'
+      });
+      updateSelect2ForElements();
+    }
+  })
 }
 
 function setConfigurationForSelect2(element, url) {
