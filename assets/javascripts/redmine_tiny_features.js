@@ -35,6 +35,11 @@ function redminePluginDatetimeCustomFieldInstalled() {
   return !(typeof buildDateTimeFilterRow === "undefined")
 }
 
+// check if plugin redmine_limited_visibility is installed
+function redminePluginLimitedVisibilityIsInstalled() {
+  return !(typeof buildListVisibilityFilterRow === "undefined")
+}
+
 $(function() {
     addFilter = function (field, operator, values) {
       var fieldId = field.replace('.', '_');
@@ -54,14 +59,24 @@ $(function() {
       if (tr.length > 0) {
         tr.show();
       } else {
-        if (redminePluginDatetimeCustomFieldInstalled()  && (filterOptions['type'] == "date" || filterOptions['type'] == "date_past" )) {
+        if (redminePluginDatetimeCustomFieldInstalled() && (filterOptions['type'] == "date" || filterOptions['type'] == "date_past" )) {
           buildDateTimeFilterRow(field, operator, values);
         } else {
-          buildFilterRow(field, operator, values);
+          if (redminePluginLimitedVisibilityIsInstalled() && (filterOptions['type'] == "list_visibility")) {
+            buildListVisibilityFilterRow(field, operator, values);
+          } else {
+            buildFilterRow(field, operator, values);
+          }
         }
       }
       $('#cb_'+fieldId).prop('checked', true);
-      toggleFilter(field);
+
+      if (redminePluginLimitedVisibilityIsInstalled() && ($("#operators_" + fieldId).val() == 'mine')) {
+        enableValues(field, []);
+      } else {
+        toggleFilter(field);
+      }
+
       if(!redminePluginDatetimeCustomFieldInstalled()){
         toggleMultiSelectIconInit();
       }
