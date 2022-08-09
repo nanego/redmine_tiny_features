@@ -1,3 +1,5 @@
+require 'issue_custom_field'
+
 class IssueCustomField < CustomField
 
   def visibility_by_project_condition(project_key = nil, user = User.current, id_column = nil)
