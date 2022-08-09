@@ -16,6 +16,7 @@ Here is a complete list of the features:
 * **Reminders rake task: add max-delay option** to define the maximum number of days after which reminders stop to be sent
 * Add **range** custom-field format
 * Apply **default value** to existing-issues custom-fields if field is required and not set
+* Fix performance problem when filtering issues by custom-values (remove this patch when issue has been addressed in Redmine Core: https://www.redmine.org/issues/37565)
 
 ## Test status
 

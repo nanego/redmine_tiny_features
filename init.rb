@@ -18,6 +18,7 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/mailer_patch'
   require_dependency 'redmine_tiny_features/custom_field_enumeration_patch'
   require_dependency 'redmine_tiny_features/custom_field_patch'
+  require_dependency 'redmine_tiny_features/issue_custom_field_patch'
 end
 
 Redmine::Plugin.register :redmine_tiny_features do
