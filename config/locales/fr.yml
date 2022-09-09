@@ -25,3 +25,4 @@ fr:
   label_range: "Intervalle"
   label_min_max_range: "Valeurs minimale et maximale"
   label_steps: "Incrément"
+  field_module_enabled: "Modules activés"

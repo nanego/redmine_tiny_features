@@ -25,3 +25,4 @@ en:
   label_range: "Range"
   label_min_max_range: "Min / Max values"
   label_steps: "Step"
+  field_module_enabled: "Enabled modules"

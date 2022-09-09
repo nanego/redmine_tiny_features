@@ -4,6 +4,10 @@ class Project < ActiveRecord::Base
 
   has_many :disabled_custom_field_enumerations, :dependent => :delete_all
 
+  def module_enabled    
+    EnabledModule.where("project_id = ? ", self.id).map { |e_m| l("project_module_#{e_m.name}") }
+  end
+
 end
 
 module RedmineTinyFeatures
@@ -22,10 +26,10 @@ module RedmineTinyFeatures
         base_statement = "1=1"
       else
         base_statement = if perm && perm.read?
-                           "#{Project.table_name}.status <> #{Project::STATUS_ARCHIVED}"
-                         else
-                           "#{Project.table_name}.status = #{Project::STATUS_ACTIVE}"
-                         end
+                            "#{Project.table_name}.status <> #{Project::STATUS_ARCHIVED}"
+                          else
+                            "#{Project.table_name}.status = #{Project::STATUS_ACTIVE}"
+                          end
         if perm && perm.project_module
           # If the permission belongs to a project module, make sure the module is enabled
           base_statement +=
