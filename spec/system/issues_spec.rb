@@ -115,5 +115,37 @@ RSpec.describe "creating an issue", type: :system do
     end
   end
 
+  describe "option prevent copy issues" do
+    it "Show link copy when its tracker allows copy issues page(issue/show)" do
+      visit 'issues/2'
+      expect(page).to have_selector('a' , class: 'icon-copy', text: 'Copy')
+    end
+
+    it "Show link copy when its tracker allows copy issues page(issue/index)" do
+      visit 'issues/'
+      
+      find('tr#issue-2>td.buttons>a.icon-actions').click
+      expect(page).to have_selector('a.icon-copy')
+    end
+
+    it "Hide link copy when its tracker prevents copy issues page(issue/show)" do
+      tracker_test = Tracker.find(2)
+      tracker_test.prevent_copy_issues = true
+      tracker_test.save
+
+      visit 'issues/2'
+      expect(page).to_not have_selector('a', class: 'icon-copy', text: 'Copy')
+    end
+
+    it "Hide link copy when its tracker prevents copy issues page(issue/index)" do
+      tracker_test = Tracker.find(2)
+      tracker_test.prevent_copy_issues = true
+      tracker_test.save
+
+      visit 'issues/'      
+      find('tr#issue-2>td.buttons>a.icon-actions').click
+      expect(page).to_not have_selector('a.icon-copy')
+    end
+  end
 end
 

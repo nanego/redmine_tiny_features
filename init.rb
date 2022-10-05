@@ -15,6 +15,7 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/time_entry_query_patch'
   require_dependency 'redmine_tiny_features/issues_helper_patch'
   require_dependency 'redmine_tiny_features/journal_patch'
+  require_dependency 'redmine_tiny_features/tracker_patch'
   require_dependency 'redmine_tiny_features/mailer_patch'
   require_dependency 'redmine_tiny_features/custom_field_enumeration_patch'
   require_dependency 'redmine_tiny_features/custom_field_patch'
