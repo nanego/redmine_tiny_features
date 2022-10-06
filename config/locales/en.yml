@@ -26,3 +26,5 @@ en:
   label_min_max_range: "Min / Max values"
   label_steps: "Step"
   field_module_enabled: "Enabled modules"
+  field_prevent_issue_copy: "Prevent issue copy"
+
