@@ -1,3 +1,3 @@
-class Tracker < ActiveRecord::Base	
-	safe_attributes('prevent_copy_issues')
+class Tracker < ActiveRecord::Base
+  safe_attributes('prevent_issue_copy')
 end

@@ -18,6 +18,7 @@ Here is a complete list of the features:
 * Apply **default value** to existing-issues custom-fields if field is required and not set
 * Fix performance problem when filtering issues by custom-values (remove this patch when issue has been addressed in Redmine Core: https://www.redmine.org/issues/37565)
 * Add **enabled modules** filter and column in projects list
+* Add **prevent issue copy** attribute to trackers
 
 ## Test status
 
