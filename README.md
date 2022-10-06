@@ -8,7 +8,7 @@ Here is a complete list of the features:
 * Hide optional advanced fields in **version** form
 * Define a **default project** selected when creating a new issue without being in a specific project
 * Add **check-all / uncheck-all shortcuts** to roles filters
-* Improve **roles synthesis** by adding missing informations about issues permissions and trackers
+* Improve **roles synthesis** by adding missing data about issues permissions and trackers
 * Use or not the select2 plugin
 * Improve load time of **users filters** when there are thousands entries and when the select2 plugin is used
 * Save **note deletion** in issue journal
