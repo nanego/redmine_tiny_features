@@ -27,4 +27,5 @@ en:
   label_steps: "Step"
   field_module_enabled: "Enabled modules"
   field_prevent_issue_copy: "Prevent issue copy"
+  setting_disable_email_hiding: "Disable the emails hiding function"
 
