@@ -1,1 +1,3 @@
-gem 'puma', '~> 5.6.5' if Rails.env.test?
+group :test do
+  gem 'puma', '~> 5.6.5'
+end
