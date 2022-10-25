@@ -29,6 +29,18 @@ describe UsersController, type: :controller do
 
       expect(response.body).to_not include(User.find(2).mail)
     end
+
+    it "should hide the option (Hide my email address) when the option is selected" do
+      Setting["plugin_redmine_tiny_features"]["disable_email_hiding"] = '1'
+      get :edit, params: { :id => 2 }
+      expect(response.body).to_not include("Hide my email address")
+    end
+
+    it "should show the option (Hide my email address) when the option is unselected" do
+      Setting["plugin_redmine_tiny_features"]["disable_email_hiding"] = ''
+      get :edit, params: { :id => 2 }
+      expect(response.body).to include("Hide my email address")
+    end
   end
 
 end
