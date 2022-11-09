@@ -23,6 +23,7 @@ describe UsersController, type: :controller do
     end
 
     it "should hide user's email when the option is unselected, if the user hides his email" do
+      @request.session[:user_id] = 3
       Setting["plugin_redmine_tiny_features"]["disable_email_hiding"] = ''
       expect(User.find(2).pref.hide_mail).to eq true
       get :show, params: { :id => 2 }
@@ -40,6 +41,18 @@ describe UsersController, type: :controller do
       Setting["plugin_redmine_tiny_features"]["disable_email_hiding"] = ''
       get :edit, params: { :id => 2 }
       expect(response.body).to include("Hide my email address")
+    end
+
+    it "should show user's email when the current use has the permission always_see_user_email_addresses" do
+      User.current = User.find(1)
+      role_test = Role.find(1)
+      role_test.add_permission!(:always_see_user_email_addresses)
+      role_test.save
+       
+      expect(User.find(2).pref.hide_mail).to eq true
+      get :show, params: { :id => 2 }
+
+      expect(response.body).to include(User.find(2).mail)
     end
   end
 
