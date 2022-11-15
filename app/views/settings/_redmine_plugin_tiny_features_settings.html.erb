@@ -59,6 +59,14 @@
   <% end %>
 </p>
 
+
+<p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[disable_email_hiding]", '1', Setting["plugin_redmine_tiny_features"]["disable_email_hiding"] %>
+    <%= l("setting_disable_email_hiding") %>
+  <% end %>
+</p>
+
 <%= javascript_tag do %>
   $(function() {
     if ((typeof $().select2) === 'function') {
