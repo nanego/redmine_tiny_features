@@ -146,6 +146,13 @@ RSpec.describe "creating an issue", type: :system do
       find('tr#issue-2>td.buttons>a.icon-actions').click
       expect(page).to_not have_selector('a.icon-copy')
     end
+
+    it "only on click button edit" do
+      visit 'issues/2'
+      expect(page).to_not have_selector('#issue-form', visible: :hidden)
+      find('.icon-edit',  match: :first).click
+      expect(page).to have_selector('#issue-form')
+    end
   end
 end
 
