@@ -27,3 +27,6 @@ fr:
   label_steps: "Incrément"
   field_module_enabled: "Modules activés"
   field_prevent_issue_copy: "Empêcher la copie de demandes"
+  setting_disable_email_hiding: "Désactiver la fonction de masquage des emails"
+  permission_always_see_user_email_addresses: "Toujours voir les adresses mail des utilisateurs"
+  project_module_user_email: "Adresses mail des utilisateurs"

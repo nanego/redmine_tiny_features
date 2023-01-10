@@ -19,7 +19,6 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/mailer_patch'
   require_dependency 'redmine_tiny_features/custom_field_enumeration_patch'
   require_dependency 'redmine_tiny_features/custom_field_patch'
-  require_dependency 'redmine_tiny_features/issue_custom_field_patch'
   require_dependency 'redmine_tiny_features/project_query_patch'
 end
 
@@ -32,7 +31,10 @@ Redmine::Plugin.register :redmine_tiny_features do
   author_url 'https://github.com/nanego'
   requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.4' if Rails.env.test?
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
-  permission :manage_project_enumerations, {}
+ 
+  project_module :user_email do
+    permission :always_see_user_email_addresses ,{}
+  end
   settings partial: 'settings/redmine_plugin_tiny_features_settings',
            default: {
                'warning_message_on_closed_issues': '1',
@@ -41,6 +43,7 @@ Redmine::Plugin.register :redmine_tiny_features do
                'default_project': '',
                'paginate_issue_filters_values': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1',
                'journalize_note_deletion': Rails.env.test? ? '0' : '1',
-               'use_select2': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1'
+               'use_select2': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1',
+               'disable_email_hiding': '',
            }
 end
