@@ -40,3 +40,4 @@ fr:
   field_issue_display_mode: "Colorisation des demandes"
   label_issue_display_by_priority: "Colorisation par priorité"
   label_issue_display_by_status: "Colorisation par statut"
+  setting_load_issue_edit: "Charger le formulaire d'édition de la demande uniquement en cliquant sur le lien Modifier"

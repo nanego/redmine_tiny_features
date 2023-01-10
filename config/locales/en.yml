@@ -40,4 +40,4 @@ en:
   field_issue_display_mode: "Colorization of issues"
   label_issue_display_by_priority: "Colorization According to priority"
   label_issue_display_by_status: "Colorization According to status"
-
+  setting_load_issue_edit: "Load the issue's edit form only by clicking on the Edit link"
