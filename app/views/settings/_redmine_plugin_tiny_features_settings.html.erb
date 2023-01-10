@@ -13,7 +13,7 @@
 <p>
   <%= label_tag l("default_open_status") %>
   <%= select_tag "settings[default_open_status]", options_for_select(IssueStatus.where(is_closed: false).sorted.map { |status| [status.name, status.id] },
-                                                                     selected: Setting["plugin_redmine_tiny_features"]["default_open_status"]) %>
+                                                                      selected: Setting["plugin_redmine_tiny_features"]["default_open_status"]) %>
 </p>
 
 <hr>
@@ -67,6 +67,13 @@
   <% end %>
 </p>
 
+<p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[load_issue_edit]", '1', Setting["plugin_redmine_tiny_features"]["load_issue_edit"] %>
+    <%= l("setting_load_issue_edit") %>
+  <% end %>
+</p>
+
 <%= javascript_tag do %>
   $(function() {
     if ((typeof $().select2) === 'function') {
@@ -94,6 +101,3 @@
   // Add to disabled option pagination when select2 option is not checked when the page is launched
   hidePagination()
 <% end %>
-
-
-

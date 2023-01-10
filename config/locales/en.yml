@@ -30,4 +30,4 @@ en:
   setting_disable_email_hiding: "Disable the emails hiding function"
   permission_always_see_user_email_addresses: "Always see user email addresses"
   project_module_user_email: "User email addresses"
-
+  setting_load_issue_edit: "Load the issue's edit form only by clicking on the Edit link"
