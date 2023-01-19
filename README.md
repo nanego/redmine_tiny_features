@@ -18,6 +18,7 @@ Here is a complete list of the features:
 * Apply **default value** to existing-issues custom-fields if field is required and not set
 * Add **enabled modules** filter and column in projects list
 * Add **prevent issue copy** attribute to trackers
+* Add new permission to always see **users's email addresses**, bypassing user email_hiding setting
 
 ## Test status
 
