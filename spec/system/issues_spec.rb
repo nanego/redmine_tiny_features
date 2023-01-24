@@ -164,6 +164,8 @@ RSpec.describe "creating an issue", type: :system do
       visit 'issues/2'
       expect(page).to_not have_selector('#issue-form', visible: :hidden)
       find('.icon-edit',  match: :first).click
+      # wait for render form
+      sleep 10      
       expect(page).to have_selector('#issue-form')
     end
   end

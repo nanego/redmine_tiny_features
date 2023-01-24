@@ -10,22 +10,35 @@ Deface::Override.new :virtual_path  => 'issues/_action_menu_edit',
     // override this method,for calling renderPartialEdit before it, only in case of link edit
     function showAndScrollTo(id, focus) {
       if (id =='update'){
-        renderPartialEdit();
-      }
-      $('#'+id).show();
+        renderPartialEdit(id);
+      } else {
+        $('#'+id).show();
+      }      
       if (focus !== null) {
         $('#'+focus).focus();
       }
       $('html, body').animate({scrollTop: $('#'+id).offset().top}, 100);
     }
 
-    function renderPartialEdit(){
-      $('#update').html('<%= escape_javascript(render :partial => 'edit') %>');
-      // as there are elements of wikitoolbar
-      <% if Redmine::Plugin.installed?(:redmine_wysiwyg_editor) %>
-        $('.jstEditor').each(initRedmineWysiwygEditor);
-      <% end %>
-      $(document).ready(setupFileDrop);
+    function renderPartialEdit(id){
+      $.ajax({
+        url: "<%= render_form_by_ajax_path(@issue.id) %>",
+        success: function(response) {
+          $('#update').append(response.html);
+          // to avoid displaying the edit label before the render form
+          $('#'+id).show();
+          $( document ).ready(function() {
+            // for datepicker element, 
+            <% include_calendar_headers_tags %>
+            // for wikitoolbar element in mode Textile,
+            setupFileDrop();
+            // But for mode visual there is no need to call because it is already called in { $(document).ajaxSuccess/redmine_wysiwyg_editor }
+          });
+        },error: function(response) {
+          console.error(response);
+        },
+      });
+      
     } 
   </script>
 <% else %>
