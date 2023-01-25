@@ -33,7 +33,8 @@ describe "issues/show.html.erb", type: :view do
 
   it "contains a warning to prevent to re-open it if a new issue is more appropriate" do
     Setting["plugin_redmine_tiny_features"]["warning_message_on_closed_issues"] = '1'
-
+    Setting["plugin_redmine_tiny_features"]["load_issue_edit"] = '0'
+    
     assign(:issue, issue)
     assign(:journals, issue.journals.includes(:user, :details).reorder("#{Journal.table_name}.id ASC").to_a)
     assign(:allowed_statuses, issue.new_statuses_allowed_to(User.current))
