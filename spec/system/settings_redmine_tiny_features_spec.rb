@@ -29,5 +29,6 @@ RSpec.describe "settings_redmine_tiny_features", type: :system do
     find("input[name='commit']").click    
     
     expect(Setting["plugin_redmine_tiny_features"]["load_issue_edit"]).to eq '1'
+    Setting["plugin_redmine_tiny_features"]["load_issue_edit"] = '0'
   end
 end
