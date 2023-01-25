@@ -167,6 +167,12 @@ RSpec.describe "creating an issue", type: :system do
       # wait for render form
       sleep 10      
       expect(page).to have_selector('#issue-form')
+      Setting.send "plugin_redmine_tiny_features=", {
+        "warning_message_on_closed_issues" => "1",
+        "default_open_status" => "2",
+        "default_project" => "1",
+        "load_issue_edit" => "0",
+      }
     end
   end
 end
