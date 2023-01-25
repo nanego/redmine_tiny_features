@@ -29,6 +29,11 @@ RSpec.describe "settings_redmine_tiny_features", type: :system do
     find("input[name='commit']").click    
     
     expect(Setting["plugin_redmine_tiny_features"]["load_issue_edit"]).to eq '1'
-    Setting["plugin_redmine_tiny_features"]["load_issue_edit"] = '0'
+    Setting.send "plugin_redmine_tiny_features=", {
+      "warning_message_on_closed_issues" => "1",
+      "default_open_status" => "2",
+      "default_project" => "1",
+      "load_issue_edit" => "0",
+    }
   end
 end
