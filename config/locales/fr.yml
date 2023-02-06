@@ -41,3 +41,4 @@ fr:
   label_issue_display_by_priority: "Colorisation par priorité"
   label_issue_display_by_status: "Colorisation par statut"
   setting_load_issue_edit: "Charger le formulaire d'édition de la demande uniquement en cliquant sur le lien Modifier"
+  setting_do_not_preload_issue_edit_form: "Charger le formulaire d'édition de la demande uniquement en cliquant sur le lien Modifier"

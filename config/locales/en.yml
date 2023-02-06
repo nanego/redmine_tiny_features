@@ -41,3 +41,4 @@ en:
   label_issue_display_by_priority: "Colorization According to priority"
   label_issue_display_by_status: "Colorization According to status"
   setting_load_issue_edit: "Load the issue's edit form only by clicking on the Edit link"
+  setting_do_not_preload_issue_edit_form: "Load the issue's edit form only by clicking on the Edit link"

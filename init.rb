@@ -51,7 +51,7 @@ Redmine::Plugin.register :redmine_tiny_features do
                'paginate_issue_filters_values': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1',
                'journalize_note_deletion': Rails.env.test? ? '0' : '1',
                'use_select2': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1',
-               'load_issue_edit': Rails.env.test? ? '0' : '1',
+               'do_not_preload_issue_edit_form': Rails.env.test? ? '0' : '1',
                'disable_email_hiding': '',
            }
 end
