@@ -13,7 +13,7 @@
 <p>
   <%= label_tag l("default_open_status") %>
   <%= select_tag "settings[default_open_status]", options_for_select(IssueStatus.where(is_closed: false).sorted.map { |status| [status.name, status.id] },
-                                                                      selected: Setting["plugin_redmine_tiny_features"]["default_open_status"]) %>
+                                                                     selected: Setting["plugin_redmine_tiny_features"]["default_open_status"]) %>
 </p>
 
 <hr>

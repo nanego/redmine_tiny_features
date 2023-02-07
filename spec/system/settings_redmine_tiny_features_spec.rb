@@ -16,7 +16,7 @@ RSpec.describe "settings_redmine_tiny_features", type: :system do
     end
   end
 
-  it "Should active the option do_not_preload_issue_edit_form" do
+  it "activates the option do_not_preload_issue_edit_form" do
     log_user('admin', 'admin')
     Setting.send "plugin_redmine_tiny_features=", {
       "warning_message_on_closed_issues" => "1",

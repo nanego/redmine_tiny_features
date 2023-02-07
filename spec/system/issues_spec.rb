@@ -149,7 +149,7 @@ RSpec.describe "creating an issue", type: :system do
   end
 
   describe "Load the issue's edit" do
-    it "Load the form when the option (do_not_preload_issue_edit_form) is unselected" do
+    it "preloads the form when the option (do_not_preload_issue_edit_form) is unselected" do
       visit 'issues/2'
       expect(page).to have_selector('#issue-form', visible: :hidden)
     end
@@ -164,8 +164,6 @@ RSpec.describe "creating an issue", type: :system do
       visit 'issues/2'
       expect(page).to_not have_selector('#issue-form', visible: :hidden)
       find('.icon-edit',  match: :first).click
-      # wait for render form
-      sleep 10      
       expect(page).to have_selector('#issue-form')
       Setting.send "plugin_redmine_tiny_features=", {
         "warning_message_on_closed_issues" => "1",
