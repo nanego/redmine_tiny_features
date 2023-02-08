@@ -4,15 +4,15 @@ class IssuesController
 
   append_before_action :find_optional_project_for_new_issue, :only => [:new]
   skip_before_action :authorize, :only => [:render_form_by_ajax]
-  
 
-  def render_form_by_ajax    
+  def render_form_by_ajax
     @issue = Issue.find(params[:id])
 
-    return unless update_issue_from_params  
+    return unless User.current.allowed_to?(:edit_issues, @issue.project)
+    return unless update_issue_from_params
 
     render json: { html: render_to_string(partial: 'edit') }
-  
+
   end
 
   private
