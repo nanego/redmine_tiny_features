@@ -18,18 +18,20 @@ Deface::Override.new :virtual_path  => 'issues/_action_menu_edit',
             $('#ajax-indicator').addClass('bottom');
           },
           success: function(response) {
-            $('#update').append(response.html);
-            $(document).ready(function() {
-              // for datepicker element,
-              <% include_calendar_headers_tags %>
-              // for wikitoolbar element in mode Textile,
-              setupFileDrop();
-              // But for mode visual there is no need to call because it is already called in { $(document).ajaxSuccess/redmine_wysiwyg_editor }
-            });
             $('#ajax-indicator').removeClass('bottom');
+            if(response){
+              $('#update').append(response.html);
+              $(document).ready(function() {
+                // for datepicker element,
+                <% include_calendar_headers_tags %>
+                // for wikitoolbar element in mode Textile,
+                setupFileDrop();
+                // But for mode visual there is no need to call because it is already called in { $(document).ajaxSuccess/redmine_wysiwyg_editor }
+              });
+            }
           },error: function(response) {
-            console.error(response);
             $('#ajax-indicator').removeClass('bottom');
+            console.error(response);
           },
         });
       }
