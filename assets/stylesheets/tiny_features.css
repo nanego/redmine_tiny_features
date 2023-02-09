@@ -25,6 +25,13 @@ table.trackers-permissions td.role {color:#999;font-size:90%;font-weight:normal 
   padding-left: 8px;
 }
 
+
+#ajax-indicator.bottom {
+  position: fixed;
+  bottom: 2px;
+  top: auto;
+}
+
 /* issue_statuses */
 tr.status-red, table.list tbody tr.priority-3:hover { color:#c00; }
 tr.status-red a, tr.priority-3:hover a { color:#c00; }

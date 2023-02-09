@@ -16,7 +16,7 @@ RSpec.describe "settings_redmine_tiny_features", type: :system do
     end
   end
 
-  it "activates the option do_not_preload_issue_edit_form" do
+  it "activates the option load_issue_edit_form_asynchronously" do
     log_user('admin', 'admin')
     Setting.send "plugin_redmine_tiny_features=", {
       "warning_message_on_closed_issues" => "1",
@@ -25,15 +25,15 @@ RSpec.describe "settings_redmine_tiny_features", type: :system do
     }
     visit 'settings/plugin/redmine_tiny_features'
     
-    find("input[name='settings[do_not_preload_issue_edit_form]']").click
+    find("input[name='settings[load_issue_edit_form_asynchronously]']").click
     find("input[name='commit']").click    
     
-    expect(Setting["plugin_redmine_tiny_features"]["do_not_preload_issue_edit_form"]).to eq '1'
+    expect(Setting["plugin_redmine_tiny_features"]["load_issue_edit_form_asynchronously"]).to eq '1'
     Setting.send "plugin_redmine_tiny_features=", {
       "warning_message_on_closed_issues" => "1",
       "default_open_status" => "2",
       "default_project" => "1",
-      "do_not_preload_issue_edit_form" => "0",
+      "load_issue_edit_form_asynchronously" => "0",
     }
   end
 end

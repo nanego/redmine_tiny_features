@@ -19,7 +19,7 @@ Here is a complete list of the features:
 * Add **enabled modules** filter and column in projects list
 * Add **prevent issue copy** attribute to trackers
 * Add new permission to always see **users's email addresses**, bypassing user email_hiding setting
-* Add an option to **not preload issue form** and reduce load time of the show issue page
+* Add an option to **load issue form asynchronously** and reduce issue#show load time
 
 ## Test status
 
