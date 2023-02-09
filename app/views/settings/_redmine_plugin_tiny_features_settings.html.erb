@@ -69,8 +69,8 @@
 
 <p>
   <%= label_tag '', { style: 'width: auto;' } do %>
-    <%= check_box_tag "settings[do_not_preload_issue_edit_form]", '1', Setting["plugin_redmine_tiny_features"]["do_not_preload_issue_edit_form"] %>
-    <%= l("setting_do_not_preload_issue_edit_form") %>
+    <%= check_box_tag "settings[load_issue_edit_form_asynchronously]", '1', Setting["plugin_redmine_tiny_features"]["load_issue_edit_form_asynchronously"] %>
+    <%= l("setting_load_issue_edit_form_asynchronously") %>
   <% end %>
 </p>
 

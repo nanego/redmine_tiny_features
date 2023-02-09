@@ -24,3 +24,9 @@ table.trackers-permissions td.role {color:#999;font-size:90%;font-weight:normal 
   word-wrap: break-word;
   padding-left: 8px;
 }
+
+#ajax-indicator.bottom {
+  position: fixed;
+  bottom: 2px;
+  top: auto;
+}
