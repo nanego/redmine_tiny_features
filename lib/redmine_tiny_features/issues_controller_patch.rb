@@ -14,7 +14,7 @@ class IssuesController
   def render_form_by_ajax
     @issue = Issue.find(params[:id])
 
-    return unless User.current.allowed_to?(:edit_issues, @issue.project)
+    return unless @issue.editable?
     return unless update_issue_from_params
 
     render json: { html: render_to_string(partial: 'edit') }
