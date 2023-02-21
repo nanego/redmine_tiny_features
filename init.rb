@@ -20,6 +20,13 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/custom_field_enumeration_patch'
   require_dependency 'redmine_tiny_features/custom_field_patch'
   require_dependency 'redmine_tiny_features/project_query_patch'
+  require_dependency 'redmine_tiny_features/issue_patch'
+  require_dependency 'redmine_tiny_features/issue_status_patch'
+  require_dependency 'redmine_tiny_features/issue_statuses_helper_patch'
+  require_dependency 'redmine_tiny_features/issues_helper_patch'
+  require_dependency 'redmine_tiny_features/user_patch'
+  require_dependency 'redmine_tiny_features/users_helper_patch'
+
 end
 
 Redmine::Plugin.register :redmine_tiny_features do
@@ -31,6 +38,8 @@ Redmine::Plugin.register :redmine_tiny_features do
   author_url 'https://github.com/nanego'
   requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.4' if Rails.env.test?
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
+  requires_redmine_plugin :redmine_admin_activity, :version_or_higher => '4.0.0'
+  requires_redmine_plugin :redmine_limited_visibility, :version_or_higher => '3.3.0'
  
   project_module :user_email do
     permission :always_see_user_email_addresses ,{}

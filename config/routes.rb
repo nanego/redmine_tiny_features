@@ -3,3 +3,4 @@ resources :projects do
 end
 match 'queries/author_values_pagination', :controller => 'queries', :action => 'author_values_pagination' , :via => :get,  :as => 'author_values_pagination'
 match 'queries/assigned_to_values_pagination', :controller => 'queries', :action => 'assigned_to_values_pagination' , :via => :get,  :as => 'assigned_to_values_pagination'
+post 'issues/switch', to: 'issues#switch_display_mode', as: :switch_display_mode
