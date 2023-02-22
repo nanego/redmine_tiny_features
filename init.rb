@@ -31,7 +31,7 @@ Redmine::Plugin.register :redmine_tiny_features do
   author_url 'https://github.com/nanego'
   requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.4' if Rails.env.test?
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
-
+  
   permission :always_see_user_email_addresses, {}
 
   settings partial: 'settings/redmine_plugin_tiny_features_settings',
@@ -43,6 +43,7 @@ Redmine::Plugin.register :redmine_tiny_features do
              'paginate_issue_filters_values': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1',
              'journalize_note_deletion': Rails.env.test? ? '0' : '1',
              'use_select2': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1',
+             'load_issue_edit_form_asynchronously': Rails.env.test? ? '0' : '1',
              'disable_email_hiding': '',
            }
 end

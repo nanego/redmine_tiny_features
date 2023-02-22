@@ -67,6 +67,13 @@
   <% end %>
 </p>
 
+<p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[load_issue_edit_form_asynchronously]", '1', Setting["plugin_redmine_tiny_features"]["load_issue_edit_form_asynchronously"] %>
+    <%= l("setting_load_issue_edit_form_asynchronously") %>
+  <% end %>
+</p>
+
 <%= javascript_tag do %>
   $(function() {
     if ((typeof $().select2) === 'function') {
@@ -94,6 +101,3 @@
   // Add to disabled option pagination when select2 option is not checked when the page is launched
   hidePagination()
 <% end %>
-
-
-
