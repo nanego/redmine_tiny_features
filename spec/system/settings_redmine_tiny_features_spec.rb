@@ -15,4 +15,25 @@ RSpec.describe "settings_redmine_tiny_features", type: :system do
       expect(Setting["plugin_redmine_tiny_features"]["paginate_issue_filters_values"]).to eq "1"
     end
   end
+
+  it "activates the option load_issue_edit_form_asynchronously" do
+    log_user('admin', 'admin')
+    Setting.send "plugin_redmine_tiny_features=", {
+      "warning_message_on_closed_issues" => "1",
+      "default_open_status" => "2",
+      "default_project" => "1",        
+    }
+    visit 'settings/plugin/redmine_tiny_features'
+    
+    find("input[name='settings[load_issue_edit_form_asynchronously]']").click
+    find("input[name='commit']").click    
+    
+    expect(Setting["plugin_redmine_tiny_features"]["load_issue_edit_form_asynchronously"]).to eq '1'
+    Setting.send "plugin_redmine_tiny_features=", {
+      "warning_message_on_closed_issues" => "1",
+      "default_open_status" => "2",
+      "default_project" => "1",
+      "load_issue_edit_form_asynchronously" => "0",
+    }
+  end
 end

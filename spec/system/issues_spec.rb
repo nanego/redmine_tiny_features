@@ -147,5 +147,30 @@ RSpec.describe "creating an issue", type: :system do
       expect(page).to_not have_selector('a.icon-copy')
     end
   end
-end
 
+  describe "Load the issue's edit" do
+    it "preloads the form synchronously when the option (load_issue_edit_form_asynchronously) is NOT selected" do
+      Setting.send "plugin_redmine_tiny_features=", {
+        "warning_message_on_closed_issues" => "1",
+        "default_open_status" => "2",
+        "default_project" => "1",
+        "load_issue_edit_form_asynchronously" => "0",
+      }
+      visit 'issues/2'
+      expect(page).to have_selector('#issue-form', visible: :hidden)
+    end
+
+    it "loads the issue form asynchronously when the option (load_issue_edit_form_asynchronously) is selected" do
+      Setting.send "plugin_redmine_tiny_features=", {
+        "warning_message_on_closed_issues" => "1",
+        "default_open_status" => "2",
+        "default_project" => "1",
+        "load_issue_edit_form_asynchronously" => "1",
+      }
+      visit 'issues/2'
+      expect(page).to_not have_selector('#issue-form', visible: :hidden)
+      find('.icon-edit',  match: :first).click
+      expect(page).to have_selector('#issue-form')
+    end
+  end
+end

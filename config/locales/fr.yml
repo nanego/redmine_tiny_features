@@ -30,6 +30,7 @@ fr:
   setting_disable_email_hiding: "Désactiver la fonction de masquage des emails"
   permission_always_see_user_email_addresses: "Toujours voir les adresses mail des utilisateurs"
   project_module_user_email: "Adresses mail des utilisateurs"
+  setting_load_issue_edit_form_asynchronously: "Charger le formulaire d'édition de la demande de façon asynchrone"
   label_issue_mode_by_priority: "Par priorité"
   label_issue_mode_by_status: "Par statut"
   label_red: "Rouge"
