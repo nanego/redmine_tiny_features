@@ -18,7 +18,6 @@ class IssuesController
     return unless update_issue_from_params
 
     render json: { html: render_to_string(partial: 'edit') }
-
   end
 
   private
