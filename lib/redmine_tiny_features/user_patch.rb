@@ -3,9 +3,6 @@ require_dependency 'principal'
 require_dependency 'user'
 
 class User < Principal
-
-  #mark 'staff' as safe attribute
-  #as it can be updated through the standard form
   safe_attributes 'issue_display_mode'
 
   BY_PRIORITY = 'by_priority'
