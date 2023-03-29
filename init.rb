@@ -20,6 +20,12 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/custom_field_enumeration_patch'
   require_dependency 'redmine_tiny_features/custom_field_patch'
   require_dependency 'redmine_tiny_features/project_query_patch'
+  require_dependency 'redmine_tiny_features/issue_patch'
+  require_dependency 'redmine_tiny_features/issue_status_patch'
+  require_dependency 'redmine_tiny_features/issue_statuses_helper_patch'
+  require_dependency 'redmine_tiny_features/issues_helper_patch'
+  require_dependency 'redmine_tiny_features/user_patch'
+  require_dependency 'redmine_tiny_features/users_helper_patch'
 end
 
 Redmine::Plugin.register :redmine_tiny_features do

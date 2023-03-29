@@ -30,3 +30,31 @@ table.trackers-permissions td.role {color:#999;font-size:90%;font-weight:normal 
   bottom: 2px;
   top: auto;
 }
+
+/* issue_statuses */
+tr.status-red, table.list tbody tr.priority-3:hover { color:#c00; }
+tr.status-red a, tr.priority-3:hover a { color:#c00; }
+tr.status-red, table.list:not(.odd-even) tbody tr:nth-child(odd).status-red,
+table.list:not(.odd-even) tbody tr:nth-child(even).status-red { background:#ffe3e3; }
+tr.status-red:hover td, tr.status-red:hover a, tr.status-red:hover a:hover, tr.status-red:hover span.status, tr.status-red:hover p.extra-fields, td.status-red { color:#ffe3e3; background:#c00; }
+
+tr.status-orange, table.list tbody tr.status-orange:hover { color:#b36d00; font-weight:normal; }
+tr.status-orange a, tr.priority-2:hover a { color:#b36d00; }
+tr.status-orange, table.list:not(.odd-even) tbody tr:nth-child(odd).status-orange,
+table.list:not(.odd-even) tbody tr:nth-child(even).status-orange { background:#fadcb3; }
+tr.status-orange:hover td, tr.status-orange:hover a, tr.status-orange:hover a:hover, tr.status-orange:hover span.status, tr.status-orange:hover p.extra-fields, td.status-orange { color:#fadcb3; background:#b36d00; }
+
+tr.status-green, table.list tbody tr.status-green:hover { color:#229e43; }
+tr.status-green a, tr.status-green:hover a { color:#229e43; }
+tr.status-green, table.list:not(.odd-even) tbody tr:nth-child(odd).status-green,
+table.list:not(.odd-even) tbody tr:nth-child(even).status-green { background:#f9ffef; }
+tr.status-green:hover td, tr.status-green:hover a, tr.status-green:hover a:hover, tr.status-green:hover span.status, tr.status-green:hover p.extra-fields, td.status-green { color:#f9ffef; background:#229e43; }
+
+tr.status-grey, table.list tbody tr.status-grey:hover { color:#888; }
+tr.status-grey a, tr.status-grey:hover a { color:#888; }
+tr.status-grey, table.list:not(.odd-even) tbody tr:nth-child(odd).status-grey,
+table.list:not(.odd-even) tbody tr:nth-child(even).status-grey { background:#ffffff; }
+tr.status-grey:hover td, tr.status-grey:hover a, tr.status-grey:hover a:hover, tr.status-grey:hover span.status, tr.status-grey:hover p.extra-fields, td.status-grey { color:#ffffff; background:#bbb; }
+.jstb_tags {
+        background-image: url(../images/tag_blue.png);
+}
