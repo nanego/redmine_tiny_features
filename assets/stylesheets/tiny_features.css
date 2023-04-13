@@ -55,6 +55,3 @@ tr.status-grey a, tr.status-grey:hover a { color:#888; }
 tr.status-grey, table.list:not(.odd-even) tbody tr:nth-child(odd).status-grey,
 table.list:not(.odd-even) tbody tr:nth-child(even).status-grey { background:#ffffff; }
 tr.status-grey:hover td, tr.status-grey:hover a, tr.status-grey:hover a:hover, tr.status-grey:hover span.status, tr.status-grey:hover p.extra-fields, td.status-grey { color:#ffffff; background:#bbb; }
-.jstb_tags {
-        background-image: url(../images/tag_blue.png);
-}

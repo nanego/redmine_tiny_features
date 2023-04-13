@@ -21,8 +21,4 @@ end
 
 class Issue < ActiveRecord::Base
   prepend RedmineTinyFeatures::IssuePatch
-
-  def self.by_priority(project, with_subprojects = false, year = nil)
-    count_and_group_by(:project => project, :association => :priority, :with_subprojects => with_subprojects, :year => year)
-  end
 end
