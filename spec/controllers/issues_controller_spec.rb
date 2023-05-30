@@ -1,6 +1,8 @@
 require "spec_helper"
 
 describe IssuesController, type: :controller do
+  include ApplicationHelper
+  include IssuesHelper
   render_views
 
   fixtures :projects, :users, :members, :member_roles, :roles,
@@ -23,6 +25,69 @@ describe IssuesController, type: :controller do
       assert_select '.query-totals'
       assert_select ".total-for-cf-#{field.id} span.value", :text => '50'
     end
+  end
+
+  before do
+    @controller = IssuesController.new
+    @request    = ActionDispatch::TestRequest.create
+    @request.session[:user_id] = 1
+  end
+
+  describe "colorization of issues" do
+
+    it "should show the colorization of issues by status if the user selects this mode" do
+      User.find(1).update_attribute(:issue_display_mode, User::BY_STATUS)
+      IssueStatus.find(1).update_attribute(:color, "green") # status new
+      IssueStatus.find(2).update_attribute(:color, "orange") # status Assigned
+      IssueStatus.find(5).update_attribute(:color, "grey")  # status Closed
+      IssueStatus.find(6).update_attribute(:color, "red") # status Rejected
+
+      columns = ['project', 'status', 'priority']
+      get :index, :params => { :set_filter => 1,
+                              :f => ["authorized_viewers" => ""],
+                              :op => { "issue_templates" => "=" },
+                              :c => columns }
+
+      expect(Issue.count).to eq 14
+      assert_select "table tbody tr", :count => 14
+      assert_select "table tbody tr.status-green", :count => Issue.where(status_id: 1).count
+      assert_select "table tbody tr.status-grey", :count => Issue.where(status_id: 5).count
+      assert_select "table tbody tr.status-orange", :count => Issue.where(status_id: 2).count
+      assert_select "table tbody tr.status-red", :count => Issue.where(status_id: 6).count
+    end
+
+    it "should switch the display mode of issue for user in project/issue index" do
+      post :switch_display_mode, :params =>  { :path =>"http://localhost:3000/projects/ecookbook/issues" }
+      expect(User.find(1).issue_display_mode).to eq User::BY_STATUS
+    end
+
+    it "should switch the display mode of issue for user in issue index" do
+      post :switch_display_mode, :params =>  { :path =>"http://localhost:3000/issues" }
+      expect(User.find(1).issue_display_mode).to eq User::BY_STATUS
+    end
+
+    it "should display the link of colorization by status in issue index" do
+      get :index
+      assert_select 'a', :text => 'Colorization According to status'
+    end
+
+    it "should display the link of colorization by status in project/issue index" do
+      get :index, :params =>  { :project_id => "ecookbook" }
+      assert_select 'a', :text => 'Colorization According to status'
+    end
+
+    it "should display the link of colorization by priority in issue index, when issue_display_mode of user is by status" do
+      User.find(1).update_attribute(:issue_display_mode, User::BY_STATUS)
+      get :index
+      assert_select 'a', :text => 'Colorization According to priority'
+    end
+
+    it "should display the link of colorization by priority in project/issue index, when issue_display_mode of user is by status" do
+      User.find(1).update_attribute(:issue_display_mode, User::BY_STATUS)
+      get :index, :params =>  { :project_id => "ecookbook" }
+      assert_select 'a', :text => 'Colorization According to priority'
+    end
+
   end
 
 end
