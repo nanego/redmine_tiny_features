@@ -23,7 +23,7 @@
         <%= l("permission_#{permission}") %>
       </td>
       <% @roles.each do |role| %>
-        <% if role.setable_permissions.collect(&:name).include? permission %>
+        <% if role.has_permission?(permission) && role.setable_permissions.collect(&:name).include?(permission) %>
           <td title="<%= l("permission_#{permission}") + "(#{role.name})" %>">
             <%= hidden_field_tag "permissions_all_trackers[#{role.id}][#{permission}]", '0', :id => nil %>
             <%= check_box_tag "permissions_all_trackers[#{role.id}][#{permission}]", '1', (role.permissions_all_trackers?(permission)), :id => nil, class: "view_issues-#{role.id}_shown", :data => { :disables => ".#{permission}_tracker_role_#{role.id}" } %>
@@ -55,7 +55,7 @@
           <%= l("permission_#{permission}") %>
         </td>
         <% @roles.each do |role| %>
-          <% if role.setable_permissions.collect(&:name).include? permission %>
+          <% if role.has_permission?(permission) && role.setable_permissions.collect(&:name).include?(permission) %>
             <!--   This condition is because there are (redmine tests) that call the function without passing this parameter -->
             <% if role.permissions_tracker_ids.present? %>
               <td title="<%= l("permission_#{permission}") + "(#{role.name})" %>">
