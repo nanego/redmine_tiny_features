@@ -15,6 +15,17 @@ module RedmineTinyFeatures
 
       s
     end
+
+    def validate_required_fields
+      super
+
+      # Customize validation of "notes" field
+      if errors.added? :notes, :blank
+        # Remove error previously added by core method if new issue
+        errors.delete("notes") if self.new_record?
+      end
+    end
+    
   end
 end
 
