@@ -5,6 +5,7 @@ class IssueQuery < Query
 
   alias :find_updated_by_filter_values :find_assigned_to_id_filter_values
   alias :find_last_updated_by_filter_values :find_assigned_to_id_filter_values
+  alias :find_watcher_id_filter_values :find_assigned_to_id_filter_values
 
 end
 
@@ -29,6 +30,10 @@ module RedmineTinyFeatures
           )
           add_available_filter(
             "last_updated_by",
+            :type => :list, :values => lambda { [] }
+          )
+          add_available_filter(
+            "watcher_id",
             :type => :list, :values => lambda { [] }
           )
         end
