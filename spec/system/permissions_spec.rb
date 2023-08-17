@@ -115,4 +115,17 @@ RSpec.describe "Synthesis of roles", type: :system do
     expect(Role.find(1).permissions_all_trackers["view_issues"]).to eq "0"
     expect(Role.find(1).permissions_tracker_ids["view_issues"]).to eq ["1", "3"]
   end
+
+  it "Should accept the setting from permissions_all_trackers without permissions_tracker_ids, in case of a role that has no permissions" do
+    # Remove all permissions from the role "Non member"
+    role = Role.find(4)
+    role.permissions = []
+    role.save
+
+    visit 'roles/permissions'
+    # Click on button save
+    find("input[name='commit']").click
+
+    expect(page).to have_content("Successful update.")
+  end
 end

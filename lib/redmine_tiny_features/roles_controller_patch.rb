@@ -19,13 +19,13 @@ class RolesController
 
       # update permissions of trackers
       if params[:permissions_tracker_ids].present? # This condition is because there are (redmine tests) that call the function without passing this parameter
-        params[:permissions_tracker_ids][role.id.to_s].each do |permission|
+        params[:permissions_tracker_ids][role.id.to_s]&.each do |permission|
           role.set_permission_trackers(permission.first, permission.second)
         end
       end
 
       if params[:permissions_all_trackers].present? # This condition is because there are (redmine tests) that call the function without passing this parameter
-        params[:permissions_all_trackers][role.id.to_s].each do |permission|
+        params[:permissions_all_trackers][role.id.to_s]&.each do |permission|
           role.set_permission_trackers(permission.first, :all) if permission.second == "1"
         end
       end
