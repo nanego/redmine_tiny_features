@@ -31,6 +31,9 @@ Deface::Override.new :virtual_path  => "queries/_filters",
       if ($('#values_assigned_to_id_1').length > 0) {
         setConfigurationForSelect2($('#values_assigned_to_id_1'), '<%= assigned_to_values_pagination_path %>');
       }
+      if ($('#values_watcher_id_1').length > 0) {
+        setConfigurationForSelect2($('#values_watcher_id_1'), '<%= assigned_to_values_pagination_path %>');
+      }
     }
   }
 </script>
