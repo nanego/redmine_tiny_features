@@ -25,6 +25,7 @@ Rails.application.config.to_prepare do
   require_dependency 'redmine_tiny_features/time_entry_query_patch'
   require_dependency 'redmine_tiny_features/user_patch'
   require_dependency 'redmine_tiny_features/users_helper_patch'
+  require_dependency 'redmine_tiny_features/user_preference_patch'
 end
 
 Redmine::Plugin.register :redmine_tiny_features do
@@ -36,7 +37,7 @@ Redmine::Plugin.register :redmine_tiny_features do
   author_url 'https://github.com/nanego'
   requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.4' if Rails.env.test?
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
-  
+
   permission :always_see_user_email_addresses, {}
 
   settings partial: 'settings/redmine_plugin_tiny_features_settings',

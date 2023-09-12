@@ -173,4 +173,50 @@ RSpec.describe "creating an issue", type: :system do
       expect(page).to have_selector('#issue-form')
     end
   end
+
+  describe "Pagination links at the top of issues results" do
+
+    before do
+      # login as admin
+      visit 'logout/'
+      find('input[name=commit]').click
+      log_user('admin', 'admin')
+
+    end
+
+    it "Shoud not show pagination links when the option show_pagination_at_top_results is not selected and there are multi pages" do
+      # create 70 issues
+      70.times do |i|
+        Issue.create(:project_id => 1, :tracker_id => 1, :author_id => 1,
+          :status_id => 1, :priority_id => 1,
+          :subject => "test_create#{i}",
+          :description => "description#{i}")
+      end
+      visit 'issues?query_id=5'
+      expect(page).to have_selector('span.pagination', count: 1)
+    end
+
+    it "Shoud not show pagination links when the option show_pagination_at_top_results is selected and there is only one page" do
+      pref = User.find(1).preference
+      pref.show_pagination_at_top_results = true
+      pref.save
+      visit 'issues?query_id=5'
+      expect(page).to have_selector('span.pagination', count: 1)
+    end
+
+    it "Shoud show pagination links when the option show_pagination_at_top_results is selected and there are multi pages" do
+      pref = User.find(1).preference
+      pref.show_pagination_at_top_results = true
+      pref.save
+      # create 70 issues
+      70.times do |i|
+        Issue.create(:project_id => 1, :tracker_id => 1, :author_id => 1,
+          :status_id => 1, :priority_id => 1,
+          :subject => "test_create#{i}",
+          :description => "description#{i}")
+      end
+      visit 'issues/'
+      expect(page).to have_selector('span.pagination', count: 2)
+    end
+  end
 end
