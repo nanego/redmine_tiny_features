@@ -1,7 +1,8 @@
 require "spec_helper"
 
 RSpec.describe "my_controller", type: :system do
-fixtures :users, :user_preferences
+
+  fixtures :users, :user_preferences
 
   before do
     log_user('admin', 'admin')

@@ -2,13 +2,14 @@ require "spec_helper"
 require "active_support/testing/assertions"
 
 RSpec.describe "Synthesis of roles", type: :system do
+
   fixtures :roles, :users
 
   before do
     log_user('admin', 'admin')
     # settings by default for all roles
     roles.each do |role|
-      role.permissions_all_trackers = { "view_issues" => "1", "add_issues" => "1", "edit_issues" => "1", "add_issue_notes" => "1", "delete_issues"=> "1" }
+      role.permissions_all_trackers = { "view_issues" => "1", "add_issues" => "1", "edit_issues" => "1", "add_issue_notes" => "1", "delete_issues" => "1" }
       role.permissions_tracker_ids = { "view_issues" => [], "add_issues" => [], "edit_issues" => [], "add_issue_notes" => [], "delete_issues" => [] }
       role.save
     end
@@ -34,7 +35,7 @@ RSpec.describe "Synthesis of roles", type: :system do
       Role::ISSUES_VISIBILITY_OPTIONS.each do |option|
         unless role.anonymous?
           # ex:<input type="radio" id="issues_visibility_1_all" name="issues_visibility[1]"  value="all">
-          str = "input[id='issues_visibility_"+ role.id.to_s + '_' + option.first + "'][name='issues_visibility[" + role.id.to_s + "]'][value='"+ option.first + "']"
+          str = "input[id='issues_visibility_" + role.id.to_s + '_' + option.first + "'][name='issues_visibility[" + role.id.to_s + "]'][value='" + option.first + "']"
           page.assert_selector(str, count: 1)
         end
       end
@@ -48,7 +49,7 @@ RSpec.describe "Synthesis of roles", type: :system do
     # permissions for all trackers
     permissions.each do |permission|
       # ex: <tr class="all-trackers-view_issues">
-      str =  'tr.all-trackers-' + permission.to_s
+      str = 'tr.all-trackers-' + permission.to_s
       page.assert_selector(str, count: 1)
     end
 
@@ -61,11 +62,11 @@ RSpec.describe "Synthesis of roles", type: :system do
         roles.each do |role|
           if role.setable_permissions.collect(&:name).include? permission && role.has_permission?(permission)
             # ex: <input class="add_issues_tracker_role_2" >
-            str = 'input.'+ permission.to_s + '_tracker_role_' + role.id.to_s
+            str = 'input.' + permission.to_s + '_tracker_role_' + role.id.to_s
             page.assert_selector(str, count: Tracker.count)
             expect(page).to have_css(str + '[disabled]')
             # ex: <input  name="permissions_tracker_ids[1][add_issues][]" value="1">
-            str = "input[name='permissions_tracker_ids[" + role.id.to_s + "][" + permission.to_s + "][]'][value='"+ tracker.id.to_s + "']"
+            str = "input[name='permissions_tracker_ids[" + role.id.to_s + "][" + permission.to_s + "][]'][value='" + tracker.id.to_s + "']"
             page.assert_selector(str, count: 1)
           end
         end
@@ -77,14 +78,14 @@ RSpec.describe "Synthesis of roles", type: :system do
     visit 'roles/permissions'
     find("input[name='permissions_all_trackers[1][view_issues]']").click
     Tracker.sorted.all.each do |tracker|
-      str = "input[name='permissions_tracker_ids[1][view_issues][]'][value='"+ tracker.id.to_s + "']"
+      str = "input[name='permissions_tracker_ids[1][view_issues][]'][value='" + tracker.id.to_s + "']"
       expect(page).to_not have_css(str + '[disabled]')
     end
   end
 
   it "Should hide (issues_visibility options/general data) and permission of trackers when we uncheck (View Issues) of a role" do
     visit 'roles/permissions'
-    #find('.view_issues-1_shown').should be_visible
+    # find('.view_issues-1_shown').should be_visible
     expect(page).to have_css('.view_issues-1_shown', visible: :visible)
     find("input[name='permissions[1][]'][value='view_issues']").click
     expect(page).to have_css('.view_issues-1_shown', visible: :hidden)
@@ -94,7 +95,7 @@ RSpec.describe "Synthesis of roles", type: :system do
     visit 'roles/permissions'
 
     # Uncheck all the checkboxes
-    find("tr.all-trackers-add_issues a" ).click
+    find("tr.all-trackers-add_issues a").click
 
     expect(find("input[name='permissions_all_trackers[1][add_issues]']").checked?).to be(false)
     expect(find("input[name='permissions_all_trackers[2][add_issues]']").checked?).to be(false)

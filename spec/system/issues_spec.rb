@@ -169,7 +169,7 @@ RSpec.describe "creating an issue", type: :system do
       }
       visit 'issues/2'
       expect(page).to_not have_selector('#issue-form', visible: :hidden)
-      find('.icon-edit',  match: :first).click
+      find('.icon-edit', match: :first).click
       expect(page).to have_selector('#issue-form')
     end
   end
@@ -188,9 +188,9 @@ RSpec.describe "creating an issue", type: :system do
       # create 70 issues
       70.times do |i|
         Issue.create(:project_id => 1, :tracker_id => 1, :author_id => 1,
-          :status_id => 1, :priority_id => 1,
-          :subject => "test_create#{i}",
-          :description => "description#{i}")
+                     :status_id => 1, :priority_id => 1,
+                     :subject => "test_create#{i}",
+                     :description => "description#{i}")
       end
       visit 'issues?query_id=5'
       expect(page).to have_selector('span.pagination', count: 1)
@@ -211,9 +211,9 @@ RSpec.describe "creating an issue", type: :system do
       # create 70 issues
       70.times do |i|
         Issue.create(:project_id => 1, :tracker_id => 1, :author_id => 1,
-          :status_id => 1, :priority_id => 1,
-          :subject => "test_create#{i}",
-          :description => "description#{i}")
+                     :status_id => 1, :priority_id => 1,
+                     :subject => "test_create#{i}",
+                     :description => "description#{i}")
       end
       visit 'issues/'
       expect(page).to have_selector('span.pagination', count: 2)
