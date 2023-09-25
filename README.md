@@ -22,6 +22,7 @@ Here is a complete list of the features:
 * Add an option to **load issue form asynchronously** and reduce issue#show load time
 * Add customizable **issue colorization** based on status or priority
 * Add a user parameter to also **display pagination links at the top of issues results**
+* Include the 'notes' field in workflows, providing the capability to **require notes** when updating an issue
 
 ## Test status
 
