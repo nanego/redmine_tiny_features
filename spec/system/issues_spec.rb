@@ -219,4 +219,17 @@ RSpec.describe "creating an issue", type: :system do
       expect(page).to have_selector('span.pagination', count: 2)
     end
   end
+
+  describe "Group by filter of issues" do
+    it "Show options in alphabetic order" do
+      visit 'issues'
+  
+      # Click on option button
+      page.all('legend')[1].click
+
+      expect(page).to have_selector('select', id: 'group_by') 
+      options = page.all('#group_by option').map(&:value)
+      expect(options).to eq (options.sort)
+    end
+  end
 end
