@@ -9,4 +9,11 @@ module QueriesHelper
                                                     .collect { |column| [column.caption, column.name] }
   end
 
+  ## Get group by coolumns sort by displayed names
+  def group_by_column_select_tag(query)  
+    options = [[]] + query.groupable_columns.sort_by { |column| column.name }
+                                            .collect {|c| [c.caption, c.name.to_s]}
+                                            
+    select_tag('group_by', options_for_select(options, @query.group_by))
+  end
 end
