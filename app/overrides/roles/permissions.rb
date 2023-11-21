@@ -20,4 +20,4 @@ Deface::Override.new :virtual_path => 'roles/permissions',
 Deface::Override.new :virtual_path => 'roles/permissions',
                      :name => 'add-trackers-permissions-box',
                      :insert_after => ".permissions",
-                     :partial    => "roles/trackers_permissions.html"
+                     :partial    => "roles/trackers_permissions"

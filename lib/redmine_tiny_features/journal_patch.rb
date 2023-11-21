@@ -1,7 +1,6 @@
 require_dependency 'journal'
 
-class Journal < ActiveRecord::Base
-
+module RedmineTinyFeatures::JournalPatch
   # Adds a journal detail for a note that was removed
   def journalize_note(journal)
     details <<
@@ -19,3 +18,5 @@ class Journal < ActiveRecord::Base
     end
   end
 end
+
+Journal.prepend RedmineTinyFeatures::JournalPatch

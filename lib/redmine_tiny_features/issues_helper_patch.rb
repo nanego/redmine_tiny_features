@@ -1,7 +1,7 @@
 require_dependency 'issues_helper'
 
 module RedmineTinyFeatures
-  module IssuesHelper
+  module IssuesHelperPatch
 
     def show_detail(detail, no_html = false, options = {})
       case detail.property
@@ -45,5 +45,5 @@ module RedmineTinyFeatures
   end
 end
 
-IssuesHelper.prepend RedmineTinyFeatures::IssuesHelper
+IssuesHelper.prepend RedmineTinyFeatures::IssuesHelperPatch
 ActionView::Base.prepend IssuesHelper

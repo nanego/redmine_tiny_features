@@ -37,7 +37,7 @@ describe ProjectsController, type: :controller do
                             :format => 'csv' }
 
       expect(response).to be_successful
-      expect(response.media_type).to eq 'text/csv'
+      expect(response.media_type).to include 'text/csv'
 
       lines = response.body.chomp.split("\n")
 

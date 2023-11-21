@@ -1,5 +1,5 @@
 require "spec_helper"
-require 'redmine_tiny_features/queries_controller_patch'
+require_relative '../../lib/redmine_tiny_features/queries_controller_patch'
 require 'json'
 # Re-raise errors caught by the controller.
 

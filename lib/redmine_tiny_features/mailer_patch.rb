@@ -1,5 +1,9 @@
 require_dependency 'mailer'
 
+module RedmineTinyFeatures::MailerPatch
+
+end
+
 class Mailer < ActionMailer::Base
 
   # Sends reminders to issue assignees

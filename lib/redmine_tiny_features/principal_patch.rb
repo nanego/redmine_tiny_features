@@ -1,5 +1,9 @@
 require_dependency 'principal'
 
+module RedmineTinyFeatures::PrincipalPatch
+
+end
+
 class Principal < ActiveRecord::Base
 
   # Principals that are members of a collection of projects with pagination

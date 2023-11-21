@@ -1,5 +1,9 @@
 require_dependency 'issues_controller'
 
+module RedmineTinyFeatures::IssuesControllerPatch
+
+end
+
 class IssuesController
 
   append_before_action :find_optional_project_for_new_issue, :only => [:new]
