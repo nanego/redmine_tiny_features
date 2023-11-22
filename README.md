@@ -23,6 +23,7 @@ Here is a complete list of the features:
 * Add customizable **issue colorization** based on status or priority
 * Add a user parameter to also **display pagination links at the top of issues results**
 * Include the 'notes' field in workflows, providing the capability to **require notes** when updating an issue
+* Issues filter: **sort group-by options alphabetically**
 
 ## Test status
 
