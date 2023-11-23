@@ -11,7 +11,7 @@ module RedmineTinyFeatures::QueriesHelperPatch
   ## Get group by coolumns sort by displayed names
   def group_by_column_select_tag(query)
     options = [[]] + query.groupable_columns
-                          .sort_by { |column| column.caption.to_sym } # Patch: sort by displayed names
+                          .sort_by { |column| column.caption.to_s.parameterize } # Patch: sort by displayed names
                           .collect { |c| [c.caption, c.name.to_s] }
 
     select_tag('group_by', options_for_select(options, @query.group_by))

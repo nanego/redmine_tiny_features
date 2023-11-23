@@ -230,7 +230,7 @@ RSpec.describe "creating an issue", type: :system do
       expect(page).to have_selector('select', id: 'group_by')
 
       options = page.all('#group_by option').map(&:text)
-      expect(options).to eq (options.sort)
+      expect(options).to eq (options.sort_by(&:parameterize))
     end
   end
 end
