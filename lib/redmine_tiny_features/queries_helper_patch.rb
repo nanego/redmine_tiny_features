@@ -19,3 +19,4 @@ module RedmineTinyFeatures::QueriesHelperPatch
 end
 
 QueriesHelper.prepend RedmineTinyFeatures::QueriesHelperPatch
+ActionView::Base.send(:prepend, QueriesHelper)
