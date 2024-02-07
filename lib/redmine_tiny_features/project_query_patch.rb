@@ -5,7 +5,7 @@ class ProjectQuery < Query
   self.available_columns << QueryColumn.new(:module_enabled, :sortable => false, :default_order => 'asc')
 end
 
-module PluginRedmineTinyFeatures
+module RedmineTinyFeatures
   module ProjectQueryPatch
 
     def initialize_available_filters
@@ -35,4 +35,4 @@ module PluginRedmineTinyFeatures
   end
 end
 
-ProjectQuery.prepend PluginRedmineTinyFeatures::ProjectQueryPatch
+ProjectQuery.prepend RedmineTinyFeatures::ProjectQueryPatch

@@ -1,5 +1,9 @@
 require_dependency 'project'
 
+module RedmineTinyFeatures::ProjectPatch
+
+end
+
 class Project < ActiveRecord::Base
 
   has_many :disabled_custom_field_enumerations, :dependent => :delete_all

@@ -1,3 +1,7 @@
+module RedmineTinyFeatures::QueryPatch
+
+end
+
 class Query < ActiveRecord::Base
   def principals_with_pagination(term = '', limit = 0, page = 0)
     begin

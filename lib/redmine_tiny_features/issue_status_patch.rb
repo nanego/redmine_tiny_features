@@ -1,5 +1,9 @@
 require_dependency 'issue_status'
 
+module RedmineTinyFeatures::IssueStatusPatch
+
+end
+
 class IssueStatus < ActiveRecord::Base
   safe_attributes 'color', 'status_ids' #,'suggested_status_ids'
 

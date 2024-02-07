@@ -39,3 +39,4 @@ en:
   field_issue_display_mode: "Colorization of issues"
   label_issue_display_by_priority: "Colorization According to priority"
   label_issue_display_by_status: "Colorization According to status"
+  field_show_pagination_at_top_results: "Show pagination links at the top of issues results"

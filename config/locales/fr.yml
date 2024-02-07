@@ -39,3 +39,4 @@ fr:
   field_issue_display_mode: "Colorisation des demandes"
   label_issue_display_by_priority: "Colorisation par priorité"
   label_issue_display_by_status: "Colorisation par statut"
+  field_show_pagination_at_top_results: "Afficher les liens de pagination en haut des résultats des demandes"

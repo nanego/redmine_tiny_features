@@ -1,5 +1,9 @@
 require_dependency 'roles_controller'
 
+module RedmineTinyFeatures::RolesControllerPatch
+
+end
+
 class RolesController
 
   def update_permissions
@@ -8,7 +12,7 @@ class RolesController
 
       role.permissions = params[:permissions][role.id.to_s]
       if params[:assignable].present?
-        role.assignable =  params[:assignable][role.id.to_s].present? ? true : false
+        role.assignable = params[:assignable][role.id.to_s].present? ? true : false
       else
         role.assignable = false
       end

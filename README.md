@@ -21,16 +21,19 @@ Here is a complete list of the features:
 * Add new permission to always see **users's email addresses**, bypassing user email_hiding setting
 * Add an option to **load issue form asynchronously** and reduce issue#show load time
 * Add customizable **issue colorization** based on status or priority
+* Add a user parameter to also **display pagination links at the top of issues results**
+* Include the 'notes' field in workflows, providing the capability to **require notes** when updating an issue
+* Issues filter: **sort group-by options alphabetically**
 
 ## Test status
 
-|Plugin branch| Redmine Version   | Test Status      |
-|-------------|-------------------|------------------|
-|master       | 4.2.10            | [![4.2.10][1]][5]| 
-|master       | 4.1.7             | [![4.1.7][2]][5] | 
-|master       | master            | [![master][3]][5]|
+| Plugin branch | Redmine Version | Test Status       |
+|---------------|-----------------|-------------------|
+| master        | 4.2.11          | [![4.2.11][1]][5] |
+| master        | 5.1.0           | [![5.1.0][2]][5]  |
+| master        | master          | [![master][3]][5] |
 
-[1]: https://github.com/nanego/redmine_tiny_features/actions/workflows/4_2_10.yml/badge.svg
-[2]: https://github.com/nanego/redmine_tiny_features/actions/workflows/4_1_7.yml/badge.svg
+[1]: https://github.com/nanego/redmine_tiny_features/actions/workflows/4_2_11.yml/badge.svg
+[2]: https://github.com/nanego/redmine_tiny_features/actions/workflows/5_1_0.yml/badge.svg
 [3]: https://github.com/nanego/redmine_tiny_features/actions/workflows/master.yml/badge.svg
 [5]: https://github.com/nanego/redmine_tiny_features/actions

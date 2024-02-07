@@ -1,7 +1,7 @@
 require_dependency 'projects_helper'
 
-module PluginRedmineTinyFeatures
-  module ProjectsHelper
+module RedmineTinyFeatures
+  module ProjectsHelperPatch
     def project_settings_tabs
       super.tap do |tabs|
         if User.current.allowed_to?(:manage_project_enumerations, @project)
@@ -17,5 +17,5 @@ module PluginRedmineTinyFeatures
   end
 end
 
-ProjectsHelper.prepend PluginRedmineTinyFeatures::ProjectsHelper
+ProjectsHelper.prepend RedmineTinyFeatures::ProjectsHelperPatch
 ActionView::Base.send(:include, ProjectsHelper)
