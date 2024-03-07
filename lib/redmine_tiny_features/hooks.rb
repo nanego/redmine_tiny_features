@@ -42,6 +42,7 @@ module RedmineTinyFeatures
       require_relative 'user_patch'
       require_relative 'users_helper_patch'
       require_relative 'user_preference_patch'
+      require_relative 'issues_pdf_helper_patch'
     end
   end
 end
