@@ -24,6 +24,7 @@ Here is a complete list of the features:
 * Add a user parameter to also **display pagination links at the top of issues results**
 * Include the 'notes' field in workflows, providing the capability to **require notes** when updating an issue
 * Issues filter: **sort group-by options alphabetically**
+* PDF exports: add **links to attached files in generated PDF**"
 
 ## Test status
 

@@ -1,1 +1,3 @@
-gem 'pdf-reader'
+group :test do
+  gem 'pdf-reader'
+end
