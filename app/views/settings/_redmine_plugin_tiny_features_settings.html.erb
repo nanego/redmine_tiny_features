@@ -73,6 +73,12 @@
     <%= l("setting_load_issue_edit_form_asynchronously") %>
   <% end %>
 </p>
+<p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[hide_members_section_in_overview_project]", '1', Setting["plugin_redmine_tiny_features"]["hide_members_section_in_overview_project"] %>
+    <%= l("enable_members_in_overview_project") %>
+  <% end %>
+</p>
 
 <%= javascript_tag do %>
   $(function() {

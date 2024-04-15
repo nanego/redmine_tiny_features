@@ -40,3 +40,4 @@ en:
   label_issue_display_by_priority: "Colorization According to priority"
   label_issue_display_by_status: "Colorization According to status"
   field_show_pagination_at_top_results: "Show pagination links at the top of issues results"
+  enable_members_in_overview_project: "Hides members section on project overview page"
