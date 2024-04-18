@@ -25,6 +25,7 @@ Here is a complete list of the features:
 * Include the 'notes' field in workflows, providing the capability to **require notes** when updating an issue
 * Issues filter: **sort group-by options alphabetically**
 * PDF exports: add **links to attached files in generated PDF**"
+* Projects overview: add an option to **hide members section**
 
 ## Test status
 
