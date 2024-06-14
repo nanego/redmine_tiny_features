@@ -31,6 +31,10 @@ class IssuePriority < Enumeration
   def self.valid_priority_color_list
     COLOR_LIST
   end
+
+  def plugin_test_mode?
+    Rails.env.test? && $testing_plugin
+  end
 end
 
 IssuePriority.prepend RedmineTinyFeatures::IssuePriorityPatch
