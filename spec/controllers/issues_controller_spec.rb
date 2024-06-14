@@ -56,6 +56,36 @@ describe IssuesController, type: :controller do
       assert_select "table tbody tr.status-red", :count => Issue.where(status_id: 6).count
     end
 
+    it "should show the colorization of issues by priority if the user selects this mode" do
+      User.find(1).update_attribute(:issue_display_mode, User::BY_PRIORITY)
+
+      priority_low = Enumeration.where(:type => "IssuePriority")[0]
+      priority_low.update_attribute(:color, "green")
+
+      priority_default = Enumeration.where(:type => "IssuePriority")[1]
+      priority_default.update_attribute(:color, "grey")
+
+      priority_high3 = Enumeration.where(:type => "IssuePriority")[2]
+      priority_high3.update_attribute(:color, "orange")
+
+
+      priority_urgent = Enumeration.where(:type => "IssuePriority")[3]
+      priority_urgent.update_attribute(:color, "red")
+
+      columns = ['project', 'status', 'priority']
+      get :index, :params => { :set_filter => 1,
+                               :f => ["authorized_viewers" => ""],
+                               :op => { "issue_templates" => "=" },
+                               :c => columns }
+
+      expect(Issue.count).to eq 14
+      assert_select "table tbody tr", :count => 14
+      assert_select "table tbody tr.priority-green", :count => Issue.where(priority_id: priority_low.id).count
+      assert_select "table tbody tr.priority-grey", :count => Issue.where(priority_id: priority_default.id).count
+      assert_select "table tbody tr.priority-orange", :count => Issue.where(priority_id: priority_high3.id).count
+      assert_select "table tbody tr.priority-red", :count => Issue.where(priority_id: priority_urgent.id).count
+    end
+
     it "should switch the display mode of issue for user in project/issue index" do
       post :switch_display_mode, :params => { :path => "http://localhost:3000/projects/ecookbook/issues" }
       expect(User.find(1).issue_display_mode).to eq User::BY_STATUS
