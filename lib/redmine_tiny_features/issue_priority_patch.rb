@@ -1,7 +1,13 @@
 require_dependency 'issue_priority'
 
 module RedmineTinyFeatures::IssuePriorityPatch
-
+  def css_classes
+    if !Rails.env.test? || plugin_test_mode?
+      "priority-#{color}"
+    else
+      super
+    end
+  end
 end
 
 class IssuePriority < Enumeration
@@ -25,8 +31,6 @@ class IssuePriority < Enumeration
   def self.valid_priority_color_list
     COLOR_LIST
   end
-
-  def css_classes
-    "priority-#{color}"
-  end
 end
+
+IssuePriority.prepend RedmineTinyFeatures::IssuePriorityPatch
