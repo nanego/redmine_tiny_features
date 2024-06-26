@@ -2,7 +2,9 @@ require_dependency 'issue_priority'
 
 module RedmineTinyFeatures::IssuePriorityPatch
   def css_classes
-    super.to_s + " priority-#{color}"
+    classes = super
+    classes << " priority-#{color}" if color.present?
+    classes
   end
 end
 
