@@ -12,24 +12,17 @@ RSpec.describe "ProjectController", type: :system do
     let(:project_test) { Project.find(1) }
 
     it "hides members section when the option is activated" do
-
-      Setting.send "plugin_redmine_tiny_features=", {
-        "hide_members_section_on_project_overview" => "1",
-      }
-
-      visit "/projects/#{project_test.identifier}"
-      expect(page).to_not have_selector('div.members')
-
+      with_settings :plugin_redmine_tiny_features => { 'hide_members_section_on_project_overview' => '1' } do
+        visit "/projects/#{project_test.identifier}"
+        expect(page).to_not have_selector('div.members')
+      end
     end
 
     it "displays members section when the option is deactivated" do
-
-      Setting.send "plugin_redmine_tiny_features=", {
-        "hide_members_section_on_project_overview" => "",
-      }
-
-      visit "/projects/#{project_test.identifier}"
-      expect(page).to have_selector('div.members')
+      with_settings :plugin_redmine_tiny_features => { 'hide_members_section_on_project_overview' => '' } do
+        visit "/projects/#{project_test.identifier}"
+        expect(page).to have_selector('div.members')
+      end
     end
 
   end

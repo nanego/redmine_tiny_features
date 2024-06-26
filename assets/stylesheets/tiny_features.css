@@ -31,6 +31,31 @@ table.trackers-permissions td.role {color:#999;font-size:90%;font-weight:normal 
   top: auto;
 }
 
+/* priorities */
+tr.priority-red, table.list tbody tr.priority-red:hover { color:#c00; }
+tr.priority-red a, tr.priority-red:hover a { color:#c00; }
+tr.priority-red, table.list:not(.odd-even) tbody tr:nth-child(odd).priority-red,
+table.list:not(.odd-even) tbody tr:nth-child(even).priority-red { background:#ffe3e3; }
+tr.priority-red:hover td, tr.priority-red:hover a, tr.priority-red:hover a:hover, tr.priority-red:hover span.status, tr.priority-red:hover p.extra-fields, td.priority-red { color:#ffe3e3; background:#c00; }
+
+tr.priority-orange, table.list tbody tr.priority-orange:hover { color:#b36d00; font-weight:normal; }
+tr.priority-orange a, tr.priority-orange:hover a { color:#b36d00; }
+tr.priority-orange, table.list:not(.odd-even) tbody tr:nth-child(odd).priority-orange,
+table.list:not(.odd-even) tbody tr:nth-child(even).priority-orange { background:#fadcb3; }
+tr.priority-orange:hover td, tr.priority-orange:hover a, tr.priority-orange:hover a:hover, tr.priority-orange:hover span.status, tr.priority-orange:hover p.extra-fields, td.priority-orange { color:#fadcb3; background:#b36d00; }
+
+tr.priority-green, table.list tbody tr.priority-green:hover { color:#229e43; }
+tr.priority-green a, tr.priority-green:hover a { color:#229e43; }
+tr.priority-green, table.list:not(.odd-even) tbody tr:nth-child(odd).priority-green,
+table.list:not(.odd-even) tbody tr:nth-child(even).priority-green { background:#f9ffef; }
+tr.priority-green:hover td, tr.priority-green:hover a, tr.priority-green:hover a:hover, tr.priority-green:hover span.status, tr.priority-green:hover p.extra-fields, td.priority-green { color:#f9ffef; background:#229e43; }
+
+tr.priority-grey, table.list tbody tr.priority-grey:hover { color:#888; }
+tr.priority-grey a, tr.priority-grey:hover a { color:#888; }
+tr.priority-grey, table.list:not(.odd-even) tbody tr:nth-child(odd).priority-grey,
+table.list:not(.odd-even) tbody tr:nth-child(even).priority-grey { background:#ffffff; }
+tr.priority-grey:hover td, tr.priority-grey:hover a, tr.priority-grey:hover a:hover, tr.priority-grey:hover span.status, tr.priority-grey:hover p.extra-fields, td.priority-grey { color:#ffffff; background:#bbb; }
+
 /* issue_statuses */
 tr.status-red, table.list tbody tr.priority-3:hover { color:#c00; }
 tr.status-red a, tr.priority-3:hover a { color:#c00; }
