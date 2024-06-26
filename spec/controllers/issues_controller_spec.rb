@@ -27,12 +27,6 @@ describe IssuesController, type: :controller do
     end
   end
 
-  before do
-    @controller = IssuesController.new
-    @request = ActionDispatch::TestRequest.create
-    @request.session[:user_id] = 1
-  end
-
   describe "colorization of issues" do
 
     it "should show the colorization of issues by status if the user selects this mode" do
@@ -54,6 +48,35 @@ describe IssuesController, type: :controller do
       assert_select "table tbody tr.status-grey", :count => Issue.where(status_id: 5).count
       assert_select "table tbody tr.status-orange", :count => Issue.where(status_id: 2).count
       assert_select "table tbody tr.status-red", :count => Issue.where(status_id: 6).count
+    end
+
+    it "displays issues colorized by priority if the user selects this mode" do
+      User.find(1).update_attribute(:issue_display_mode, User::BY_PRIORITY)
+
+      priority_low = Enumeration.find_by(:type => "IssuePriority", :name => "Low")
+      priority_low.update_attribute(:color, "grey")
+
+      priority_normal = Enumeration.find_by(:type => "IssuePriority", :name => "Normal")
+      priority_normal.update_attribute(:color, "green")
+
+      priority_high = Enumeration.find_by(:type => "IssuePriority", :name => "High")
+      priority_high.update_attribute(:color, "orange")
+
+      priority_urgent = Enumeration.find_by(:type => "IssuePriority", :name => "Urgent")
+      priority_urgent.update_attribute(:color, "red")
+
+      columns = ['project', 'status', 'priority']
+      get :index, :params => { :set_filter => 1,
+                               :f => ["status_id" => ""],
+                               :op => { "status_id" => "o" },
+                               :c => columns }
+
+      expect(Issue.count).to eq 14
+      assert_select "table tbody tr", :count => 14
+      assert_select "tr.priority-grey", :count => 6 # Issue.where(priority_id: priority_low.id).count
+      assert_select "table tbody tr.priority-green", :count => Issue.where(priority_id: priority_normal.id).count
+      assert_select "table tbody tr.priority-orange", :count => Issue.where(priority_id: priority_high.id).count
+      assert_select "table tbody tr.priority-red", :count => Issue.where(priority_id: priority_urgent.id).count
     end
 
     it "should switch the display mode of issue for user in project/issue index" do
