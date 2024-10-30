@@ -233,4 +233,26 @@ RSpec.describe "creating an issue", type: :system do
       expect(options).to eq (options.sort_by(&:parameterize))
     end
   end
+
+  describe "status field" do
+    let (:issue_test) { Issue.find(9) }
+
+    before do
+      visit 'logout/'
+      find('input[name=commit]').click
+      log_user('jsmith', 'jsmith')
+    end
+
+    it "Should hide the Status field when it is not editable" do
+      WorkflowTransition.delete_all
+      issue_test
+      visit "/issues/#{issue_test.id}/edit"
+      expect(page).to_not have_selector('label', text: "Status")
+    end
+
+    it "Should show the Status field when it is editable" do
+      visit "/issues/#{issue_test.id}/edit"
+      expect(page).to have_selector('label', text: "Status *")
+    end
+  end
 end
