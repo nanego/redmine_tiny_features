@@ -166,4 +166,35 @@ describe IssuesController, type: :controller do
 
   end
 
+  describe '#retrieve_previous_and_next_issue_ids' do
+
+    let(:issue) { Issue.first }
+
+    context 'with asynchronous loading enabled' do
+      before do
+        Setting.send "plugin_redmine_tiny_features=", {
+          "warning_message_on_closed_issues" => "1",
+          "default_open_status" => "2",
+          "default_project" => "1",
+          "load_issue_edit_form_asynchronously" => "1",
+        }
+      end
+
+      it 'allows patched method to receive an argument' do
+        controller.retrieve_previous_and_next_issue_ids(false)
+      end
+
+      it 'allows patched method to receive true as an argument' do
+        controller.retrieve_previous_and_next_issue_ids(true)
+      end
+
+      it 'renders previous and next issue ids as JSON response' do
+        get :load_previous_and_next_issue_ids, params: { id: issue.id }
+        expect(response).to have_http_status(:success)
+        expect(response.content_type).to include('application/json')
+        expect(JSON.parse(response.body)).to have_key('html')
+      end
+    end
+  end
+
 end

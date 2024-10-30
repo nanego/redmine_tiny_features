@@ -1,0 +1,54 @@
+<% if Setting.plugin_redmine_tiny_features.key?('load_issue_edit_form_asynchronously') == false %>
+  <%= render :partial => 'edit' %>
+<% else %>
+  <%# These header tags are not included if the partial is not preloaded %>
+  <% content_for :header_tags do %>
+    <%= javascript_include_tag 'attachments' %>
+  <% end %>
+  <script>
+      function loadIssueEditForm() {
+          if ($('#issue-form').length < 1) {
+              $.ajax({
+                  url: "<%= render_form_by_ajax_path(@issue.id) %>",
+                  beforeSend: function () {
+                      $('#ajax-indicator').addClass('bottom');
+                  },
+                  success: function (response) {
+                      $('#ajax-indicator').removeClass('bottom');
+                      if (response) {
+                          $('#update').append(response.html);
+                          $(document).ready(function () {
+                              // for datepicker element,
+                              <% include_calendar_headers_tags %>
+                              // for wikitoolbar element in mode Textile,
+                              setupFileDrop();
+                              // But for mode visual there is no need to call because it is already called in { $(document).ajaxSuccess/redmine_wysiwyg_editor }
+                          });
+                      }
+                  }, error: function (response) {
+                      $('#ajax-indicator').removeClass('bottom');
+                      console.error(response);
+                  },
+              });
+          }
+      }
+
+      function loadPreviousAndNextIssueIds() {
+          $.ajax({
+              url: "<%= load_previous_and_next_issue_ids_path(@issue.id) %>",
+              success: function (response) {
+                  if (response) {
+                      $('.issue.details').prepend(response.html);
+                  }
+              }, error: function (response) {
+                  console.error(response);
+              },
+          });
+      }
+
+      $(document).ready(function () {
+          loadIssueEditForm();
+          loadPreviousAndNextIssueIds();
+      });
+  </script>
+<% end %>
