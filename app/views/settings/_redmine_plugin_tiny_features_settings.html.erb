@@ -120,6 +120,6 @@
 <p>
   <%= label_tag l("setting_create_related_issue_shortcut_project_id") %>
   <%= select_tag "settings[create_related_issue_shortcut_project_id]",
-                 project_tree_options_for_select(Project.all_public.active.sorted,
+                 project_tree_options_for_select(Project.active.sorted,
                                                  selected: Project.where(id: Setting["plugin_redmine_tiny_features"]["create_related_issue_shortcut_project_id"]).first) %>
 </p>
