@@ -41,3 +41,6 @@ en:
   label_issue_display_by_status: "Colorization According to status"
   field_show_pagination_at_top_results: "Show pagination links at the top of issues results"
   hide_members_on_project_overview: "Hide members section on project overview page"
+  label_create_related_issue_shortcut: "Create a related issue"
+  setting_create_related_issue_shortcut: "Display a shortcut to create a related issue"
+  setting_create_related_issue_shortcut_project_id: "Project where to create related issues"

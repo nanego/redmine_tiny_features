@@ -26,6 +26,8 @@ Here is a complete list of the features:
 * Issues filter: **sort group-by options alphabetically**
 * PDF exports: add **links to attached files in generated PDF**"
 * Projects overview: add an option to **hide members section**
+* **Hide status select box** in new issue form if only one status is available
+* Add a link to quickly **create a new issue related to the current one**
 
 ## Test status
 

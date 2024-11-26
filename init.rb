@@ -24,5 +24,7 @@ Redmine::Plugin.register :redmine_tiny_features do
              'use_select2': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1',
              'load_issue_edit_form_asynchronously': Rails.env.test? ? '0' : '1',
              'disable_email_hiding': '',
+             'create_related_issue_shortcut': '',
+             'create_related_issue_shortcut_project_id': ''
            }
 end
