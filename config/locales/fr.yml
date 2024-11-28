@@ -41,6 +41,3 @@ fr:
   label_issue_display_by_status: "Colorisation par statut"
   field_show_pagination_at_top_results: "Afficher les liens de pagination en haut des résultats des demandes"
   hide_members_on_project_overview: "Masquer la section des membres sur la page d'aperçu des projets"
-  label_create_related_issue_shortcut: "Créer une demande liée"
-  setting_create_related_issue_shortcut: "Afficher un raccourci pour créer une demande liée"
-  setting_create_related_issue_shortcut_project_id: "Projet où créer les demandes liées"

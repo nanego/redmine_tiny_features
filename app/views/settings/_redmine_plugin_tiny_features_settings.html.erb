@@ -108,18 +108,3 @@
   // Add to disabled option pagination when select2 option is not checked when the page is launched
   hidePagination()
 <% end %>
-
-<!-- Create Related Shortcut options -->
-<hr>
-<p>
-  <%= label_tag '', { style: 'width: auto;' } do %>
-    <%= check_box_tag "settings[create_related_issue_shortcut]", '1', Setting["plugin_redmine_tiny_features"]["create_related_issue_shortcut"] %>
-    <%= l("setting_create_related_issue_shortcut") %>
-  <% end %>
-</p>
-<p>
-  <%= label_tag l("setting_create_related_issue_shortcut_project_id") %>
-  <%= select_tag "settings[create_related_issue_shortcut_project_id]",
-                 project_tree_options_for_select(Project.active.sorted,
-                                                 selected: Project.where(id: Setting["plugin_redmine_tiny_features"]["create_related_issue_shortcut_project_id"]).first) %>
-</p>
