@@ -29,6 +29,6 @@ module RedmineTinyFeatures
   end
 end
 
-class Issue < ActiveRecord::Base
+class Issue
   prepend RedmineTinyFeatures::IssuePatch
 end

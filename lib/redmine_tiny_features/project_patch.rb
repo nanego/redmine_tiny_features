@@ -4,7 +4,7 @@ module RedmineTinyFeatures::ProjectPatch
 
 end
 
-class Project < ActiveRecord::Base
+class Project
 
   has_many :disabled_custom_field_enumerations, :dependent => :delete_all
 

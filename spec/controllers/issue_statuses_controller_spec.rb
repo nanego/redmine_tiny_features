@@ -9,6 +9,7 @@ describe IssueStatusesController do
   before do
     @controller = IssueStatusesController.new
     @request    = ActionDispatch::TestRequest.create
+    @request.session = ActionController::TestSession.new
     @request.session[:user_id] = 1
   end
 

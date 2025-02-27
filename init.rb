@@ -26,3 +26,10 @@ Redmine::Plugin.register :redmine_tiny_features do
              'disable_email_hiding': ''
            }
 end
+
+# Support for Redmine 5
+if Redmine::VERSION::MAJOR < 6
+  class ApplicationRecord < ActiveRecord::Base
+    self.abstract_class = true
+  end
+end

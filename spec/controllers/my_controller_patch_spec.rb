@@ -1,4 +1,3 @@
-
 require 'spec_helper'
 
 describe MyController do
@@ -10,9 +9,10 @@ describe MyController do
 
   before do
     @controller = MyController.new
-    @request    = ActionDispatch::TestRequest.create
+    @request = ActionDispatch::TestRequest.create
+    @request.session = ActionController::TestSession.new
     @request.session[:user_id] = 2
-    @response   = ActionDispatch::TestResponse.new
+    @response = ActionDispatch::TestResponse.new
   end
 
   it "should add the option of display mode an issue in my account" do

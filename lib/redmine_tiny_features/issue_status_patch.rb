@@ -4,7 +4,7 @@ module RedmineTinyFeatures::IssueStatusPatch
 
 end
 
-class IssueStatus < ActiveRecord::Base
+class IssueStatus
   safe_attributes 'color', 'status_ids' #,'suggested_status_ids'
 
   COLOR_LIST = [

@@ -2,7 +2,7 @@ module RedmineTinyFeatures::TrackerPatch
 
 end
 
-class Tracker < ActiveRecord::Base
+class Tracker
 
   safe_attributes('prevent_issue_copy')
 

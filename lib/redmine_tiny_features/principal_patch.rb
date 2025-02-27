@@ -4,7 +4,7 @@ module RedmineTinyFeatures::PrincipalPatch
 
 end
 
-class Principal < ActiveRecord::Base
+class Principal
 
   # Principals that are members of a collection of projects with pagination
   scope :member_of_with_pagination, (lambda do |projects, term, limit, page|

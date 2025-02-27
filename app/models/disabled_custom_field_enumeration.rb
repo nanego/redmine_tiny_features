@@ -1,4 +1,4 @@
-class DisabledCustomFieldEnumeration < ActiveRecord::Base
+class DisabledCustomFieldEnumeration < ApplicationRecord
 
   belongs_to :project
   belongs_to :custom_field_enumeration
