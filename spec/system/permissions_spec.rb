@@ -113,6 +113,8 @@ RSpec.describe "Synthesis of roles", type: :system do
     # click on button save
     find("input[name='commit']").click
 
+    expect(page).to have_content("Successful update.")
+
     expect(Role.find(1).permissions_all_trackers["view_issues"]).to eq "0"
     expect(Role.find(1).permissions_tracker_ids["view_issues"]).to eq ["1", "3"]
   end

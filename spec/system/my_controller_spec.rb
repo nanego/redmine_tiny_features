@@ -15,6 +15,8 @@ RSpec.describe "my_controller", type: :system do
       find("input[name='pref[show_pagination_at_top_results]']").click
       find("input[name='commit']").click
 
+      expect(page).to have_content("Account was successfully updated.")
+
       expect(User.find(1).preference.show_pagination_at_top_results).to eq true
     end
 
@@ -27,6 +29,8 @@ RSpec.describe "my_controller", type: :system do
 
       find("input[name='pref[show_pagination_at_top_results]']").click
       find("input[name='commit']").click
+
+      expect(page).to have_content("Account was successfully updated.")
 
       expect(User.find(1).preference.show_pagination_at_top_results).to eq false
     end

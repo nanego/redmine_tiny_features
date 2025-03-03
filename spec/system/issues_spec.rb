@@ -11,6 +11,7 @@ RSpec.describe "creating an issue", type: :system do
            :workflows
 
   context "logged as non-admin" do
+
     before do
       log_user('jsmith', 'jsmith')
     end
