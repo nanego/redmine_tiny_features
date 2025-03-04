@@ -175,42 +175,45 @@ RSpec.describe "creating an issue", type: :system do
       expect(options).to eq (options.sort_by(&:parameterize))
     end
   end
-end
 
-describe "Pagination links at the top of issues results" do
+  describe "Pagination links at the top of issues results" do
 
-  it "does not show pagination links when the option show_pagination_at_top_results is not selected and there are multi pages" do
-    # create 70 issues
-    70.times do |i|
-      Issue.create(:project_id => 1, :tracker_id => 1, :author_id => 1,
-                   :status_id => 1, :priority_id => 1,
-                   :subject => "test_create#{i}",
-                   :description => "description#{i}")
+    it "does not show pagination links when the option show_pagination_at_top_results is not selected and there are multi pages" do
+      # create 70 issues
+      70.times do |i|
+        Issue.create(:project_id => 1, :tracker_id => 1, :author_id => 1,
+                     :status_id => 1, :priority_id => 1,
+                     :subject => "test_create#{i}",
+                     :description => "description#{i}")
+      end
+      visit 'issues?query_id=5'
+      expect(page).to have_selector('span.pagination', count: 1)
     end
-    visit 'issues?query_id=5'
-    expect(page).to have_selector('span.pagination', count: 1)
-  end
 
-  it "does not show pagination links when the option show_pagination_at_top_results is selected and there is only one page" do
-    pref = User.find(1).preference
-    pref.show_pagination_at_top_results = true
-    pref.save
-    visit 'issues?query_id=5'
-    expect(page).to have_selector('span.pagination', count: 1)
-  end
-
-  it "shows pagination links when the option show_pagination_at_top_results is selected and there are multi pages" do
-    pref = User.find(1).preference
-    pref.show_pagination_at_top_results = true
-    pref.save
-    # create 70 issues
-    70.times do |i|
-      Issue.create(:project_id => 1, :tracker_id => 1, :author_id => 1,
-                   :status_id => 1, :priority_id => 1,
-                   :subject => "test_create#{i}",
-                   :description => "description#{i}")
+    it "does not show pagination links when the option show_pagination_at_top_results is selected and there is only one page" do
+      pref = User.find(1).preference
+      pref.show_pagination_at_top_results = true
+      pref.save
+      visit 'issues?query_id=5'
+      expect(page).to have_selector('span.pagination', count: 1)
     end
-    visit 'issues/'
-    expect(page).to have_selector('span.pagination', count: 2)
+
+    it "shows pagination links when the option show_pagination_at_top_results is selected and there are multi pages" do
+      pref = User.find(1).preference
+      pref.show_pagination_at_top_results = true
+      pref.save
+      expect(User.find(1).preference.show_pagination_at_top_results).to eq true
+
+      # create 70 issues
+      70.times do |i|
+        Issue.create(:project_id => 1, :tracker_id => 1, :author_id => 1,
+                     :status_id => 1, :priority_id => 1,
+                     :subject => "test_create#{i}",
+                     :description => "description#{i}")
+      end
+
+      visit 'issues/'
+      expect(page).to have_selector('span.pagination', count: 2)
+    end
   end
 end

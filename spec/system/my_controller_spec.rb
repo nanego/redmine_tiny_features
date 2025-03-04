@@ -24,6 +24,7 @@ RSpec.describe "my_controller", type: :system do
       pref = User.find(1).preference
       pref.show_pagination_at_top_results = true
       pref.save
+      expect(User.find(1).preference.show_pagination_at_top_results).to eq true
 
       visit "/my/account"
 
