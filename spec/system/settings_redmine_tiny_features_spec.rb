@@ -12,6 +12,9 @@ RSpec.describe "settings_redmine_tiny_features", type: :system do
       find("input[name='settings[use_select2]']").click
       find("input[name='settings[paginate_issue_filters_values]']").click
       find("input[name='commit']").click
+
+      expect(page).to have_content("Successful update.")
+
       expect(Setting["plugin_redmine_tiny_features"]["use_select2"]).to eq '1'
       expect(Setting["plugin_redmine_tiny_features"]["paginate_issue_filters_values"]).to eq "1"
     end
@@ -29,6 +32,8 @@ RSpec.describe "settings_redmine_tiny_features", type: :system do
     find("input[name='settings[load_issue_edit_form_asynchronously]']").click
     find("input[name='commit']").click
 
+    expect(page).to have_content("Successful update.")
+
     expect(Setting["plugin_redmine_tiny_features"]["load_issue_edit_form_asynchronously"]).to eq '1'
     Setting.send "plugin_redmine_tiny_features=", {
       "warning_message_on_closed_issues" => "1",
@@ -45,6 +50,8 @@ RSpec.describe "settings_redmine_tiny_features", type: :system do
 
     find("input[name='settings[hide_members_section_on_project_overview]']").click
     find("input[name='commit']").click
+
+    expect(page).to have_content("Successful update.")
 
     expect(Setting["plugin_redmine_tiny_features"]["hide_members_section_on_project_overview"]).to eq '1'
     Setting.send "plugin_redmine_tiny_features=", {
