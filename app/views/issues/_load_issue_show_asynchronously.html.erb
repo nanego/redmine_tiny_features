@@ -21,6 +21,7 @@
                               // for datepicker element,
                               <% include_calendar_headers_tags %>
                               // for wikitoolbar element in mode Textile,
+                              <% heads_for_wiki_formatter %>
                               setupFileDrop();
                               // But for mode visual there is no need to call because it is already called in { $(document).ajaxSuccess/redmine_wysiwyg_editor }
                           });
