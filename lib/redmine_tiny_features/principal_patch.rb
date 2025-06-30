@@ -18,23 +18,31 @@ class Principal
   end)
 
   def self.member_of_statement_with_search(projects, term, all = true)
-    projects = [projects] if projects.is_a?(Project)
 
     # if all include active and locked users else include active users
     status = all ? [STATUS_LOCKED, STATUS_ACTIVE] : [STATUS_ACTIVE]
 
-    if projects.blank?
-      where("1=0")
-    else
-      ids = projects.map(&:id)
-      reorder(status: :asc).
-        order(*Principal.fields_for_order_statement).
-        where(:type => ['User']).
-        where("(LOWER(#{Principal.table_name}.lastname) || ' ' || LOWER(#{Principal.table_name}.firstname)) LIKE LOWER(:term)
+    statement = reorder(status: :asc).
+      order(*Principal.fields_for_order_statement).
+      where(:type => ['User']).
+      where("(LOWER(#{Principal.table_name}.lastname) || ' ' || LOWER(#{Principal.table_name}.firstname)) LIKE LOWER(:term)
               OR (LOWER(#{Principal.table_name}.firstname) || ' ' || LOWER(#{Principal.table_name}.lastname)) LIKE LOWER(:term)", term: "%#{term}%").
-        where(:status => status).
-        where("#{Principal.table_name}.id IN (SELECT DISTINCT user_id FROM #{Member.table_name} where project_id IN (?))", ids)
+      where(:status => status)
+
+    if projects.nil?
+      return statement
+    else
+      projects = [projects] if projects.is_a?(Project)
+
+      if projects.blank?
+        statement.where("1=0")
+      else
+        ids = projects.map(&:id)
+        statement.where("#{Principal.table_name}.id IN (SELECT DISTINCT user_id FROM #{Member.table_name} where project_id IN (?))", ids)
+      end
+
     end
+
   end
 
 end

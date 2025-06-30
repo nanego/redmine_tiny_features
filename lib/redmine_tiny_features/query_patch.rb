@@ -3,6 +3,29 @@ module RedmineTinyFeatures::QueryPatch
 end
 
 class Query
+
+  def principals
+    @principal ||= begin
+                     principals = []
+                     if project
+                       principals += Principal.member_of(project).visible
+                       unless project.leaf?
+                         principals += Principal.member_of(project.descendants.visible).visible
+                       end
+                     else
+                       if Setting["plugin_redmine_tiny_features"]["display_all_users_in_author_filter"].to_i > 0
+                         principals += Principal.visible
+                       else
+                         principals += Principal.member_of(all_projects).visible
+                       end
+                     end
+                     principals.uniq!
+                     principals.sort!
+                     principals.reject! { |p| p.is_a?(GroupBuiltin) }
+                     principals
+                   end
+  end
+
   def principals_with_pagination(term = '', limit = 0, page = 0)
     begin
       principals = []
@@ -12,7 +35,11 @@ class Query
           principals += Principal.member_of_with_pagination(project.descendants.visible, term, limit, page).visible
         end
       else
-        principals += Principal.member_of_with_pagination(all_projects, term, limit, page).visible
+        if Setting["plugin_redmine_tiny_features"]["display_all_users_in_author_filter"].to_i > 0
+          principals += Principal.member_of_with_pagination(nil, term, limit, page).visible
+        else
+          principals += Principal.member_of_with_pagination(all_projects, term, limit, page).visible
+        end
       end
       principals.reject! { |p| p.is_a?(GroupBuiltin) }
       principals

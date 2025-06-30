@@ -41,3 +41,4 @@ fr:
   label_issue_display_by_status: "Colorisation par statut"
   field_show_pagination_at_top_results: "Afficher les liens de pagination en haut des résultats des demandes"
   hide_members_on_project_overview: "Masquer la section des membres sur la page d'aperçu des projets"
+  display_all_users_in_author_filter: "Ajouter tous les utilisateurs dans les filtres par utilisateur, pas seulement les membres des projets (attention, cela peut ralentir le chargement des pages si vous avez beaucoup d'utilisateurs et si la pagination n'est pas activée sur les filtres)"

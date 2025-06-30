@@ -42,7 +42,6 @@
     <% end %>
   </p>
 
-  <!-- Add this parameter, because there are tests for available_filters in redmine core -->
   <p id="paginate_issue_filters_values">
     <%= label_tag '', { style: 'width: auto;' } do %>
       <%= check_box_tag "settings[paginate_issue_filters_values]", '1', Setting["plugin_redmine_tiny_features"]["paginate_issue_filters_values"] %>
@@ -50,6 +49,15 @@
     <% end %>
   </p>
 <% end %>
+
+<p>
+  <%= label_tag '', { style: 'width: auto;text-align:left;' } do %>
+    <%= check_box_tag "settings[display_all_users_in_author_filter]", '1', Setting["plugin_redmine_tiny_features"]["display_all_users_in_author_filter"] %>
+    <%= l("display_all_users_in_author_filter") %>
+  <% end %>
+</p>
+
+<hr>
 
 <!-- Added this parameter in order to disable note deletion journalization and do not break core test (JournalsControllerTest#test_update_xhr_with_empty_notes_should_delete_the_journal in redmine core) -->
 <p>
@@ -88,7 +96,7 @@
   }
   });
 
-  // Avoid to activate pagination if select2 is not active
+  // Avoid activating pagination if select2 is not active
   function hidePagination(){
   paginationObject = $('#paginate_issue_filters_values input')[0]
   paginationLabel = $('#paginate_issue_filters_values label')[0]
