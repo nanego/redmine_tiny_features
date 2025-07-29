@@ -1,8 +1,8 @@
-name: Tests 6.0.5
+name: Tests 6.0.6
 
 env:
   PLUGIN_NAME: redmine_tiny_features
-  REDMINE_VERSION: 6.0.5
+  REDMINE_VERSION: 6.0.6
   RAILS_ENV: test
 
 on:

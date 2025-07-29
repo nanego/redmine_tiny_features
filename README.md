@@ -33,12 +33,11 @@ Here is a complete list of the features:
 
 | Plugin branch | Redmine Version | Test Status       |
 |---------------|-----------------|-------------------|
-| master        | 6.0.5           | [![6.0.5][1]][5]  |
-| master        | 5.1.8           | [![5.1.8][2]][5]  |
+| master        | 6.0.6           | [![6.0.6][1]][5]  |
+| master        | 5.1.9           | [![5.1.9][2]][5]  |
 | master        | master          | [![master][3]][5] |
 
-[1]: https://github.com/nanego/redmine_tiny_features/actions/workflows/6_0_5.yml/badge.svg
-[2]: https://github.com/nanego/redmine_tiny_features/actions/workflows/5_1_8.yml/badge.svg
+[1]: https://github.com/nanego/redmine_tiny_features/actions/workflows/6_0_6.yml/badge.svg
+[2]: https://github.com/nanego/redmine_tiny_features/actions/workflows/5_1_9.yml/badge.svg
 [3]: https://github.com/nanego/redmine_tiny_features/actions/workflows/master.yml/badge.svg
 [5]: https://github.com/nanego/redmine_tiny_features/actions
-

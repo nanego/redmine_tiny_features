@@ -14,7 +14,7 @@ fr:
   permission_manage_project_enumerations: Gérer les valeurs possibles des champs personnalisés par projet
   default_project: Projet par défaut pour les nouvelles demandes
   label_general_data: Données générales
-  label_trakers_permissions: Permissions des trackers
+  label_trackers_permissions: Permissions des trackers
   label_general_data_permission: Permissions des données générales
   setting_paginate_issue_filters_values: Paginer les valeurs des filtres sur les demandes afin de réduire les temps de chargement
   setting_journalize_note_deletion: Traçabilité des effacements de note

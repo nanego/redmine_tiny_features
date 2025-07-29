@@ -14,7 +14,7 @@ en:
   permission_manage_project_enumerations: Manager custom fields possible values per project
   default_project: Default project for new issues
   label_general_data: General data
-  label_trakers_permissions: Tracker permissions
+  label_trackers_permissions: Tracker permissions
   label_general_data_permission: General data permissions
   setting_paginate_issue_filters_values: Paginate issue filters values to improve load time
   setting_journalize_note_deletion: Journalize the note deletion
