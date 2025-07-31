@@ -1,7 +1,7 @@
 require_dependency 'queries_controller'
 
 module RedmineTinyFeatures::QueriesControllerPatch
-  
+
 end
 
 class QueriesController
@@ -11,18 +11,18 @@ class QueriesController
     total_query = Query.new
     total = total_query.count_author_values_with_search(params['term'], true)
 
-    # Calculating the number of active users in order to know the page number on which we will put the label locked
+    # Calculating the number of active users to know the page number on which we will put the label locked
     total_active_query = Query.new
     total_active = total_active_query.count_author_values_with_search(params['term'], false)
 
-    # pass the maxPage for add user_anonymous in the last page
-    maxPage = (total.to_f / params['page_limit'].to_i).ceil
+    # pass the max_page to add user_anonymous in the last page
+    max_page = (total.to_f / params['page_limit'].to_i).ceil
 
     issue_query = Query.new
-    values = issue_query.author_values_with_pagination(params['term'], params['page_limit'], params['page'], maxPage)
+    values = issue_query.author_values_with_pagination(params['term'], params['page_limit'], params['page'], max_page)
 
     render :json => {
-      :results => get_data_for_pagination(total, total_active, values, true, maxPage),
+      :results => get_data_for_pagination(total, total_active, values, true, max_page),
       :total => total,
     }
 
@@ -32,7 +32,7 @@ class QueriesController
     total_query = Query.new
     total = total_query.count_assigned_to_values_with_search(params['term'], true)
 
-    # Calculating the number of active users in order to know the page number on which we will put the label locked
+    # Calculating the number of active users to know the page number on which we will put the label locked
     total_active_query = Query.new
     total_active = total_active_query.count_assigned_to_values_with_search(params['term'], false)
 
@@ -47,7 +47,7 @@ class QueriesController
 
   private
 
-  def get_data_for_pagination(total, total_active, values, with_anonymous = false, maxPage = 1)
+  def get_data_for_pagination(total, total_active, values, with_anonymous = false, max_page = 1)
 
     if total_active == 0
       page_locked = params['page'].to_i
@@ -64,8 +64,8 @@ class QueriesController
 
     myValue = values.shift() if params['page'] == "0" && values.count > 0 && values[0][1] == "me"
 
-    # show "me" in the begining of list
-    h_me = { 'id' => myValue[1], 'text' => myValue[0] } if myValue.present?
+    # add "me" value at the beginning of the list
+    h_me = { 'id' => User.current.id, 'text' => myValue[0] } if myValue.present?
 
     values.each do |val|
       h_active.push({ 'id' => val[1], 'text' => val[0] }) if val[2] == l("status_active")
@@ -73,8 +73,8 @@ class QueriesController
     end
 
     if with_anonymous
-      # show "anonymous" in the end of list
-      anonymousValue = values.pop() if ((params['page'].to_i == (maxPage - 1)) && (values.count > 0) && (values[values.count - 1][0] == l(:label_user_anonymous)))
+      # add "anonymous" value at the end of the list
+      anonymousValue = values.pop() if ((params['page'].to_i == (max_page - 1)) && (values.count > 0) && (values[values.count - 1][0] == l(:label_user_anonymous)))
       h_anonymous = { 'id' => anonymousValue[1], 'text' => anonymousValue[0] } if anonymousValue.present?
     end
 

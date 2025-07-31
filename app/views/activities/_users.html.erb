@@ -1,0 +1,61 @@
+<% if !Setting.plugin_redmine_tiny_features['use_select2'] || @project.present? %>
+
+  <%# Standard select tag %>
+  <%= select_tag 'user_id',
+                 activity_authors_options_for_select(@project, params[:user_id]),
+                 include_blank: true %>
+
+<% else %>
+
+  <%# Select2-enhanced select tag for global user selection %>
+  <% selected_user = User.find_by(id: params[:user_id]) %>
+
+  <%= select_tag 'user_id',
+                 options_for_select([[selected_user&.name, selected_user&.id]].compact, params[:user_id]) %>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const $userSelect = $('#user_id');
+
+          if (!$userSelect.length) return;
+
+          $userSelect.select2({
+              containerCss: {width: '180px', minWidth: '180px'},
+              width: 'style',
+              tags: false,
+              language: {
+                  noResults: () => "Aucun résultat trouvé..",
+                  searching: () => "Recherche...",
+                  loadingMore: () => "Charger plus de résultats..."
+              },
+              ajax: {
+                  url: '<%= author_values_pagination_path %>',
+                  dataType: 'json',
+                  delay: 250,
+                  method: 'GET',
+                  data: params => ({
+                      term: params.term,
+                      page_limit: 20,
+                      page: params.page || 0
+                  }),
+                  processResults: (data, params) => {
+                      params.page = params.page || 0;
+                      const maxPage = Math.ceil(data.total / 20);
+
+                      return {
+                          results: data.results,
+                          pagination: {
+                              more:
+                                  (params.page * 20 < data.total) &&
+                                  (data.results.length < data.total) &&
+                                  (maxPage > params.page + 1)
+                          }
+                      };
+                  },
+                  cache: true
+              }
+          });
+      });
+  </script>
+
+<% end %>
