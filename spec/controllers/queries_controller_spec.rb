@@ -19,8 +19,8 @@ describe QueriesController, type: :controller do
   end
 
   describe "author_values_pagination" do
-    it "should return 21 (20 active users + me ) in the first page whitout search value" do
-      get :author_values_pagination, params: {:page_limit => 20, :term => '', :page => 0}
+    it "should return 21 (20 active users + me ) in the first page without search value" do
+      get :author_values_pagination, params: { :page_limit => 20, :term => '', :page => 0 }
 
       assert_response :success
       assert_equal 'application/json', response.media_type
@@ -28,14 +28,14 @@ describe QueriesController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(json["results"].count).to eq(3)
-      expect(json["results"]).to include({"id"=>"me", "text"=>"<< me >>"})
-      expect(json["results"][1]).to eq({"id"=>1, "text"=>"active", "children"=>[]})
+      expect(json["results"]).to include({ "id" => 1, "text" => "<< me >>" })
+      expect(json["results"][1]).to eq({ "id" => 1, "text" => "active", "children" => [] })
       expect(json["results"][2]["children"].count).to eq(20)
 
     end
 
     it "should return 6 users (4 active users + 1 user locked + Anonymous ) in the second page whitout search value" do
-      get :author_values_pagination, params: {:page_limit => 20, :term => '', :page => 1}
+      get :author_values_pagination, params: { :page_limit => 20, :term => '', :page => 1 }
 
       assert_response :success
       assert_equal 'application/json', response.media_type
@@ -43,15 +43,15 @@ describe QueriesController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(json["results"].count).to eq(4)
-      expect(json["results"]).to include({"id"=>"6", "text"=>"Anonymous"})
+      expect(json["results"]).to include({ "id" => "6", "text" => "Anonymous" })
       expect(json["results"][0]["children"].count).to eq(4)
-      expect(json["results"][1]).to eq({"id"=>2, "text"=>"locked", "children"=>[]})
-      expect(json["results"][2]["children"][0]).to eq({"id"=>"5", "text"=>"Dave2 Lopper2"})
-      expect(json["results"][3]).to eq({"id"=>"6", "text"=>"Anonymous"})
+      expect(json["results"][1]).to eq({ "id" => 2, "text" => "locked", "children" => [] })
+      expect(json["results"][2]["children"][0]).to eq({ "id" => "5", "text" => "Dave2 Lopper2" })
+      expect(json["results"][3]).to eq({ "id" => "6", "text" => "Anonymous" })
     end
 
     it "should return 10 users whose names are like the search value in the first page" do
-      get :author_values_pagination, params: {:page_limit => 20, :term => 'first1', :page => 0}
+      get :author_values_pagination, params: { :page_limit => 20, :term => 'first1', :page => 0 }
 
       assert_response :success
       assert_equal 'application/json', response.media_type
@@ -59,13 +59,13 @@ describe QueriesController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(json["results"].count).to eq(2)
-      expect(json["results"][0]).to eq({"id"=>1, "text"=>"active", "children"=>[]})
+      expect(json["results"][0]).to eq({ "id" => 1, "text" => "active", "children" => [] })
       expect(json["results"][1]["children"].count).to eq(10)
       expect(json["results"][1]["children"][0]["text"]).to eq("first1name_0 lastname0")
     end
 
     it "should return users whose names are like the search value with both firstname and name" do
-      get :author_values_pagination, params: {:page_limit => 20, :term => 'first1name_0 last', :page => 0}
+      get :author_values_pagination, params: { :page_limit => 20, :term => 'first1name_0 last', :page => 0 }
 
       assert_response :success
       assert_equal 'application/json', response.media_type
@@ -73,13 +73,13 @@ describe QueriesController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(json["results"].count).to eq(2)
-      expect(json["results"][0]).to eq({"id"=>1, "text"=>"active", "children"=>[]})
+      expect(json["results"][0]).to eq({ "id" => 1, "text" => "active", "children" => [] })
       expect(json["results"][1]["children"].size).to eq 1
       expect(json["results"][1]["children"][0]["text"]).to eq("first1name_0 lastname0")
     end
 
     it "should return users whose names are like the search value with both firstname and name in reverse order" do
-      get :author_values_pagination, params: {:page_limit => 20, :term => 'lastname0 first1name_0', :page => 0}
+      get :author_values_pagination, params: { :page_limit => 20, :term => 'lastname0 first1name_0', :page => 0 }
 
       assert_response :success
       assert_equal 'application/json', response.media_type
@@ -87,7 +87,7 @@ describe QueriesController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(json["results"].count).to eq(2)
-      expect(json["results"][0]).to eq({"id"=>1, "text"=>"active", "children"=>[]})
+      expect(json["results"][0]).to eq({ "id" => 1, "text" => "active", "children" => [] })
       expect(json["results"][1]["children"].size).to eq 1
       expect(json["results"][1]["children"][0]["text"]).to eq("first1name_0 lastname0")
     end
@@ -95,7 +95,7 @@ describe QueriesController, type: :controller do
 
   describe "assigned_to_values_pagination" do
     it "should return 21 (20 active users + me ) in the first page whitout search value" do
-      get :assigned_to_values_pagination, params: {:page_limit => 20, :term => '', :page => 0}
+      get :assigned_to_values_pagination, params: { :page_limit => 20, :term => '', :page => 0 }
 
       assert_response :success
       assert_equal 'application/json', response.media_type
@@ -103,14 +103,14 @@ describe QueriesController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(json["results"].count).to eq(3)
-      expect(json["results"]).to include({"id"=>"me", "text"=>"<< me >>"})
-      expect(json["results"][1]).to eq({"id"=>1, "text"=>"active", "children"=>[]})
+      expect(json["results"]).to include({ "id" => 1, "text" => "<< me >>" })
+      expect(json["results"][1]).to eq({ "id" => 1, "text" => "active", "children" => [] })
       expect(json["results"][2]["children"].count).to eq(20)
 
     end
 
     it "should return 5 users (4 active users + 1 user locked) in the second page whitout search value" do
-      get :assigned_to_values_pagination, params: {:page_limit => 20, :term => '', :page => 1}
+      get :assigned_to_values_pagination, params: { :page_limit => 20, :term => '', :page => 1 }
 
       assert_response :success
       assert_equal 'application/json', response.media_type
@@ -119,12 +119,12 @@ describe QueriesController, type: :controller do
 
       expect(json["results"].count).to eq(3)
       expect(json["results"][0]["children"].count).to eq(4)
-      expect(json["results"][1]).to eq({"id"=>2, "text"=>"locked", "children"=>[]})
-      expect(json["results"][2]["children"][0]).to eq({"id"=>"5", "text"=>"Dave2 Lopper2"})
+      expect(json["results"][1]).to eq({ "id" => 2, "text" => "locked", "children" => [] })
+      expect(json["results"][2]["children"][0]).to eq({ "id" => "5", "text" => "Dave2 Lopper2" })
     end
 
     it "should return 10 users whose names are like the search value in the first page" do
-      get :author_values_pagination, params: {:page_limit => 20, :term => 'first0', :page => 0}
+      get :author_values_pagination, params: { :page_limit => 20, :term => 'first0', :page => 0 }
 
       assert_response :success
       assert_equal 'application/json', response.media_type
@@ -132,7 +132,7 @@ describe QueriesController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(json["results"].count).to eq(2)
-      expect(json["results"][0]).to eq({"id"=>1, "text"=>"active", "children"=>[]})
+      expect(json["results"][0]).to eq({ "id" => 1, "text" => "active", "children" => [] })
       expect(json["results"][1]["children"].count).to eq(10)
       expect(json["results"][1]["children"][0]["text"]).to eq("first0name_0 lastname0")
     end
