@@ -33,7 +33,7 @@ module RedmineTinyFeatures
 
       if content.present?
         trigger =
-          content_tag('span', l(:button_actions), :class => 'icon-only icon-actions',
+          content_tag('span', sprite_icon('3-bullets', l(:button_actions)), :class => 'icon-only icon-actions',
                       :title => l(:button_actions))
         trigger = content_tag('span', trigger, :class => 'drdn-trigger')
         content = content_tag('div', content, :class => 'drdn-items')
