@@ -6,22 +6,25 @@ class Query
 
   def principals
     @principal ||= begin
-                     principals = []
-                     if project
-                       principals += Principal.member_of(project).visible
-                       unless project.leaf?
-                         principals += Principal.member_of(project.descendants.visible).visible
-                       end
-                     else
-                       if Setting["plugin_redmine_tiny_features"]["display_all_users_in_author_filter"].to_i > 0
-                         principals += Principal.visible
-                       else
-                         principals += Principal.member_of(all_projects).visible
-                       end
-                     end
-                     principals.uniq!
+                     principals = if project
+                                    scope = Principal.visible.member_of(project)
+                                    unless project.leaf?
+                                      scope = scope.or(
+                                        Principal.visible.member_of(project.descendants.visible)
+                                      )
+                                    end
+                                    scope
+                                  else
+                                    if Setting["plugin_redmine_tiny_features"]["display_all_users_in_author_filter"].to_i > 0
+                                      Principal.visible
+                                    else
+                                      Principal.visible.member_of(all_projects)
+                                    end
+                                  end
+
+                     principals = principals.distinct
+                                            .where.not(type: ['GroupAnonymous', 'GroupNonMember'])
                      principals.sort!
-                     principals.reject! { |p| p.is_a?(GroupBuiltin) }
                      principals
                    end
   end
