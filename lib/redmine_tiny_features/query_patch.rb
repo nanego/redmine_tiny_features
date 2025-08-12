@@ -22,10 +22,9 @@ class Query
                                     end
                                   end
 
-                     principals = principals.distinct
-                                            .where.not(type: ['GroupAnonymous', 'GroupNonMember'])
-                     principals.sort!
-                     principals
+                     principals.distinct
+                               .where.not(type: ['GroupAnonymous', 'GroupNonMember'])
+                               .sorted
                    end
   end
 
