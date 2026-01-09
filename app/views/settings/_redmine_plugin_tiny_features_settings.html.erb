@@ -89,6 +89,13 @@
   <% end %>
 </p>
 
+<p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[collapse_gantt_chart_at_project_level]", '1', Setting["plugin_redmine_tiny_features"]["collapse_gantt_chart_at_project_level"] %>
+    <%= l("collapse_gantt_chart_at_project_level") %>
+  <% end %>
+</p>
+
 <%= javascript_tag do %>
   $(function() {
   if ((typeof $().select2) === 'function') {

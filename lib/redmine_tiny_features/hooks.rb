@@ -21,6 +21,7 @@ module RedmineTinyFeatures
       require_relative 'custom_field_enumeration_patch'
       require_relative 'custom_field_patch'
       require_relative 'field_format_patch'
+      require_relative 'gantt_patch'
       require_relative 'issue_query_patch'
       require_relative 'issue_patch'
       require_relative 'issue_status_patch'

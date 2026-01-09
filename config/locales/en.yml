@@ -42,3 +42,4 @@ en:
   field_show_pagination_at_top_results: "Show pagination links at the top of issues results"
   hide_members_on_project_overview: "Hide members section on project overview page"
   display_all_users_in_author_filter: "Display all users in author filter - Not only project members"
+  collapse_gantt_chart_at_project_level: "Collapse Gantt chart at project level if there are many projects"

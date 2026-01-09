@@ -5,6 +5,10 @@ $(document).ready(function(){
   $('#content').on('change', 'input[data-disables], input[data-enables], input[data-shows]', toggleVisibilityOnChange);
   toggleVisibilityInit();
 
+  $('.gantt_subjects').on('click', '.icon.expander', function(){
+    resizableSubjectColumn()
+  });
+
   function toggleVisibilityOnChange() {
     var checked = $(this).is(':checked');
     if(!checked) {

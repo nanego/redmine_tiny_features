@@ -24,7 +24,8 @@ Redmine::Plugin.register :redmine_tiny_features do
              'use_select2': Rails.env.test? || !(Redmine::Plugin.installed?(:redmine_base_select2)) ? '0' : '1',
              'load_issue_edit_form_asynchronously': Rails.env.test? ? '0' : '1',
              'disable_email_hiding': '',
-             'display_all_users_in_author_filter': '0'
+             'display_all_users_in_author_filter': '0',
+             'collapse_gantt_chart_at_project_level': '0'
            }
 end
 
