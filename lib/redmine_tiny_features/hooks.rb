@@ -2,8 +2,15 @@ module RedmineTinyFeatures
   class Hooks < Redmine::Hook::ViewListener
     # adds our css on each page
     def view_layouts_base_html_head(context)
-      stylesheet_link_tag("tiny_features", :plugin => "redmine_tiny_features") +
-        javascript_include_tag('redmine_tiny_features.js', plugin: 'redmine_tiny_features')
+      output = stylesheet_link_tag("tiny_features", :plugin => "redmine_tiny_features") +
+               javascript_include_tag('redmine_tiny_features.js', plugin: 'redmine_tiny_features')
+
+      # Add meta tag for Gantt collapse setting
+      if Setting["plugin_redmine_tiny_features"]["collapse_gantt_chart_at_project_level"].present?
+        output += tag('meta', :name => 'collapse-gantt-at-project-level', :content => 'true')
+      end
+
+      output
     end
 
     def controller_journals_edit_post(context = {})
@@ -21,7 +28,6 @@ module RedmineTinyFeatures
       require_relative 'custom_field_enumeration_patch'
       require_relative 'custom_field_patch'
       require_relative 'field_format_patch'
-      require_relative 'gantt_patch'
       require_relative 'issue_query_patch'
       require_relative 'issue_patch'
       require_relative 'issue_status_patch'

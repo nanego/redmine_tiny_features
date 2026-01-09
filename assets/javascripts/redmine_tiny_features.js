@@ -9,6 +9,45 @@ $(document).ready(function(){
     resizableSubjectColumn()
   });
 
+  // Collapse projects at the project level if setting is enabled
+  if ($('meta[name="collapse-gantt-at-project-level"]').attr('content') === 'true') {
+    collapseGanttProjectsOnLoad();
+  }
+
+  function collapseGanttProjectsOnLoad() {
+    // Find all project expanders that are currently expanded (have class 'open')
+    var projectExpanders = $('.gantt_subjects div.project-name.open .icon.expander');
+
+    if (projectExpanders.length === 0) {
+      // Retry after a short delay to ensure DOM is fully loaded and events are attached
+      setTimeout(collapseGanttProjectsOnLoad, 100);
+      return;
+    }
+
+    // Collapse all projects except the first one (main project context)
+    // This keeps the main project expanded while collapsing all sub-projects
+    // Important: collapse from bottom to top (reverse order) to avoid position recalculation conflicts
+    // when dealing with nested projects and issues
+    var expandersToCollapse = projectExpanders.slice(1).get().reverse();
+
+    $(expandersToCollapse).each(function() {
+      // Call ganttEntryClick directly if it exists (more reliable than trigger)
+      if (typeof ganttEntryClick === 'function') {
+        // Create a fake event with currentTarget set to the expander
+        var fakeEvent = { currentTarget: this };
+        ganttEntryClick(fakeEvent);
+      } else {
+        // Fallback to trigger if ganttEntryClick is not available yet
+        $(this).trigger('click');
+      }
+    });
+
+    // Redraw gantt after all collapses to ensure relations are correct
+    if (typeof drawGanttHandler === 'function') {
+      drawGanttHandler();
+    }
+  }
+
   function toggleVisibilityOnChange() {
     var checked = $(this).is(':checked');
     if(!checked) {
