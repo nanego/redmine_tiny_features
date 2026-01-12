@@ -8,6 +8,9 @@ module RedmineTinyFeatures
       # Add meta tag for Gantt collapse setting
       if Setting["plugin_redmine_tiny_features"]["collapse_gantt_chart_at_project_level"].present?
         output += tag('meta', :name => 'collapse-gantt-at-project-level', :content => 'true')
+        if context[:project]
+          output += tag('meta', :name => 'current-project-id', :content => context[:project].id)
+        end
       end
 
       output

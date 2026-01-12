@@ -24,11 +24,19 @@ $(document).ready(function(){
       return;
     }
 
-    // Collapse all projects except the first one (main project context)
-    // This keeps the main project expanded while collapsing all sub-projects
+    // Check if we're in a project context (e.g., /projects/xxx/issues)
+    var currentProjectId = $('meta[name="current-project-id"]').attr('content');
+    var currentProjectExpander = null;
+    if (currentProjectId) {
+      currentProjectExpander = $('.gantt_subjects div.project-name[data-collapse-expand*="project-' + currentProjectId + '"] .icon.expander');
+    }
+
+    // Collapse all projects except the current one (if in project context)
     // Important: collapse from bottom to top (reverse order) to avoid position recalculation conflicts
     // when dealing with nested projects and issues
-    var expandersToCollapse = projectExpanders.slice(1).get().reverse();
+    var expandersToCollapse = projectExpanders.filter(function() {
+      return !currentProjectExpander || this !== currentProjectExpander[0];
+    }).get().reverse();
 
     $(expandersToCollapse).each(function() {
       // Call ganttEntryClick directly if it exists (more reliable than trigger)
