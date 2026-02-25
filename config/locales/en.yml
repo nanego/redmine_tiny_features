@@ -43,3 +43,5 @@ en:
   hide_members_on_project_overview: "Hide members section on project overview page"
   display_all_users_in_author_filter: "Display all users in author filter - Not only project members"
   collapse_gantt_chart_at_project_level: "Collapse Gantt chart at project level if there are many projects"
+  label_users_quick_search_placeholder: "Quick search by name, first name, login..."
+  label_tiny_features_users_quick_search: "Users quick search (/users page)"

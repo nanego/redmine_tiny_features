@@ -96,6 +96,13 @@
   <% end %>
 </p>
 
+<p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[users_quick_search]", '1', Setting["plugin_redmine_tiny_features"]["users_quick_search"] %>
+    <%= l("label_tiny_features_users_quick_search") %>
+  <% end %>
+</p>
+
 <%= javascript_tag do %>
   $(function() {
   if ((typeof $().select2) === 'function') {

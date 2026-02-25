@@ -80,3 +80,11 @@ tr.status-grey a, tr.status-grey:hover a { color:#888; }
 tr.status-grey, table.list:not(.odd-even) tbody tr:nth-child(odd).status-grey,
 table.list:not(.odd-even) tbody tr:nth-child(even).status-grey { background:#ffffff; }
 tr.status-grey:hover td, tr.status-grey:hover a, tr.status-grey:hover a:hover, tr.status-grey:hover span.status, tr.status-grey:hover p.extra-fields, td.status-grey { color:#ffffff; background:#bbb; }
+
+#users-quick-search {
+  margin: 8px 0 12px 0;
+}
+#users-quick-search input[type=text] {
+  width: 280px;
+  padding: 5px 8px;
+}

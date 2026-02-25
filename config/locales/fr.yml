@@ -43,3 +43,5 @@ fr:
   hide_members_on_project_overview: "Masquer la section des membres sur la page d'aperçu des projets"
   display_all_users_in_author_filter: "Ajouter tous les utilisateurs dans les filtres par utilisateur, pas seulement les membres des projets (attention, cela peut ralentir le chargement des pages si vous avez beaucoup d'utilisateurs et si la pagination n'est pas activée sur les filtres)"
   collapse_gantt_chart_at_project_level: "Diagramme de Gantt replié au niveau projet par défaut si il y en a plusieurs"
+  label_users_quick_search_placeholder: "Rechercher rapide par nom, prénom, login..."
+  label_tiny_features_users_quick_search: "Recherche rapide utilisateurs (page /users)"

@@ -1,0 +1,17 @@
+<% if Setting["plugin_redmine_tiny_features"]['users_quick_search'].to_s == '1' %>
+  <% current_term = @query.has_filter?('name') ? @query.values_for('name')&.first.to_s : '' %>
+  <div id="users-quick-search">
+    <form action="<%= users_path %>" method="get" onsubmit="return usersQuickSearchSubmit(this)">
+      <%= hidden_field_tag 'set_filter', '1' %>
+      <%= hidden_field_tag 'f[]', 'name' %>
+      <%= hidden_field_tag 'op[name]', '~' %>
+      <input type="text"
+             id="users-quick-search-input"
+             name="v[name][]"
+             placeholder="<%= l(:label_users_quick_search_placeholder) %>"
+             value="<%= h(current_term) %>"
+             autocomplete="off">
+      <%= submit_tag l(:label_search), name: nil, class: 'button-small' %>
+    </form>
+  </div>
+<% end %>

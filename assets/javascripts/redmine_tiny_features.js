@@ -221,6 +221,15 @@ function setConfigurationForSelect2(element, url) {
   }
 }
 
+function usersQuickSearchSubmit(form) {
+  var term = document.getElementById('users-quick-search-input').value.trim();
+  if (!term) {
+    window.location.href = form.action + '?set_filter=1';
+    return false;
+  }
+  return true;
+}
+
 // Fix Copy/Paste issue when using Chrome or mwhen there is multiple form in the page
 $(document).ready(function(){
   // override copyImageFromClipboard of core Redmine

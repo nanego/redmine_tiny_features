@@ -12,6 +12,21 @@ describe UsersController, type: :controller do
     @request.session[:user_id] = 1 #=> admin ; permissions are hard...
   end
 
+  context "Quick search on users index" do
+    it "filters users by login when searching" do
+      get :index, params: { set_filter: '1', f: ['name'], op: { name: '~' }, v: { name: ['jsmith'] } }
+      expect(response).to be_successful
+      expect(assigns(:users)).to include(User.find(2)) # jsmith
+      expect(assigns(:users)).not_to include(User.find(1)) # admin
+    end
+
+    it "returns all users when no name filter is applied" do
+      get :index, params: { set_filter: '1' }
+      expect(response).to be_successful
+      expect(assigns(:users)).to include(User.find(1), User.find(2))
+    end
+  end
+
   context "Disable emails hiding function" do
 
     it "should show user's email when the option is selected, even if the user hides his email" do

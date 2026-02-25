@@ -25,7 +25,8 @@ Redmine::Plugin.register :redmine_tiny_features do
              'load_issue_edit_form_asynchronously': Rails.env.test? ? '0' : '1',
              'disable_email_hiding': '',
              'display_all_users_in_author_filter': '0',
-             'collapse_gantt_chart_at_project_level': '0'
+             'collapse_gantt_chart_at_project_level': '0',
+             'users_quick_search': '1'
            }
 end
 
