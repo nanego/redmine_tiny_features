@@ -18,7 +18,12 @@ class Query
                                     if Setting["plugin_redmine_tiny_features"]["display_all_users_in_author_filter"].to_i > 0
                                       Principal.visible
                                     else
-                                      Principal.visible.member_of(all_projects)
+                                      # Use a SQL subquery instead of materializing all visible project IDs
+                                      # to avoid a large IN (id1, id2, ...) clause when there are many projects
+                                      Principal.visible
+                                               .where(status: [Principal::STATUS_LOCKED, Principal::STATUS_ACTIVE])
+                                               .where(id: Member.select(:user_id).distinct
+                                                                .where(project_id: Project.visible.select(:id)))
                                     end
                                   end
 
@@ -40,7 +45,7 @@ class Query
         if Setting["plugin_redmine_tiny_features"]["display_all_users_in_author_filter"].to_i > 0
           principals += Principal.member_of_with_pagination(nil, term, limit, page).visible
         else
-          principals += Principal.member_of_with_pagination(all_projects, term, limit, page).visible
+          principals += Principal.member_of_with_pagination(Project.visible, term, limit, page).visible
         end
       end
       principals.reject! { |p| p.is_a?(GroupBuiltin) }
@@ -57,7 +62,7 @@ class Query
           principals += Principal.count_member_of_with_search(project.descendants.visible, term, all)
         end
       else
-        principals += Principal.count_member_of_with_search(all_projects, term, all)
+        principals += Principal.count_member_of_with_search(Project.visible, term, all)
       end
 
       principals

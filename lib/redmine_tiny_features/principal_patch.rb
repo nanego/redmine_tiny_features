@@ -31,6 +31,9 @@ class Principal
 
     if projects.nil?
       return statement
+    elsif projects.is_a?(ActiveRecord::Relation)
+      # Use a SQL subquery to avoid materializing project IDs in Ruby
+      statement.where(id: Member.select(:user_id).distinct.where(project_id: projects.select(:id)))
     else
       projects = [projects] if projects.is_a?(Project)
 
@@ -40,7 +43,6 @@ class Principal
         ids = projects.map(&:id)
         statement.where("#{Principal.table_name}.id IN (SELECT DISTINCT user_id FROM #{Member.table_name} where project_id IN (?))", ids)
       end
-
     end
 
   end
