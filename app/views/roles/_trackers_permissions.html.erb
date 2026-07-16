@@ -16,10 +16,7 @@
   <% permissions.each do |permission| %>
     <tr class="all-trackers-<%= permission %>">
       <td class="name">
-        <%= link_to_function('',
-                             "toggleCheckboxesBySelector('tr.all-trackers-#{permission} input[type=checkbox]')",
-                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
-                             :class => 'icon-only icon-checked') %>
+        <%= toggle_checkboxes_link("tr.all-trackers-#{permission} input[type=checkbox]") %>
         <%= l("permission_#{permission}") %>
       </td>
       <% @roles.each do |role| %>
@@ -48,10 +45,7 @@
     <% permissions.each do |permission| %>
       <tr class="permission-<%= permission %><%= tracker.id %>">
         <td class="name">
-          <%= link_to_function('',
-                               "toggleCheckboxesBySelector('.permission-#{permission}#{tracker.id} input:enabled')",
-                               :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
-                               :class => 'icon-only icon-checked') %>
+          <%= toggle_checkboxes_link(".permission-#{permission}#{tracker.id} input:enabled") %>
           <%= l("permission_#{permission}") %>
         </td>
         <% @roles.each do |role| %>
