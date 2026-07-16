@@ -21,25 +21,12 @@ module RedmineTinyFeatures
 
     ## TODO Remove this patch: override the specific issues#index view instead of the widely used helper method
     def actions_dropdown(&block)
-      content = capture(&block)
+      return super unless controller.controller_name == 'issues' && controller.action_name == 'index'
 
-      ## START PATCH
-      # insert link to switch issues display mode
-      if controller.controller_name == 'issues' && controller.action_name == 'index'
-        current_mode = User.current.issue_display_mode == User::BY_STATUS ? l(:label_issue_display_by_priority) : l(:label_issue_display_by_status)
-        content.prepend link_to current_mode, switch_display_mode_path(:path => request.url), method: :post, :class => 'icon icon-projects'
-      end
-      ## END PATCH
-
-      if content.present?
-        trigger =
-          content_tag('span', sprite_icon('3-bullets', l(:button_actions)), :class => 'icon-only icon-actions',
-                      :title => l(:button_actions))
-        trigger = content_tag('span', trigger, :class => 'drdn-trigger')
-        content = content_tag('div', content, :class => 'drdn-items')
-        content = content_tag('div', content, :class => 'drdn-content')
-        content_tag('span', trigger + content, :class => 'drdn')
-      end
+      # insert link to switch issues display mode, let the core render the dropdown itself
+      current_mode = User.current.issue_display_mode == User::BY_STATUS ? l(:label_issue_display_by_priority) : l(:label_issue_display_by_status)
+      switch_link = link_to current_mode, switch_display_mode_path(:path => request.url), method: :post, :class => 'icon icon-projects'
+      super() { switch_link + capture(&block).to_s }
     end
 
   end
