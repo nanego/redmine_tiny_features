@@ -23,7 +23,7 @@ module RedmineTinyFeatures
     def actions_dropdown(&block)
       return super unless controller.controller_name == 'issues' && controller.action_name == 'index'
 
-      # insert link to switch issues display mode, let the core render the dropdown itself
+      # insert link to switch issues display mode
       current_mode = User.current.issue_display_mode == User::BY_STATUS ? l(:label_issue_display_by_priority) : l(:label_issue_display_by_status)
       switch_link = link_to current_mode, switch_display_mode_path(:path => request.url), method: :post, :class => 'icon icon-projects'
       super() { switch_link + capture(&block).to_s }

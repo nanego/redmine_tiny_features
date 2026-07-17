@@ -49,20 +49,27 @@ describe JournalsController, type: :controller do
         .and change { Journal.last().notes }.from('note_test').to('')
     end
 
-    it "delete note without details should empty the note, destroy the journal, create another journal and journaldetails with property note" do
+    it "journalizes the deletion of a note whose journal has no details" do
+      note_journal = Journal.last()
+
       expect {
         put(
           :update,
           :params => {
-            :id => Journal.last().id,
+            :id => note_journal.id,
             :journal => {
               :notes => ''
             }
           }
         )
-      }. to change { Journal.count }.by(0)
-        .and change { JournalDetail.count }.by(1)
-        .and change { Journal.last().notes }.from('note_test').to('')
+      }. to change { JournalDetail.where(:property => 'note').count }.by(1)
+
+      # the core destroys the emptied journal up to Redmine 7.0, and keeps it since #44258
+      expect(Journal.where(:id => note_journal.id).first&.notes).to be_blank
+
+      detail = JournalDetail.where(:property => 'note').last
+      expect(detail.prop_key).to eq(note_journal.user_id.to_s)
+      expect(detail.old_value).to eq(note_journal.id.to_s)
     end
   end
 
