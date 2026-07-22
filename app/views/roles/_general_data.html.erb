@@ -13,10 +13,9 @@
   <tbody>
   <tr class="assignable">
     <td class="name">
-      <%= link_to_function('',
+      <%= link_to_function(sprite_icon('checked'),
                            "toggleCheckboxesBySelector('.assignable input')",
-                           :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
-                           :class => 'icon-only icon-checked') %>
+                           :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}") %>
       <%= l(:field_assignable) %>
     </td>
     <% @roles.each do |role| %>
@@ -31,7 +30,7 @@
   </tr>
   <tr class="group open" class="view_issues_shown">
     <td>
-      <span class="expander icon icon-expended" onclick="toggleRowGroup(this);">&nbsp;</span>
+      <span class="expander icon icon-expanded" onclick="toggleRowGroup(this);"><%= sprite_icon("angle-down") %></span>
       <%= l(:field_issues_visibility) %>
     </td>
     <% @roles.each do |role| %>
@@ -41,10 +40,9 @@
   <% Role::ISSUES_VISIBILITY_OPTIONS.each do |option| %>
     <tr class="visibility_<%= option.first %>">
       <td class="name">
-        <%= link_to_function('',
+        <%= link_to_function(sprite_icon('checked'),
                              "toggleCheckboxesBySelector('.visibility_#{option.first} input')",
-                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
-                             :class => 'icon-only icon-checked') %>
+                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}") %>
         <%= l(option.second) %>
       </td>
       <% @roles.each do |role| %>

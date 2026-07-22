@@ -25,7 +25,7 @@ module RedmineTinyFeatures
 
       # insert link to switch issues display mode
       current_mode = User.current.issue_display_mode == User::BY_STATUS ? l(:label_issue_display_by_priority) : l(:label_issue_display_by_status)
-      switch_link = link_to current_mode, switch_display_mode_path(:path => request.url), method: :post, :class => 'icon icon-projects'
+      switch_link = link_to sprite_icon('projects', current_mode), switch_display_mode_path(:path => request.url), method: :post
       super() { switch_link + capture(&block).to_s }
     end
 
