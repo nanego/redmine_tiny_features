@@ -16,5 +16,5 @@ Deface::Override.new :virtual_path => 'issues/index',
                      :insert_after => 'erb[loud]:contains("actions_dropdown do")',
                      :text => <<-SWITCH_DISPLAY_MODE
                        <% current_mode = User.current.issue_display_mode == User::BY_STATUS ? l(:label_issue_display_by_priority) : l(:label_issue_display_by_status) %>
-                       <%= link_to sprite_icon('projects', current_mode), switch_display_mode_path(:path => request.url), method: :post, class: 'icon icon-projects' %>
+                       <%= link_to sprite_icon('circle-dot-filled', current_mode, style: :filled), switch_display_mode_path(:path => request.url), method: :post, class: 'icon' %>
                      SWITCH_DISPLAY_MODE
