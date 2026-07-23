@@ -26,7 +26,8 @@ Redmine::Plugin.register :redmine_tiny_features do
              'disable_email_hiding': '',
              'display_all_users_in_author_filter': '0',
              'collapse_gantt_chart_at_project_level': '0',
-             'users_quick_search': '1'
+             'users_quick_search': '1',
+             'account_menu_caret': '1'
            }
 end
 

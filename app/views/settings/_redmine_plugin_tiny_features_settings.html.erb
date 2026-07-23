@@ -103,6 +103,13 @@
   <% end %>
 </p>
 
+<p>
+  <%= label_tag '', { style: 'width: auto;' } do %>
+    <%= check_box_tag "settings[account_menu_caret]", '1', Setting["plugin_redmine_tiny_features"]["account_menu_caret"] %>
+    <%= l("label_tiny_features_account_menu_caret") %>
+  <% end %>
+</p>
+
 <%= javascript_tag do %>
   $(function() {
   if ((typeof $().select2) === 'function') {

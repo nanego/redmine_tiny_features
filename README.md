@@ -30,6 +30,7 @@ Here is a complete list of the features:
 * **Complete Author filter** with users not member of any project
 * **Gantt chart: collapse at the project level** by default when there are many projects
 * Add **quick search bar** to /users page *
+* Account menu: add a **caret** hinting the avatar opens a dropdown (Redmine 7.0+)
 
 ## Test status
 

@@ -88,3 +88,16 @@ tr.status-grey:hover td, tr.status-grey:hover a, tr.status-grey:hover a:hover, t
   width: 280px;
   padding: 5px 8px;
 }
+
+/* Caret hinting that the account avatar opens a dropdown menu */
+.tiny-features-account-caret {
+  display: inline-block;
+  margin-inline-start: 6px;
+  border-inline: 4px solid transparent;
+  border-block-start: 5px solid var(--oc-gray-1);
+  border-block-end: 0;
+  transition: transform 0.15s ease;
+}
+#account .dropdown-trigger:has(~ .dropdown-content:not(.hidden)) .tiny-features-account-caret {
+  transform: rotate(180deg);
+}

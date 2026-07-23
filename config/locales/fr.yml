@@ -45,3 +45,4 @@ fr:
   collapse_gantt_chart_at_project_level: "Diagramme de Gantt replié au niveau projet par défaut si il y en a plusieurs"
   label_users_quick_search_placeholder: "Rechercher rapide par nom, prénom, login..."
   label_tiny_features_users_quick_search: "Recherche rapide utilisateurs (page /users)"
+  label_tiny_features_account_menu_caret: "Afficher une flèche sur le menu du compte pour indiquer qu'il est déroulant"
