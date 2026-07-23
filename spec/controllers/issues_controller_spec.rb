@@ -89,24 +89,24 @@ describe IssuesController, type: :controller do
 
     it "should display the link of colorization by status in issue index" do
       get :index
-      assert_select 'a', :text => 'Colorization According to status'
+      assert_select 'a', :text => 'Colorization According to status', :count => 1
     end
 
     it "should display the link of colorization by status in project/issue index" do
       get :index, :params => { :project_id => "ecookbook" }
-      assert_select 'a', :text => 'Colorization According to status'
+      assert_select 'a', :text => 'Colorization According to status', :count => 1
     end
 
     it "should display the link of colorization by priority in issue index, when issue_display_mode of user is by status" do
       User.find(1).update_attribute(:issue_display_mode, User::BY_STATUS)
       get :index
-      assert_select 'a', :text => 'Colorization According to priority'
+      assert_select 'a', :text => 'Colorization According to priority', :count => 1
     end
 
     it "should display the link of colorization by priority in project/issue index, when issue_display_mode of user is by status" do
       User.find(1).update_attribute(:issue_display_mode, User::BY_STATUS)
       get :index, :params => { :project_id => "ecookbook" }
-      assert_select 'a', :text => 'Colorization According to priority'
+      assert_select 'a', :text => 'Colorization According to priority', :count => 1
     end
 
   end

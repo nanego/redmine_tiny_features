@@ -15,7 +15,8 @@
     <td class="name">
       <%= link_to_function(sprite_icon('checked'),
                            "toggleCheckboxesBySelector('.assignable input')",
-                           :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}") %>
+                           :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
+                           :class => 'icon-only icon-checked') %>
       <%= l(:field_assignable) %>
     </td>
     <% @roles.each do |role| %>
@@ -42,7 +43,8 @@
       <td class="name">
         <%= link_to_function(sprite_icon('checked'),
                              "toggleCheckboxesBySelector('.visibility_#{option.first} input')",
-                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}") %>
+                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
+                             :class => 'icon-only icon-checked') %>
         <%= l(option.second) %>
       </td>
       <% @roles.each do |role| %>

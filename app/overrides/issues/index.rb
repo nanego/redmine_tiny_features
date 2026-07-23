@@ -8,3 +8,13 @@ Deface::Override.new :virtual_path => 'issues/index',
                          </span>
                        <% end %>
                      SHOW_PARAMETER
+
+# Add a link to switch the issues display mode (colorize by status/priority)
+# as the first item of the actions dropdown.
+Deface::Override.new :virtual_path => 'issues/index',
+                     :name => 'add-switch-display-mode-link',
+                     :insert_after => 'erb[loud]:contains("actions_dropdown do")',
+                     :text => <<-SWITCH_DISPLAY_MODE
+                       <% current_mode = User.current.issue_display_mode == User::BY_STATUS ? l(:label_issue_display_by_priority) : l(:label_issue_display_by_status) %>
+                       <%= link_to sprite_icon('projects', current_mode), switch_display_mode_path(:path => request.url), method: :post, class: 'icon icon-projects' %>
+                     SWITCH_DISPLAY_MODE
