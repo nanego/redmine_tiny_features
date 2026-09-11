@@ -1,7 +1,13 @@
 require_dependency 'mailer'
 
 module RedmineTinyFeatures::MailerPatch
-
+  def mail(headers = {})
+    reply_to = Setting["plugin_redmine_tiny_features"]["reply_to_address"].to_s.strip
+    if reply_to.present? && headers[:reply_to].blank? && headers['Reply-To'].blank?
+      headers[:reply_to] = reply_to
+    end
+    super
+  end
 end
 
 class Mailer < ActionMailer::Base
@@ -61,3 +67,5 @@ class Mailer < ActionMailer::Base
   end
 
 end
+
+Mailer.prepend RedmineTinyFeatures::MailerPatch

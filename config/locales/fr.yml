@@ -45,3 +45,5 @@ fr:
   collapse_gantt_chart_at_project_level: "Diagramme de Gantt replié au niveau projet par défaut si il y en a plusieurs"
   label_users_quick_search_placeholder: "Rechercher rapide par nom, prénom, login..."
   label_tiny_features_users_quick_search: "Recherche rapide utilisateurs (page /users)"
+  setting_reply_to_address: "Adresse de réponse (Reply-To) des emails envoyés"
+  text_reply_to_address_info: "Les réponses aux emails envoyés par Redmine iront à cette adresse. Laisser vide pour répondre à l'adresse d'émission."

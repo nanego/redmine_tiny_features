@@ -9,7 +9,8 @@ describe "Mailer" do
            :roles, :members, :member_roles,
            :issues, :issue_statuses, :issue_relations,
            :versions, :trackers, :projects_trackers,
-           :issue_categories, :enabled_modules, :enumerations
+           :issue_categories, :enabled_modules, :enumerations,
+           :projects
 
   it "does not send reminders for older issues when using max_delay option" do
 
@@ -38,5 +39,29 @@ describe "Mailer" do
     expect(mail_boy).to match(/qux \(Due in 1 day\)/)
     expect(mail_boy).to_not match(/bar/)
 
+  end
+
+  describe "Reply-To header" do
+    def deliver_issue_add_with_reply_to_address(address)
+      settings = Setting["plugin_redmine_tiny_features"].merge("reply_to_address" => address)
+      with_settings "plugin_redmine_tiny_features" => settings do
+        ActionMailer::Base.deliveries.clear
+        Mailer.deliver_issue_add(Issue.find(1))
+      end
+      expect(ActionMailer::Base.deliveries).to_not be_empty
+      ActionMailer::Base.deliveries.last
+    end
+
+    it "adds the configured Reply-To header to outgoing emails" do
+      email = deliver_issue_add_with_reply_to_address("replies@example.net")
+
+      expect(email.reply_to).to eq ["replies@example.net"]
+    end
+
+    it "does not add a Reply-To header when no address is configured" do
+      email = deliver_issue_add_with_reply_to_address("")
+
+      expect(email.reply_to).to be_nil
+    end
   end
 end

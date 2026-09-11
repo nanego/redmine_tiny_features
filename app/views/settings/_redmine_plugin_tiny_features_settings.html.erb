@@ -75,6 +75,16 @@
   <% end %>
 </p>
 
+<hr>
+
+<p>
+  <%= label_tag "settings_reply_to_address", l("setting_reply_to_address") %>
+  <%= text_field_tag "settings[reply_to_address]", Setting["plugin_redmine_tiny_features"]["reply_to_address"], size: 60 %>
+  <em class="info"><%= l("text_reply_to_address_info") %></em>
+</p>
+
+<hr>
+
 <p>
   <%= label_tag '', { style: 'width: auto;' } do %>
     <%= check_box_tag "settings[load_issue_edit_form_asynchronously]", '1', Setting["plugin_redmine_tiny_features"]["load_issue_edit_form_asynchronously"] %>
