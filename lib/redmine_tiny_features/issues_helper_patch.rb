@@ -12,7 +12,7 @@ module RedmineTinyFeatures
         else
           note_id = content_tag("del", detail.old_value)
         end
-        l(:text_note_deleted, :author => author.name, :note_id => note_id).html_safe
+        l(:text_note_deleted, :author => (no_html ? author.name : h(author.name)), :note_id => note_id).html_safe
       else
         # Process standard properties
         super
