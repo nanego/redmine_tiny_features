@@ -11,6 +11,7 @@ Redmine::Plugin.register :redmine_tiny_features do
   requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.4' if Rails.env.test?
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
 
+  permission :manage_project_enumerations, { project_custom_field_enumerations: [:update] }, :require => :member
   permission :always_see_user_email_addresses, {}
 
   settings partial: 'settings/redmine_plugin_tiny_features_settings',

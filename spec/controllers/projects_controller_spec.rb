@@ -58,4 +58,20 @@ describe ProjectsController, type: :controller do
       expect(project_csv.sort).to eq(Project.where(id: ids).map(&:name).sort)
     end
   end
-end  
+
+  context "Custom field values per project" do
+    fixtures :members, :roles, :member_roles, :trackers, :projects_trackers
+
+    it "shows the enumerations tab to a member with the permission" do
+      custom_field = IssueCustomField.create!(name: 'Key/value list', field_format: 'enumeration', is_for_all: true, tracker_ids: [1])
+      custom_field.enumerations.create!(name: 'Value', position: 1)
+      Role.find(1).add_permission!(:manage_project_enumerations)
+      @request.session[:user_id] = 2 # jsmith, manager of project 1
+
+      get :settings, params: { id: 1, tab: 'enumerations' }
+
+      expect(response).to be_successful
+      assert_select "form[action=?]", "/projects/ecookbook/custom_field_enumerations?tab=enumerations"
+    end
+  end
+end 

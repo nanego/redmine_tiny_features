@@ -1,8 +1,8 @@
 class ProjectCustomFieldEnumerationsController < ApplicationController
 
-  def update
-    @project = Project.find(params[:project_id])
+  before_action :find_project, :authorize
 
+  def update
     disabled_enumerations_ids = params[:enumerations].select{ |k, v| v == "0" }.keys
     selected_enumerations_ids = params[:enumerations].reject{ |k, v| v == "0" }.keys
 
@@ -18,6 +18,14 @@ class ProjectCustomFieldEnumerationsController < ApplicationController
       }
       format.api  { render_api_ok }
     end
+  end
+
+  private
+
+  def find_project
+    @project = Project.find(params[:project_id])
+  rescue ActiveRecord::RecordNotFound
+    render_404
   end
 
 end
