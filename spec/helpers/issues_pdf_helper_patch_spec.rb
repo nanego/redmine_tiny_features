@@ -30,7 +30,7 @@ describe "IssuesPdfHelperPatch", type: :helper do
 
     it "checks core helper checksums Redmine::Export::PDF::IssuesPdfHelper" do
       # the issue_to_pdf method is completely overridden, so it should be updated if the core method is modified
-      # Redmine 6.1.5, 7.0.2 & master are validated
+      # Redmine 6.1.6, 7.0.3 & master are validated
       assert_checksum %w"9f909be99e4fe9355a6a65142f2747bf", "lib/redmine/export/pdf/issues_pdf_helper.rb"
     end
 
