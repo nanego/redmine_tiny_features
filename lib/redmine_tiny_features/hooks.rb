@@ -28,6 +28,7 @@ module RedmineTinyFeatures
 
   class ModelHook < Redmine::Hook::Listener
     def after_plugins_loaded(_context = {})
+      require_relative 'application_helper_patch'
       require_relative 'custom_field_enumeration_patch'
       require_relative 'custom_field_patch'
       require_relative 'field_format_patch'
