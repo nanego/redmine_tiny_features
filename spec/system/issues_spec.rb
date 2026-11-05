@@ -162,6 +162,91 @@ RSpec.describe "creating an issue", type: :system do
     end
   end
 
+  describe "Warning on closed issues" do
+    def with_closed_issue_warning(settings = {}, &block)
+      with_settings "plugin_redmine_tiny_features" => { "warning_message_on_closed_issues" => "1" }.merge(settings), &block
+    end
+
+    it "hides the notes editor until the warning is acknowledged, then saves the note" do
+      with_closed_issue_warning do
+        visit '/issues/8/edit'
+        expect(page).to have_selector('#warning-issue-closed')
+        expect(page).to_not have_selector('#issue_notes')
+        expect(page).to_not have_selector('#add_notes .jstBlock')
+
+        click_on 'I understand'
+        expect(page).to_not have_selector('#warning-issue-closed')
+
+        fill_in 'issue_notes', with: 'Note added after the warning'
+        click_on 'Submit'
+        expect(page).to have_content('Successful update.')
+        expect(Issue.find(8).journals.last.notes).to eq 'Note added after the warning'
+      end
+    end
+
+    it "hides the notes editor when the form is loaded asynchronously" do
+      with_closed_issue_warning("load_issue_edit_form_asynchronously" => "1") do
+        visit '/issues/8'
+        find('.icon-edit', match: :first).click
+        expect(page).to have_selector('#warning-issue-closed')
+        expect(page).to_not have_selector('#issue_notes')
+      end
+    end
+
+    it "reveals the notes editor when an open status is selected" do
+      with_closed_issue_warning do
+        visit '/issues/8/edit'
+        select 'Assigned', from: 'issue_status_id'
+        expect(page).to_not have_selector('#warning-issue-closed')
+        expect(page).to have_selector('#issue_notes')
+      end
+    end
+
+    it "keeps the notes editor hidden when another closed status is selected" do
+      with_closed_issue_warning do
+        visit '/issues/8/edit'
+        select 'Rejected', from: 'issue_status_id'
+        expect(page).to have_select('issue_status_id', selected: 'Rejected')
+        expect(page).to have_selector('#warning-issue-closed')
+        expect(page).to_not have_selector('#issue_notes')
+      end
+    end
+
+    it "selects the default open status when the warning is acknowledged, if configured" do
+      with_closed_issue_warning("open_issue_when_editing_closed_issues" => "1", "default_open_status" => "2") do
+        visit '/issues/8/edit'
+        click_on 'I understand'
+        expect(page).to have_select('issue_status_id', selected: 'Assigned')
+        expect(page).to have_selector('#issue_notes')
+      end
+    end
+
+    it "keeps the current status when the warning is acknowledged, if not configured" do
+      with_closed_issue_warning do
+        visit '/issues/8/edit'
+        click_on 'I understand'
+        expect(page).to have_selector('#issue_notes')
+        expect(page).to have_select('issue_status_id', selected: 'Closed')
+      end
+    end
+
+    it "shows the notes editor without warning on an open issue" do
+      with_closed_issue_warning do
+        visit '/issues/2/edit'
+        expect(page).to have_selector('#issue_notes')
+        expect(page).to_not have_selector('#warning-issue-closed')
+      end
+    end
+
+    it "shows the notes editor without warning when the feature is disabled" do
+      with_settings "plugin_redmine_tiny_features" => { "warning_message_on_closed_issues" => "" } do
+        visit '/issues/8/edit'
+        expect(page).to have_selector('#issue_notes')
+        expect(page).to_not have_selector('#warning-issue-closed')
+      end
+    end
+  end
+
   describe "Group-by filter" do
     it "shows options in alphabetic order" do
       visit 'issues'

@@ -11,12 +11,12 @@
     </div>
     <script>
         function hideIfIssueClosed() {
-            $("#warning-issue-closed").parent().children(".jstElements, .jstEditor, .jstHandle, >p").hide()
+            $("#warning-issue-closed").parent().children(".jstBlock, >p").hide()
             $("#warning-issue-closed").show()
         }
 
         function showIfIssueOpen() {
-            $("#warning-issue-closed").parent().children(".jstElements, .jstEditor, .jstHandle, >p").show()
+            $("#warning-issue-closed").parent().children(".jstBlock, >p").show()
             $("#warning-issue-closed").hide()
         }
 
