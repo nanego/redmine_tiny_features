@@ -1,7 +1,7 @@
 #encoding: utf-8
 Deface::Override.new :virtual_path  => "issues/_edit",
                      :name          => "add-warning-above-notes-textarea-if-issue-closed",
-                     :insert_before => "erb[loud]:contains('wiki-edit')",
+                     :insert_before => "erb[loud]:contains('wiki-edit'), erb[loud]:contains('wiki_textarea')",
                      :partial       => "issues/edit_closed"
 
 unless Rails.env.test?
